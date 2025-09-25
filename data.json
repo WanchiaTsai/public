@@ -8,7 +8,12 @@
         "date": "9月28日",
         "departureTime": "06:30 AM",
         "travelMode": "airport_service",
-        "infoLink": "https://68666.tw/MscA"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://68666.tw/MscA"
+            }
+        ]
     },
     {
         "from": "TPE 桃園國際機場 (Terminal 1)",
@@ -21,7 +26,12 @@
         "travelMode": "flight",
         "airline": "tigersmart",
         "flightNumber": "IT256",
-        "infoLink": ""
+        "otherDetails": [
+            {
+                "info": "租車公司",
+                "infoLink": "https://maps.app.goo.gl/wtECfmuNsfCcrw8x7"
+            }
+        ]
     },
     {
         "from": "AXT 秋田機場 (あきたくうこう)",
@@ -42,21 +52,10 @@
         "route": "住宿",
         "date": "9月28日",
         "travelMode": "stay",
-        "infoLink": ""
+        "googleMapsLink": "https://maps.app.goo.gl/8n5HRA7gj16XfHoe6"
     },
     {
         "from": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
-        "to": "鳥海山 五合目鉾立『象潟口』 (ちょうかいさんごごうめほこたて『きさかたぐち』)",
-        "distance": 3.3,
-        "duration": "5分",
-        "route": "鳥海ブルーライン",
-        "date": "9月29日",
-        "departureTime": "08:55 AM",
-        "travelMode": "driving",
-        "navigationLink": "https://www.google.com/maps/dir/%E9%B3%A8%E6%B5%B7%E5%B1%B1+%E4%BA%94%E5%90%88%E7%9B%AE%E9%89%BE%E7%AB%8B%E3%80%8E%E8%B1%A1%E6%BD%9F%E5%8F%A3%E3%80%8F,+Kisakatamachi+Kodaki,+Nikaho,+Akita,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJlYkpCSW-j18RQs7MMGKmAQE!2m2!1d140.2177165!2d39.614477799999996!1m5!1m1!19sChIJYbrSwlbyjl8RVaL7JwckjRo!2m2!1d139.9915595!2d39.1218077!3e0"
-    },
-    {
-        "from": "鳥海山 五合目鉾立『象潟口』 (ちょうかいさんごごうめほこたて『きさかたぐち』)",
         "to": "鳥海湖 & 稲倉岳周遊 (ちょうかいこ & いなくらだけしゅうゆう)",
         "distance": 6.6,
         "duration": "3時間24分",
@@ -64,11 +63,12 @@
         "date": "9月29日",
         "departureTime": "09:00 AM",
         "travelMode": "walking",
-        "infoLink": "https://yamap.com/model-courses/25567",
+        "otherDetails": [
+        ],
         "isRoundTrip": true
     },
     {
-        "from": "鳥海山 五合目鉾立『象潟口』 (ちょうかいさんごごうめほこたて『きさかたぐち』)",
+        "from": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "to": "羽黒山 三光院 (はぐろさんさんこういん)",
         "distance": 68.3,
         "duration": "1時間13分",
@@ -85,8 +85,7 @@
         "duration": "一泊",
         "route": "住宿",
         "date": "9月29日",
-        "travelMode": "stay",
-        "infoLink": ""
+        "travelMode": "stay"
     },
     {
         "from": "羽黒山 三光院 (はぐろさんさんこういん)",
@@ -108,7 +107,12 @@
         "date": "9月30日",
         "departureTime": "08:40 AM",
         "travelMode": "walking",
-        "infoLink": "https://yamap.com/maps/39",
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://yamap.com/maps/39"
+            }
+        ],
         "isRoundTrip": true
     },
     {
@@ -129,8 +133,7 @@
         "duration": "一泊",
         "route": "住宿",
         "date": "9月30日",
-        "travelMode": "stay",
-        "infoLink": ""
+        "travelMode": "stay"
     },
     {
         "from": "羽黒山 三光院 (はぐろさんさんこういん)",
@@ -151,7 +154,12 @@
         "route": "住宿",
         "date": "10月1日",
         "travelMode": "stay",
-        "infoLink": "https://maps.app.goo.gl/xYy6kR25EYDUyB4a9"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://maps.app.goo.gl/xYy6kR25EYDUyB4a9"
+            }
+        ]
     },
     {
         "from": "折立温泉　やまきや旅館",
@@ -173,7 +181,12 @@
         "date": "10月2日",
         "departureTime": "09:30 AM",
         "travelMode": "boat",
-        "infoLink": "https://enjoyniigata.com/tc/spot/8397"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://enjoyniigata.com/tc/spot/8397"
+            }
+        ]
     },
     {
         "from": "尾瀬口船着場 (おぜぐちふなつきば)",
@@ -184,7 +197,12 @@
         "date": "10月2日",
         "departureTime": "10:15 AM",
         "travelMode": "bus",
-        "infoLink": "https://www.aizubus.com/travel/oze/"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://www.aizubus.com/travel/oze/"
+            }
+        ]
     },
     {
         "from": "沼山峠 (ぬまやまとうげ)",
@@ -195,7 +213,12 @@
         "date": "10月2日",
         "departureTime": "11:20 AM",
         "travelMode": "walking",
-        "infoLink": "https://www.env.go.jp/park/oze/data/hike_map_oze_numamoto.pdf"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://www.env.go.jp/park/oze/data/hike_map_oze_numamoto.pdf"
+            }
+        ]
     },
     {
         "from": "尾瀬沼山荘 (おぜぬまさんそう)",
@@ -204,8 +227,7 @@
         "duration": "一泊",
         "route": "住宿",
         "date": "10月2日",
-        "travelMode": "stay",
-        "infoLink": ""
+        "travelMode": "stay"
     },
     {
         "from": "尾瀬沼山荘 (おぜぬまさんそう)",
@@ -216,7 +238,12 @@
         "date": "10月3日",
         "departureTime": "07:00 AM",
         "travelMode": "walking",
-        "infoLink": "https://yamap.com/maps/39"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://yamap.com/maps/39"
+            }
+        ]
     },
     {
         "from": "尾瀬 温泉小屋",
@@ -226,7 +253,12 @@
         "route": "住宿",
         "date": "10月3日",
         "travelMode": "stay",
-        "infoLink": "https://maps.app.goo.gl/W8XT8uvVTZ532TZ69"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://maps.app.goo.gl/W8XT8uvVTZ532TZ69"
+            }
+        ]
     },
     {
         "from": "尾瀬 温泉小屋",
@@ -237,7 +269,12 @@
         "date": "10月4日",
         "departureTime": "07:00 AM",
         "travelMode": "walking",
-        "infoLink": "https://www.oze-info.jp/ozh-stay/miikelodge"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://www.oze-info.jp/ozh-stay/miikelodge"
+            }
+        ]
     },
     {
         "from": "Mi-ike lodge (みいけろっじ)",
@@ -248,7 +285,12 @@
         "date": "10月4日",
         "departureTime": "03:00 PM",
         "travelMode": "bus",
-        "infoLink": "https://www.aizubus.com/travel/oze/"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://www.aizubus.com/travel/oze/"
+            }
+        ]
     },
     {
         "from": "尾瀬口船着場 (おぜぐちふなつきば)",
@@ -259,7 +301,12 @@
         "date": "10月4日",
         "departureTime": "04:10 PM",
         "travelMode": "boat",
-        "infoLink": "https://enjoyniigata.com/tc/spot/8397"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://enjoyniigata.com/tc/spot/8397"
+            }
+        ]
     },
     {
         "from": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
@@ -280,7 +327,12 @@
         "route": "住宿",
         "date": "10月4日",
         "travelMode": "stay",
-        "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
+            }
+        ]
     },
     {
         "from": "魚沼ヒミツ基地 〜Farm stay〜",
@@ -302,7 +354,12 @@
         "date": "10月5日",
         "departureTime": "08:47 AM",
         "travelMode": "ropeway",
-        "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
+            }
+        ]
     },
     {
         "from": "八海山山頂駅 (はっかいさんさんちょうえき)",
@@ -313,7 +370,12 @@
         "date": "10月5日",
         "departureTime": "09:00 AM",
         "travelMode": "walking",
-        "infoLink": "https://yamap.com/activities/8183146"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://yamap.com/activities/8183146"
+            }
+        ]
     },
     {
         "from": "八海山山頂駅 (はっかいさんさんちょうえき)",
@@ -324,7 +386,12 @@
         "date": "10月5日",
         "departureTime": "03:20 PM",
         "travelMode": "ropeway",
-        "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
+            }
+        ]
     },
     {
         "from": "八海山ロープウェー (はっかいさんろーぷうぇー)",
@@ -345,7 +412,12 @@
         "route": "住宿",
         "date": "10月5日",
         "travelMode": "stay",
-        "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
+            }
+        ]
     },
     {
         "from": "魚沼ヒミツ基地 〜Farm stay〜",
@@ -356,7 +428,14 @@
         "date": "10月6日",
         "departureTime": "08:00 AM",
         "travelMode": "driving",
-        "navigationLink": "https://maps.app.goo.gl/K3bTiaMDXegtt2AJ6"
+        "navigationLink": "https://maps.app.goo.gl/K3bTiaMDXegtt2AJ6",
+        "otherDetails": [
+
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://yamap.com/model-courses/25567"
+            }
+        ]
     },
     {
         "from": "KIJ 新潟機場 (にいがたくうこう)",
@@ -368,8 +447,7 @@
         "departureTime": "06:50 PM",
         "travelMode": "flight",
         "airline": "tigersmart",
-        "flightNumber": "IT229",
-        "infoLink": ""
+        "flightNumber": "IT229"
     },
     {
         "from": "TPE 桃園國際機場",
@@ -380,6 +458,11 @@
         "date": "10月6日",
         "departureTime": "09:25 PM",
         "travelMode": "airport_service",
-        "infoLink": "https://68666.tw/2tyt"
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://68666.tw/2tyt"
+            }
+        ]
     }
 ]

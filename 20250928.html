@@ -454,7 +454,7 @@
                                     date: currentLeg.date,
                                     time: currentLeg.departureTime || (currentLeg.travelMode === 'stay' ? '晚上' : ''),
                                     details: (currentLeg.travelMode === 'stay' ? currentLeg.duration : `服務詳情: ${currentLeg.route}`),
-                                    infoLink: currentLeg.infoLink,
+                                    otherDetails: currentLeg.otherDetails,
                                     emoji: travelInfo.emoji,
                                     cardClass: (currentLeg.travelMode === 'stay' ? 'timeline-stay-card' : 'timeline-service-card'),
                                     isStay: currentLeg.travelMode === 'stay',
@@ -474,7 +474,6 @@
                                     date: currentLeg.date,
                                     time: currentLeg.departureTime,
                                     details: '出發點',
-                                    infoLink: '',
                                     emoji: '📍',
                                     cardClass: 'timeline-card'
                                 });
@@ -492,6 +491,7 @@
                                 to: currentLeg.to,
                                 route: currentLeg.route,
                                 navigationLink: currentLeg.navigationLink,
+                                otherDetails: currentLeg.otherDetails,
                                 emoji: travelInfo.emoji,
                                 date: currentLeg.date
                             });
@@ -510,7 +510,7 @@
                                     date: currentLeg.date,
                                     time: arrivalTime,
                                     details: '抵達點',
-                                    infoLink: '',
+                                    otherDetails: currentLeg.otherDetails,
                                     emoji: '📍',
                                     cardClass: 'timeline-card'
                                 });
@@ -537,8 +537,8 @@
                             const originalStayLink = filteredTravelData.find(leg => 
                                 leg.travelMode === 'stay' && leg.date === date && leg.to === lastBlockOfCurrentDay.locationName
                             );
-                            if (originalStayLink && originalStayLink.infoLink) {
-                                lastBlockOfCurrentDay.infoLink = originalStayLink.infoLink;
+                            if (originalStayLink && originalStayLink.otherDetails) {
+                                lastBlockOfCurrentDay.otherDetails = originalStayLink.otherDetails;
                             }
                         }
                     });
@@ -576,11 +576,11 @@
                                 ${block.details ? `<p class="timeline-detail">${block.details}</p>` : ''}
                             `;
                             
-                            if (block.infoLink && (block.isStay || block.isAirportService || block.isAccommodation)) { 
+                            if (block.otherDetails && block.otherDetails.length > 0) { 
                                  cardHtmlContent += `
                                     <div class="timeline-item-content">
                                         <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                            <a href="${block.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${block.isStay || block.isAccommodation ? '查看住宿資訊' : '查看服務詳情'} →</a>
+                                            ${block.otherDetails.map(detail => `<a href="${detail.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${detail.info} →</a>`).join('')}
                                         </div>
                                     </div>
                                 `;
