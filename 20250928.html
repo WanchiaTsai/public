@@ -328,118 +328,167 @@
                     let lastDate = null;
 
                     try {
-                        timelineData.forEach((block, index) => {
-                            const currentDate = block.date;
-                            if (currentDate && currentDate !== lastDate) {
-                                const dateSeparator = document.createElement('div');
-                                dateSeparator.className = 'flex items-center my-8';
-                                dateSeparator.innerHTML = `<hr class="flex-grow border-stone-300"><span class="px-4 py-1 bg-stone-200 text-stone-700 font-bold rounded-full">${currentDate}</span><hr class="flex-grow border-stone-300">`;
-                                timelineContainer.appendChild(dateSeparator);
-                                lastDate = currentDate;
+                        const days = {};
+                        timelineData.forEach(block => {
+                            const date = block.date;
+                            if (!days[date]) {
+                                days[date] = [];
+                            }
+                            days[date].push(block);
+                        });
+
+                        let lastStay = null;
+                        const sortedDates = Object.keys(days).sort((a, b) => {
+                            const [aMonth, aDay] = a.replace('月', ' ').replace('日', '').split(' ').map(Number);
+                            const [bMonth, bDay] = b.replace('月', ' ').replace('日', '').split(' ').map(Number);
+                            if (aMonth !== bMonth) {
+                                return aMonth - bMonth;
+                            }
+                            return aDay - bDay;
+                        });
+
+                        for (let i = 0; i < sortedDates.length; i++) {
+                            const date = sortedDates[i];
+                            const dayItems = days[date];
+
+                            if (lastStay) {
+                                const newBlock = JSON.parse(JSON.stringify(lastStay));
+                                newBlock.date = date;
+                                newBlock.time = "";
+                                newBlock.isReappearing = true;
+                                dayItems.unshift(newBlock);
                             }
 
-                            const item = document.createElement('div');
-                            item.className = 'timeline-item';
+                            const lastBlockOfDay = dayItems[dayItems.length - 1];
+                            if (lastBlockOfDay.isStay) {
+                                lastStay = lastBlockOfDay;
+                            } else {
+                                lastStay = null;
+                            }
+                        }
 
-                            const timeCol = document.createElement('div');
-                            timeCol.className = 'time-col';
-                            
-                            const timeDiv = document.createElement('div');
-                            timeDiv.className = 'time';
-                            if (block.type === 'location') {
-                                timeDiv.innerHTML = `${block.time || ''} ${block.isEstimated ? '<span class="text-amber-600">(預估)</span>' : ''}`;
-                            } else if (block.type === 'movement') {
-                                if (block.startTime && block.arrivalTime) {
-                                    timeDiv.innerHTML = `${block.isEstimated ? '<span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-amber-600 bg-amber-200">預估</span><br>' : ''}${block.startTime}<br>↓<br>${block.arrivalTime}`;
-                                } else {
-                                    timeDiv.textContent = block.startTime || block.duration;
+                        for (const date of sortedDates) {
+                            const dayContainer = document.createElement('div');
+                            timelineContainer.appendChild(dayContainer);
+
+                            const dateSeparator = document.createElement('div');
+                            dateSeparator.className = 'flex items-center my-8 cursor-pointer';
+                            dateSeparator.innerHTML = `<hr class="flex-grow border-stone-300"><span class="px-4 py-1 bg-stone-200 text-stone-700 font-bold rounded-full">${date}</span><hr class="flex-grow border-stone-300">`;
+                            dayContainer.appendChild(dateSeparator);
+
+                            const dayItemsContainer = document.createElement('div');
+                            dayItemsContainer.className = 'day-items';
+                            dayContainer.appendChild(dayItemsContainer);
+
+                            dateSeparator.addEventListener('click', () => {
+                                const isHidden = dayItemsContainer.style.display === 'none';
+                                dayItemsContainer.style.display = isHidden ? 'block' : 'none';
+                            });
+
+                            days[date].forEach(block => {
+                                const item = document.createElement('div');
+                                item.className = 'timeline-item';
+
+                                const timeCol = document.createElement('div');
+                                timeCol.className = 'time-col';
+                                
+                                const timeDiv = document.createElement('div');
+                                timeDiv.className = 'time';
+                                if (block.type === 'location') {
+                                    timeDiv.innerHTML = `${block.time || ''} ${block.isEstimated ? '<span class="text-amber-600">(預估)</span>' : ''}`;
+                                } else if (block.type === 'movement') {
+                                    if (block.startTime && block.arrivalTime) {
+                                        timeDiv.innerHTML = `${block.isEstimated ? '<span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-amber-600 bg-amber-200">預估</span><br>' : ''}${block.startTime}<br>↓<br>${block.arrivalTime}`;
+                                    } else {
+                                        timeDiv.textContent = block.startTime || block.duration;
+                                    }
                                 }
-                            }
-                            if(timeDiv.textContent) timeCol.appendChild(timeDiv);
+                                if(timeDiv.textContent || timeDiv.innerHTML) timeCol.appendChild(timeDiv);
 
-                            const markerCol = document.createElement('div');
-                            markerCol.className = 'marker-col';
+                                const markerCol = document.createElement('div');
+                                markerCol.className = 'marker-col';
 
-                            const cardCol = document.createElement('div');
-                            cardCol.className = 'card-col';
+                                const cardCol = document.createElement('div');
+                                cardCol.className = 'card-col';
 
-                            const cardDiv = document.createElement('div');
-                            let cardHtmlContent;
+                                const cardDiv = document.createElement('div');
+                                let cardHtmlContent;
 
-                            if (block.type === 'location') {
-                                const isStay = block.isStay;
-                                markerCol.innerHTML = `<div class="marker-icon">${isStay ? '🏨' : '📍'}</div><div class="marker-line"></div>`;
-                                cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
+                                if (block.type === 'location') {
+                                    const isStay = block.isStay;
+                                    markerCol.innerHTML = `<div class="marker-icon">${isStay ? '🏨' : '📍'}</div><div class="marker-line"></div>`;
+                                    cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
 
-                                const googleMapsLink = block.googleMapsLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(block.name)}`;
-                                cardHtmlContent = `
-                                    <h3 class="timeline-title">${formatFurigana(block.name)}
-                                        <a href="${googleMapsLink}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">📍</a>
-                                    </h3>
-                                    <p class="timeline-detail">${block.details || ''}</p>
-                                `;
+                                    const googleMapsLink = block.googleMapsLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(block.name)}`;
+                                    cardHtmlContent = `
+                                        <h3 class="timeline-title">${formatFurigana(block.name)}
+                                            <a href="${googleMapsLink}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">📍</a>
+                                        </h3>
+                                        <p class="timeline-detail">${block.details || ''}</p>
+                                    `;
 
-                                if (block.services && block.services.length > 0) {
-                                    cardHtmlContent += `<div class="timeline-item-content">
-                                        <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                            ${block.services.map(service => `
-                                                <div>
-                                                    <strong>${service.name}:</strong> ${service.details}
-                                                    ${service.link ? `<a href="${service.link}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">→ 查看詳情</a>` : ''}
+                                    if (block.services && block.services.length > 0) {
+                                        cardHtmlContent += `<div class="timeline-item-content">
+                                            <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                                ${block.services.map(service => `
+                                                    <div>
+                                                        <strong>${service.name}:</strong> ${service.details}
+                                                        ${service.link ? `<a href="${service.link}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">→ 查看詳情</a>` : ''}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>`;
+                                    }
+
+                                    if (block.otherDetails && block.otherDetails.length > 0) {
+                                         cardHtmlContent += `
+                                            <div class="timeline-item-content">
+                                                <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                                    ${block.otherDetails.map(detail => `<a href="${detail.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${detail.info} →</a>`).join('')}
                                                 </div>
-                                            `).join('')}
-                                        </div>
-                                    </div>`;
-                                }
+                                            </div>
+                                        `;
+                                    }
 
-                                if (block.otherDetails && block.otherDetails.length > 0) {
-                                     cardHtmlContent += `
+                                } else if (block.type === 'movement') {
+                                    const travelInfo = travelModeInfo[block.travelMode];
+                                    markerCol.innerHTML = `<div class="marker-icon movement">${travelInfo.emoji}</div><div class="marker-line"></div>`;
+                                    cardDiv.className = 'timeline-card travel-method-card';
+                                    
+                                    cardHtmlContent = `
+                                        <h3 class="timeline-title">${travelInfo.label} - ${block.duration}
+                                            ${block.isRoundTrip ? `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">來回</span>` : ''}
+                                        </h3>
+                                        <p class="timeline-detail">${(block.distance || 0).toFixed(1)} km</p>
                                         <div class="timeline-item-content">
                                             <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                                ${block.otherDetails.map(detail => `<a href="${detail.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${detail.info} →</a>`).join('')}
+                                                <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
+                                                <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
+                                                ${block.route ? `<p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>` : ''}
+                                                ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
                                             </div>
                                         </div>
                                     `;
                                 }
-
-                            } else if (block.type === 'movement') {
-                                const travelInfo = travelModeInfo[block.travelMode];
-                                markerCol.innerHTML = `<div class="marker-icon movement">${travelInfo.emoji}</div><div class="marker-line"></div>`;
-                                cardDiv.className = 'timeline-card travel-method-card';
                                 
-                                cardHtmlContent = `
-                                    <h3 class="timeline-title">${travelInfo.label} - ${block.duration}
-                                        ${block.isRoundTrip ? `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">來回</span>` : ''}
-                                    </h3>
-                                    <p class="timeline-detail">${(block.distance || 0).toFixed(1)} km</p>
-                                    <div class="timeline-item-content">
-                                        <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                            <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
-                                            <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
-                                            ${block.route ? `<p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>` : ''}
-                                            ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
-                                        </div>
-                                    </div>
-                                `;
-                            }
-                            
-                            cardDiv.innerHTML = cardHtmlContent;
-                            cardCol.appendChild(cardDiv);
+                                cardDiv.innerHTML = cardHtmlContent;
+                                cardCol.appendChild(cardDiv);
 
-                            item.appendChild(timeCol);
-                            item.appendChild(markerCol);
-                            item.appendChild(cardCol);
-                            timelineContainer.appendChild(item);
+                                item.appendChild(timeCol);
+                                item.appendChild(markerCol);
+                                item.appendChild(cardCol);
+                                dayItemsContainer.appendChild(item);
 
-                            cardDiv.addEventListener('click', (event) => {
-                               if (!event.target.closest('a')) {
-                                   const contentDiv = cardDiv.querySelector('.timeline-item-content');
-                                   if (contentDiv) {
-                                       item.classList.toggle('active');
+                                cardDiv.addEventListener('click', (event) => {
+                                   if (!event.target.closest('a')) {
+                                       const contentDiv = cardDiv.querySelector('.timeline-item-content');
+                                       if (contentDiv) {
+                                           item.classList.toggle('active');
+                                       }
                                    }
-                               }
+                                });
                             });
-                        });
+                        }
                     } catch (e) {
                         console.error("Error during timeline rendering:", e);
                     }
