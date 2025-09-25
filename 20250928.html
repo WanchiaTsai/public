@@ -251,14 +251,64 @@
                     try {
                         const travelLegs = timelineData.filter(item => item.type === 'movement');
 
+                        // Calculate main totals
                         const totalDistance = travelLegs.reduce((acc, leg) => acc + (leg.distance || 0), 0);
                         const totalMinutes = travelLegs.reduce((acc, leg) => acc + parseDurationToMinutes(leg.duration), 0);
-
                         document.getElementById('total-distance').textContent = `${totalDistance.toFixed(1)} km`;
                         document.getElementById('total-duration').textContent = formatMinutesToHours(totalMinutes);
                         document.getElementById('total-legs').textContent = `${travelLegs.length} 区間`;
+
+                        // Calculate transport breakdown
+                        const transportBreakdown = {};
+                        timelineData.forEach(block => {
+                            let mode = null;
+                            if (block.type === 'movement') {
+                                mode = block.travelMode;
+                            } else if (block.type === 'location') {
+                                if (block.details && block.details.includes('住宿')) {
+                                    mode = 'stay';
+                                } else if (block.services && block.services.length > 0) {
+                                    mode = 'airport_service';
+                                }
+                            }
+
+                            if (mode) {
+                                if (!transportBreakdown[mode]) {
+                                    transportBreakdown[mode] = { distance: 0, durationMinutes: 0, count: 0 };
+                                }
+                                if (block.type === 'movement') {
+                                    transportBreakdown[mode].distance += (block.distance || 0);
+                                    transportBreakdown[mode].durationMinutes += parseDurationToMinutes(block.duration);
+                                }
+                                transportBreakdown[mode].count++;
+                            }
+                        });
+
+                        const transportBreakdownContainer = document.getElementById('transport-breakdown');
+                        transportBreakdownContainer.innerHTML = '';
+                        for (const mode in travelModeInfo) {
+                            const breakdown = transportBreakdown[mode];
+                            if (breakdown) {
+                                const info = travelModeInfo[mode];
+                                const card = document.createElement('div');
+                                card.className = 'stat-card p-4 rounded-xl';
+                                let contentHtml = `<div class="text-3xl font-bold text-stone-800">${info.emoji}</div>
+                                                   <p class="text-stone-600 mt-1">${info.label}</p>`;
+
+                                if (mode === 'stay') {
+                                    contentHtml += `<p class="text-sm text-stone-500 mt-2">${breakdown.count} 晚</p>`;
+                                } else if (mode === 'airport_service') {
+                                    contentHtml += `<p class="text-sm text-stone-500 mt-2">${breakdown.count} 次</p>`;
+                                } else {
+                                    contentHtml += `<p class="text-sm text-stone-500 mt-2">${breakdown.distance.toFixed(1)} km</p>
+                                                    <p class="text-sm text-stone-500">${formatMinutesToHours(breakdown.durationMinutes)}</p>`;
+                                }
+                                card.innerHTML = contentHtml;
+                                transportBreakdownContainer.appendChild(card);
+                            }
+                        }
                     } catch (e) {
-                        console.error("Error calculating totals:", e);
+                        console.error("Error calculating totals and breakdown:", e);
                     }
 
                     const timelineContainer = document.getElementById('timeline-container');
