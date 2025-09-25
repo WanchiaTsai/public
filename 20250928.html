@@ -237,581 +237,534 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const travelData = [
-                // Departure Fast Track
-                { from: 'TPE 桃園國際機場', to: '【商務版】禮遇通關 (出境)', distance: 0, duration: '0分', route: '航班IT256, 編號FT14004896, 票券驗證碼 9085', date: '9月28日', departureTime: '06:30 AM', travelMode: 'airport_service', link: 'https://68666.tw/MscA' },
-                // Outbound Flight
-                { from: 'TPE 桃園國際機場 (Terminal 1)', to: 'AXT 秋田機場 (あきたくうこう)', distance: 2780, duration: '4時間20分', route: '航班號碼: IT256', date: '9月28日', departureTime: '08:00 AM', travelMode: 'flight', airline: 'tigersmart', flightNumber: 'IT256', link: '' },
+            fetch('data.json')
+                .then(response => response.json())
+                .then(travelData => {
 
-                { from: 'AXT 秋田機場 (あきたくうこう)', to: '鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)', distance: 91.9, duration: '1時間23分', route: '日本海東北自動車道/日本海東北自動車道（秋田区間）/秋田区間', date: '9月28日', departureTime: '03:00 PM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/Akita+Airport,+Yamagomori-%EF%BC%94%EF%BC%9９+Yuwatsubakigawa,+Akita,+Japan/%E6%97%A5%E6%9C%AC,+%E5%B1%B1%E5%BD%A2%E7%9C%8C%E9%81%8A%E4%BD%90%E7%94%BA%E5%90%B9%E6%B5%A6,+%E5%A4%A7%E5%B9%B3%E5%B1%B1%E8%8D%98/data=!4m14!4m13!1m5!1m1!19sChIJlYkpCSW-j18RQs7MMGKmAQE!2m2!1d140.2177165!2d39.614477799999996!1m5!1m1!19sChIJRwx4Rh2Njl8Rmj9Tw-6-De0!2m2!1d139.9784133!2d39.107180299999996!3e0', departureTime: '03:00 PM' },
-                { from: '鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)', to: '鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)', distance: 0, duration: '一泊', route: '住宿', date: '9月28日', travelMode: 'stay', link: '' },
+                    // Define a mapping from travelMode to icon emoji and Chinese label
+                    const travelModeInfo = {
+                        'flight': { emoji: '✈️', label: '飛機' },
+                        'driving': { emoji: '🚘', label: '駕車' },
+                        'walking': { emoji: '🥾', label: '徒步' },
+                        'boat': { emoji: '🛥️', label: '乘船' },
+                        'bus': { emoji: '🚌', label: '巴士' },
+                        'ropeway': { emoji: '🚠', label: '纜車' },
+                        'stay': { emoji: '🏨', label: '住宿' },
+                        'airport_service': { emoji: '🛂', label: '禮遇通關' }
+                    };
 
-                { from: '鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)', to: '鳥海山 五合目鉾立『象潟口』 (ちょうかいさんごごうめほこたて『きさかたぐち』)', distance: 3.3, duration: '5分', route: '鳥海ブルーライン', date: '9月29日', departureTime: '08:55 AM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/%E9%B3%A8%E6%B5%B7%E5%B1%B1+%E4%BA%94%E5%90%88%E7%9B%AE%E9%89%BE%E7%AB%8B%E3%80%8E%E8%B1%A1%E6%BD%9F%E5%8F%A3%E3%80%8F,+Kisakatamachi+Kodaki,+Nikaho,+Akita,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJlYkpCSW-j18RQs7MMGKmAQE!2m2!1d140.2177165!2d39.614477799999996!1m5!1m1!19sChIJYbrSwlbyjl8RVaL7JwckjRo!2m2!1d139.9915595!2d39.1218077!3e0', date: '9月29日', travelMode: 'driving' },
-                { from: '鳥海山 五合目鉾立『象潟口』 (ちょうかいさんごごうめほこたて『きさかたぐち』)', to: '鳥海湖 & 稲倉岳周遊 (ちょうかいこ & いなくらだけしゅうゆう)', distance: 6.6, duration: '3時間24分', route: '登山道 (往返合計 6.6km, 3時間24分)', date: '9月29日', departureTime: '09:00 AM', travelMode: 'walking', link: 'https://yamap.com/model-courses/25567', isRoundTrip: true },
-                { from: '鳥海山 五合目鉾立『象潟口』 (ちょうかいさんごごうめほこたて『きさかたぐち』)', to: '羽黒山 三光院 (はぐろさんさんこういん)', distance: 68.3, duration: '1時間13分', route: '鳥海ブルーライン', date: '9月29日', departureTime: '01:00 PM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/%E9%B3%A8%E6%B5%B7%E5%B1%B1+%E4%BA%94%E5%90%88%E7%9B%AE%E9%89%BE%E7%AB%8B%E3%80%8E%E8%B1%A1%E6%BD%9F%E5%8F%A3%E3%80%8F,+Kisakatamachi+Kodaki,+Nikaho,+Akita,+Japan/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJYbrSwlbyjl8RVaL7JwckjRo!2m2!1d139.9915595!2d39.1218077!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!3e0', date: '9月29日', travelMode: 'driving' },
-                { from: '羽黒山 三光院 (はぐろさんさんこういん)', to: '羽黒山 三光院 (はぐろさんさんこういん)', distance: 0, duration: '一泊', route: '住宿', date: '9月29日', travelMode: 'stay', link: '' },
-
-                { from: '羽黒山 三光院 (はぐろさんさんこういん)', to: '月山登山口 (がっさんとざんぐち)', distance: 23.6, duration: '35分', route: '県道211号', date: '9月30日', departureTime: '08:00 AM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/Mt.+Gassan+8th+Station,+Tsuruoka,+Yamagata,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJs4EjiBL3i18Rq_4mDVSpHps!2m2!1d140.016636!2d38.5861759!3e0', date: '9月30日', travelMode: 'driving' },
-                { from: '月山登山口 (がっさんとざんぐち)', to: '月山山頂 (往返) (がっさんさんちょう (おうふく))', distance: 11.0, duration: '5時間30分', route: '登山道 (參考: YAMAP 月山地圖)', date: '9月30日', departureTime: '08:40 AM', travelMode: 'walking', link: 'https://yamap.com/maps/39', isRoundTrip: true },
-                { from: '月山登山口 (がっさんとざんぐち)', to: '羽黒山 三光院 (はぐろさんさんこういん)', distance: 23.4, duration: '34分', route: '県道211号', date: '9月30日', departureTime: '02:20 PM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/Mt.+Gassan+8th+Station,+Tsuruoka,+Yamagata,+Japan/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJs4EjiBL3i18Rq_4mDVSpHps!2m2!1d140.016636!2d38.5861759!3e0', date: '9月30日', departureTime: '02:20 PM', travelMode: 'driving' },
-                { from: '羽黒山 三光院 (はぐろさんさんこういん)', to: '羽黒山 三光院 (はぐろさんさんこういん)', distance: 0, duration: '一泊', route: '住宿', date: '9月30日', travelMode: 'stay', link: '' },
-
-                { from: '羽黒山 三光院 (はぐろさんさんこういん)', to: '折立温泉　やまきや旅館', distance: 280, duration: '4時間10分', route: '新潟区間/日本海東北自動車道', date: '10月1日', departureTime: '08:00 AM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/Kozanso+Camping+Ground,+508-123+%E5%B9%B3%E9%87%8E,+%E5%B1%B1%E4%B8%AD%E6%B9%96%E6%9D%91+%E5%B1%B1%E6%A2%A8%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJi_IQhV6I9V8RTXT37oz8hmU!2m2!1d139.13869689999999!2d37.1354283!3e0' },
-                { from: '折立温泉　やまきや旅館', to: '折立温泉　やまきや旅館', distance: 0, duration: '一泊', route: '住宿', date: '10月1日', travelMode: 'stay', link: 'https://maps.app.goo.gl/xYy6kR25EYDUyB4a9' },
-
-                { from: '折立温泉　やまきや旅館', to: '奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)', distance: 11.4, duration: '21分', route: '奥只見シルバーライン/県道50号', date: '10月2日', departureTime: '08:00 AM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/Kozanso,+%E6%97%A5%E6%9C%AC,+%E3%80%92946-0085+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8B%E6%8A%98%E7%AB%8B%E5%AD%97%E5%8C%97%E3%83%8E%E5%8F%881038/%E5%A5%A5%E5%8F%AA%E8%A6%8B%E3%83%80%E3%83%A0%E7%84%A1%E6%96%99%E9%A7%90%E8%BB%8A%E5%A0%B4,+%E6%97%A5%E6%9C%AC,+%E3%80%92946-0085+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E6%B9%AF%E3%83%8E%E8%B0%B7%E8%8A%8B%E5%B7%9D%EF%BC%9１%EF%BC%9３%EF%BC%9１%EF%BC%9７%E2%88%92%EF%BC%9１%EF%BC%9０/data=!4m14!4m13!1m5!1m1!19sChIJi_IQhV6I9V8RTXT37oz8hmU!2m2!1d139.13869689999999!2d37.1354283!1m5!1m1!19sChIJgRxT50GH9V8RJoimHj5zCsM!2m2!1d139.24516649999998!2d37.156281799999995!3e0', date: '10月2日', departureTime: '08:00 AM', travelMode: 'driving' },
-                { from: '奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)', to: '尾瀬口船着場 (おぜぐちふなつきば)', distance: 0, duration: '40分', route: '奧只見遊船', date: '10月2日', departureTime: '09:30 AM', travelMode: 'boat', link: 'https://enjoyniigata.com/tc/spot/8397' },
-                { from: '尾瀬口船着場 (おぜぐちふなつきば)', to: '沼山峠 (ぬまやまとうげ)', distance: 38, duration: '1時間5分', route: '巴士', date: '10月2日', departureTime: '10:15 AM', travelMode: 'bus', link: 'https://www.aizubus.com/travel/oze/' },
-                { from: '沼山峠 (ぬまやまとうげ)', to: '尾瀬沼山荘 (おぜぬまさんそう)', distance: 2.5, duration: '1時間15分', route: '登山道', date: '10月2日', departureTime: '11:20 AM', travelMode: 'walking', link: 'https://www.env.go.jp/park/oze/data/hike_map_oze_numamoto.pdf' },
-                { from: '尾瀬沼山荘 (おぜぬまさんそう)', to: '尾瀬沼山荘 (おぜぬまさんそう)', distance: 0, duration: '一泊', route: '住宿', date: '10月2日', travelMode: 'stay', link: '' },
-
-                { from: '尾瀬沼山荘 (おぜぬまさんそう)', to: '尾瀬 温泉小屋', distance: 2.2, duration: '1時間10分', route: '登山道 (尾瀬ヶ原)', date: '10月3日', departureTime: '07:00 AM', travelMode: 'walking', link: 'https://yamap.com/maps/39' },
-                { from: '尾瀬 温泉小屋', to: '尾瀬 温泉小屋', distance: 0, duration: '一泊', route: '住宿', date: '10月3日', travelMode: 'stay', link: 'https://maps.app.goo.gl/W8XT8uvVTZ532TZ69' },
-
-                { from: '尾瀬 温泉小屋', to: 'Mi-ike lodge (みいけろっじ)', distance: 2.0, duration: '1時間0分', route: '登山道 (尾瀬ヶ原)', date: '10月4日', departureTime: '07:00 AM', travelMode: 'walking', link: 'https://www.oze-info.jp/ozh-stay/miikelodge' },
-                { from: 'Mi-ike lodge (みいけろっじ)', to: '尾瀬口船着場 (おぜぐちふなつきば)', distance: 38.0, duration: '1時間5分', route: '巴士', date: '10月4日', departureTime: '03:00 PM', travelMode: 'bus', link: 'https://www.aizubus.com/travel/oze/' },
-                { from: '尾瀬口船着場 (おぜぐちふなつきば)', to: '奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)', distance: 0, duration: '40分', route: '奧只見遊船', date: '10月4日', departureTime: '04:10 PM', travelMode: 'boat', link: 'https://enjoyniigata.com/tc/spot/8397' },
-                { from: '奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)', to: '魚沼ヒミツ基地 〜Farm stay〜', distance: 24.7, duration: '40分', route: '奥只見シルバーライン/県道50号', date: '10月4日', departureTime: '05:00 PM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8A%E6%8A%98%E7%AB%8B,+%E6%B9%AF%E6%B2%BB%E3%81%AE%E5%AE%BF+%E7%A5%9E%E9%A2%A8%E9%A4%A8/data=!4m14!4m13!1m5!1m1!19sChIJgRxT50GH9V8RJoimHj5zCsM!2m2!1d139.24516649999998!2d37.156281799999995!1m5!1m1!19sChIJ-TE3mniP9V8RfrBniRUGDhc!2m2!1d139.085947!2d37.185475!3e0', date: '10月4日', travelMode: 'driving' },
-                { from: '魚沼ヒミツ基地 〜Farm stay〜', to: '魚沼ヒミツ基地 〜Farm stay〜', distance: 0, duration: '一泊', route: '住宿', date: '10月4日', travelMode: 'stay', link: 'https://maps.app.goo.gl/cg7QYa29ZpZekFHs6' },
-
-                { from: '魚沼ヒミツ基地 〜Farm stay〜', to: '八海山ロープウェー (はっかいさんろーぷうぇー)', distance: 35.6, duration: '46分', route: '国道352号 and 国道291号', date: '10月5日', departureTime: '08:00 AM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8A%E6%8A%98%E7%AB%8B,+%E6%B9%AF%E6%B2%BB%E3%81%AE%E5%AE%BF+%E7%A5%9E%E9%A2%A8%E9%A4%A8/data=!4m14!4m13!1m5!1m1!19sChIJ-TE3mniP9V8RfrBniRUGDhc!2m2!1d139.085947!2d37.185475!1m5!1m1!19sChIJJu0D4tKaM9V8RfrBniRUGDhc!2m2!1d138.98037069999998!2d37.1110792!3e0', date: '10月5日', travelMode: 'driving' },
-                { from: '八海山ロープウェー (はっかいさんろーぷうぇー)', to: '八海山山頂駅 (はっかいさんさんちょうえき)', distance: 2.217, duration: '5分', route: '八海山纜車', date: '10月5日', departureTime: '08:47 AM', travelMode: 'ropeway', link: 'https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html' },
-                { from: '八海山山頂駅 (はっかいさんさんちょうえき)', to: '八海山 (入道岳) 周遊 (池ノ峰經由) (はっかいさん (にゅうどうだけ) しゅうゆう (いけのねけいゆ))', distance: 9.1, duration: '6時間20分', route: '登山道 (YAMAP活動ID: 8183146, 登り 910m, 下り 913m)', date: '10月5日', departureTime: '09:00 AM', travelMode: 'walking', link: 'https://yamap.com/activities/8183146' },
-                { from: '八海山山頂駅 (はっかいさんさんちょうえき)', to: '八海山ロープウェー (はっかいさんろーぷうぇー)', distance: 2.217, duration: '5分', route: '八海山纜車', date: '10月5日', departureTime: '03:20 PM', travelMode: 'ropeway', link: 'https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html' },
-                { from: '八海山ロープウェー (はっかいさんろーぷうぇー)', to: '魚沼ヒミツ基地 〜Farm stay〜', distance: 35.6, duration: '46分', route: '国道291号 and 国道352号', date: '10月5日', departureTime: '03:25 PM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/Hakkaisan+ropeway,+1610+%E5%B1%B1%E5%8F%A3,+%E5%8D%97%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8A%E6%8A%98%E7%AB%8B,+%E6%B9%AF%E6%B2%BB%E3%81%AE%E5%AE%BF+%E7%A5%9E%E9%A2%A8%E9%A4%A8/data=!4m14!4m13!1m5!1m1!19sChIJJu0D4tKaM9V8RfrBniRUGDhc!2m2!1d138.98037069999998!2d37.1110792!1m5!1m1!19sChIJ-TE3mniP9V9RfrBniRUGDhc!2m2!1d139.085947!2d37.185475!3e0', date: '10月5日', travelMode: 'driving' },
-                { from: '魚沼ヒミツ基地 〜Farm stay〜', to: '魚沼ヒミツ基地 〜Farm stay〜', distance: 0, duration: '一泊', route: '住宿', date: '10月5日', travelMode: 'stay', link: 'https://maps.app.goo.gl/cg7QYa29ZpZekFHs6' },
-
-                { from: '魚沼ヒミツ基地 〜Farm stay〜', to: '新潟 (にいがた)', distance: 114, duration: '1時間31分', route: '関越自動車道 and 北陸自動車道', date: '10月6日', departureTime: '08:00 AM', travelMode: 'driving', link: 'https://www.google.com/maps/dir/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8A%E6%8A%98%E7%AB%8B,+%E6%B9%AF%E6%B2%BB%E3%81%AE%E5%AE%BF+%E7%A5%9E%E9%A2%A8%E9%A4%A8/data=!4m14!4m13!1m5!1m1!19sChIJ-TE3mniP9V8RfrBniRUGDhc!2m2!1d139.085947!2d37.185475!1m5!1m1!19sChIJ98DHVcLF9F8RDSOQycubUPE!2m2!1d139.069444!2d37.9185345!3e0', date: '10月6日', travelMode: 'driving' },
-
-                // Return Flight
-                { from: 'KIJ 新潟機場 (にいがたくうこう)', to: 'TPE 桃園國際機場 (Terminal 1)', distance: 2780, duration: '2時間35分', route: '航班號碼: IT229', date: '10月6日', departureTime: '06:50 PM', travelMode: 'flight', airline: 'tigersmart', flightNumber: 'IT229', link: '' },
-                // Arrival Fast Track
-                { from: 'TPE 桃園國際機場', to: '【尊榮版】禮遇通關 (入境)', distance: 0, duration: '0分', route: '航班IT229, 預約編號FT14004875, 票券驗證碼 1198', date: '10月6日', departureTime: '09:25 PM', travelMode: 'airport_service', link: 'https://68666.tw/2tyt' }
-            ];
-
-            // Define a mapping from travelMode to icon emoji and Chinese label
-            const travelModeInfo = {
-                'flight': { emoji: '✈️', label: '飛機' },
-                'driving': { emoji: '🚘', label: '駕車' },
-                'walking': { emoji: '🥾', label: '徒步' },
-                'boat': { emoji: '🛥️', label: '乘船' },
-                'bus': { emoji: '🚌', label: '巴士' },
-                'ropeway': { emoji: '🚠', label: '纜車' },
-                'stay': { emoji: '🏨', label: '住宿' },
-                'airport_service': { emoji: '🛂', label: '禮遇通關' }
-            };
-
-            function parseDurationToMinutes(durationStr) {
-                if (durationStr === '一泊') return 0;
-                let totalMinutes = 0;
-                const hourMatch = durationStr.match(/(\d+)時間/);
-                const minMatch = durationStr.match(/(\d+)分/);
-                if (hourMatch) totalMinutes += parseInt(hourMatch[1], 10) * 60;
-                if (minMatch) totalMinutes += parseInt(minMatch[1], 10);
-                return totalMinutes;
-            }
-            
-            function formatMinutesToHours(minutes) {
-                const h = Math.floor(minutes / 60);
-                const m = minutes % 60;
-                return `${h}時間${m > 0 ? ` ${m}分` : ''}`;
-            }
-
-            function addMinutesToTime(timeStr, minutesToAdd) {
-                if (!timeStr) return '';
-                if (minutesToAdd === 0) return timeStr;
-
-                let [time, period] = timeStr.split(' ');
-                let [hours, minutes] = time.split(':').map(Number);
-
-                if (period === 'PM' && hours !== 12) {
-                    hours += 12;
-                } else if (period === 'AM' && hours === 12) {
-                    hours = 0;
-                }
-
-                let totalMinutes = hours * 60 + minutes + minutesToAdd;
-
-                const newHours = Math.floor(totalMinutes / 60);
-                const newMinutes = totalMinutes % 60;
-
-                const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
-                const newPeriod = newHours >= 12 ? 'PM' : 'AM';
-
-                return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
-            }
-
-            function calculateArrivalTime(departureTimeStr, durationStr, dateStr) {
-                if (!departureTimeStr || !durationStr) return '';
-
-                const durationMinutes = parseDurationToMinutes(durationStr);
-                
-                let [time, period] = departureTimeStr.split(' ');
-                let [hours, minutes] = time.split(':').map(Number);
-
-                if (period === 'PM' && hours !== 12) {
-                    hours += 12;
-                } else if (period === 'AM' && hours === 12) {
-                    hours = 0;
-                }
-
-                let totalMinutes = hours * 60 + minutes + durationMinutes;
-
-                const newHours = Math.floor(totalMinutes / 60);
-                const newMinutes = totalMinutes % 60;
-
-                const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
-                const newPeriod = newHours >= 12 ? 'PM' : 'AM';
-
-                return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
-            }
-
-            // Helper function to format Kanji with Furigana using <ruby> tags
-            function formatFurigana(nameWithFurigana) {
-                const match = nameWithFurigana.match(/(.+)\s\((.+)\)/);
-                if (match && match[1] && match[2]) {
-                    const kanji = match[1].trim();
-                    const furigana = match[2].trim();
-                    return `<ruby>${kanji}<rt>${furigana}</rt></ruby>`;
-                }
-                return nameWithFurigana; // Return original if no furigana found
-            }
-
-
-            // Filter out the specific hotel and its stay leg
-            const filteredTravelData = travelData.filter(leg => {
-                const isTargetHotel = (leg.from === '大湯温泉 湯元庄屋 和泉屋旅館 (おおゆおんせんゆもとしょうやいずみやりょかん)' ||
-                                     leg.to === '大湯温泉 湯元庄屋 和泉屋旅館 (おおゆおんせんゆもとしょうやいずみやりょかん)');
-                
-                // Keep legs that are NOT related to the target hotel
-                return !isTargetHotel;
-            });
-
-            // Update the leg that previously went to 'Kozanso' to now go to 'Kozanso'
-            filteredTravelData.forEach(leg => {
-                if (leg.to === '折立温泉　やまきや旅館' && leg.from === '羽黒山 三光院 (はぐろさんさんこういん)' && leg.date === '10月1日') {
-                    leg.distance = 280; // Updated distance from tool output
-                    leg.duration = '4時間10分'; // Updated duration from tool output
-                    leg.route = '新潟区間/日本海東北自動車道'; // Updated route from tool output
-                    leg.link = 'https://www.google.com/maps/dir/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8B%E6%8A%98%E7%AB%8B,+%E5%AD%97%E5%8C%97%E3%83%8E%E5%8F%881038,+Kozanso/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJi_IQhV6I9V8RTXT37oz8hmU!2m2!1d139.13869689999999!2d37.1354283!3e0'; // Updated link from tool output
-                }
-            });
-
-            // Update the leg that previously went from 'Kozanso' to '奥只見ダム無料駐車場'
-            filteredTravelData.forEach(leg => {
-                if (leg.from === '折立温泉　やまきや旅館' && leg.to === '奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)' && leg.date === '10月2日') {
-
-                    leg.distance = 11.4; // Updated distance from tool output
-                    leg.duration = '21分'; // Updated duration from tool output
-                    leg.link = 'https://www.google.com/maps/dir/Kozanso,+%E6%97%A5%E6%9C%AC,+%E3%80%92946-0085+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8B%E6%8A%98%E7%AB%8B%E5%AD%97%E5%8C%97%E3%83%8E%E5%8F%881038/%E5%A5%A5%E5%8F%AA%E8%A6%8B%E3%83%80%E3%83%A0%E7%84%A1%E6%96%99%E9%A7%90%E8%BB%8A%E5%A0%B4,+%E6%97%A5%E6%9C%AC,+%E3%80%92946-0085+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E6%B9%湯%E3%83%8E%E8%B0%B7%E8%8A%8B%E5%B7%9D%EF%BC%9１%EF%BC%9３%EF%BC%9１%EF%BC%9７%E2%88%92%EF%BC%9１%EF%BC%9０/data=!4m14!4m13!1m5!1m1!19sChIJi_IQhV6I9V8RTXT37oz8hmU!2m2!1d139.13869689999999!2d37.1354283!1m5!1m1!19sChIJgRxT50GH9V8RJoimHj5zCsM!2m2!1d139.24516649999998!2d37.156281799999995!3e0';
-                }
-            });
-
-            // Update the leg that previously went from '東電小屋' to '沼山峠'
-            filteredTravelData.forEach(leg => {
-                if (leg.from === '尾瀬 温泉小屋' && leg.to === '沼山峠 (ぬまやまとうげ)' && leg.date === '10月4日') {
-                    leg.distance = 6.5; // Updated distance based on Oze common routes
-                    leg.duration = '2時間30分'; // Updated duration based on Oze common routes
-                    leg.link = 'https://yamap.com/maps/39'; // General Oze map link
-                }
-            });
-
-            // Update the leg that previously went from '尾瀬沼山荘' to '東電小屋'
-            filteredTravelData.forEach(leg => {
-                if (leg.from === '尾瀬沼山荘 (おぜぬまさんそう)' && leg.to === '尾瀬 温泉小屋' && leg.date === '10月3日') {
-                    leg.distance = 2.2; // Updated distance based on Oze common routes
-                    leg.duration = '1時間10分'; // Updated duration based on Oze common routes
-                    leg.link = 'https://yamap.com/maps/39'; // General Oze map link
-                }
-            });
-
-
-            // Re-assign originalIndex for all travelData entries after modifications
-            filteredTravelData.forEach((leg, index) => {
-                leg.originalIndex = index;
-            });
-
-            // Calculate total distance and duration for overall summary
-            const totalDistance = filteredTravelData.reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? leg.distance : 0), 0);
-            const totalMinutes = filteredTravelData.reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? parseDurationToMinutes(leg.duration) : 0), 0);
-
-
-            document.getElementById('total-distance').textContent = `${totalDistance.toFixed(1)} km`;
-            document.getElementById('total-duration').textContent = formatMinutesToHours(totalMinutes);
-            document.getElementById('total-legs').textContent = `${filteredTravelData.length} 区間`;
-
-            // Calculate breakdown by transport mode
-            const transportBreakdown = {};
-            for (const mode in travelModeInfo) {
-                transportBreakdown[mode] = { distance: 0, durationMinutes: 0 };
-            }
-
-            filteredTravelData.forEach(leg => {
-                if (transportBreakdown[leg.travelMode]) {
-                    transportBreakdown[leg.travelMode].distance += leg.distance;
-                    transportBreakdown[leg.travelMode].durationMinutes += parseDurationToMinutes(leg.duration);
-                }
-            });
-
-            const transportBreakdownContainer = document.getElementById('transport-breakdown');
-            transportBreakdownContainer.innerHTML = '';
-
-            for (const mode in transportBreakdown) {
-                const info = travelModeInfo[mode];
-                const breakdown = transportBreakdown[mode];
-                if (breakdown.distance > 0 || breakdown.durationMinutes > 0 || mode === 'stay' || mode === 'flight' || mode === 'airport_service') { 
-                    const card = document.createElement('div');
-                    card.className = 'stat-card p-4 rounded-xl';
-
-                    let contentHtml = `<div class="text-3xl font-bold text-stone-800">${info.emoji}</div>
-                                       <p class="text-stone-600 mt-1">${info.label}</p>`;
-
-                    if (mode === 'stay') {
-                        const stayCount = filteredTravelData.filter(leg => leg.travelMode === 'stay' && leg.from === leg.to && leg.duration === '一泊').length;
-                        contentHtml += `<p class="text-sm text-stone-500 mt-2">${stayCount} 晚</p>`;
-                    } else {
-                        contentHtml += `<p class="text-sm text-stone-500 mt-2">${breakdown.distance.toFixed(1)} km</p>
-                                        <p class="text-sm text-stone-500">${formatMinutesToHours(breakdown.durationMinutes)}</p>`;
+                    function parseDurationToMinutes(durationStr) {
+                        if (durationStr === '一泊') return 0;
+                        let totalMinutes = 0;
+                        const hourMatch = durationStr.match(/(\d+)時間/);
+                        const minMatch = durationStr.match(/(\d+)分/);
+                        if (hourMatch) totalMinutes += parseInt(hourMatch[1], 10) * 60;
+                        if (minMatch) totalMinutes += parseInt(minMatch[1], 10);
+                        return totalMinutes;
                     }
-                    card.innerHTML = contentHtml;
-                    transportBreakdownContainer.appendChild(card);
-                }
-            }
-
-
-            const timelineContainer = document.getElementById('timeline-container');
-            timelineContainer.innerHTML = '';
-
-            // --- Generate structured data for rendering the timeline ---
-            const finalTimelineBlocks = []; 
-
-            // Group original travelData by date
-            const groupedByDate = filteredTravelData.reduce((acc, leg) => {
-                if (!acc[leg.date]) {
-                    acc[leg.date] = [];
-                }
-                acc[leg.date].push(leg);
-                return acc;
-            }, {});
-
-            const sortedDates = Object.keys(groupedByDate).sort((a, b) => new Date(a) - new Date(b));
-
-            sortedDates.forEach(date => {
-                finalTimelineBlocks.push({ type: 'date_header', date: date }); // Add date header block
-
-                const dailyLegs = groupedByDate[date];
-                // Sort legs by time within the day
-                dailyLegs.sort((a, b) => {
-                    const timeA = a.departureTime ? new Date(`${a.date} ${a.departureTime}`) : new Date(a.date + ' 00:00 AM');
-                    const timeB = b.departureTime ? new Date(`${b.date} ${b.departureTime}`) : new Date(b.date + ' 00:00 AM');
-                    return timeA - timeB;
-                });
-
-                let lastLocationAddedName = null; // Tracks the name of the last *physical location* added to `finalTimelineBlocks`
-
-                dailyLegs.forEach((currentLeg) => {
-                    const travelInfo = travelModeInfo[currentLeg.travelMode];
-
-                    // Determine if the currentLeg's 'from' location should be added as a card
-                    let shouldAddFromLocationCard = true;
-                    // If the previous block was a generic location block for the same place, and this isn't a special event, suppress 'from' card.
-                    if (lastLocationAddedName === currentLeg.from && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
-                        shouldAddFromLocationCard = false;
-                    }
-                    // Special case for first leg of the day, it always needs a 'from' location card if it's travel
-                    // (and not already covered by a preceding special event like fast track)
-                    if (finalTimelineBlocks.length > 0 && finalTimelineBlocks[finalTimelineBlocks.length - 1].type === 'date_header' && 
-                        currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
-                        shouldAddFromLocationCard = true; // Always add 'from' after date header for a travel leg
-                    } else if (finalTimelineBlocks.length === 0 && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
-                        shouldAddFromLocationCard = true; // First ever block, if it's a travel leg
-                    } else if (lastLocationAddedName === currentLeg.from && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
-                        shouldAddFromLocationCard = false; // Don't add if it's a direct continuation from previous arrival
+                    
+                    function formatMinutesToHours(minutes) {
+                        const h = Math.floor(minutes / 60);
+                        const m = minutes % 60;
+                        return `${h}時間${m > 0 ? ` ${m}分` : ''}`;
                     }
 
+                    function addMinutesToTime(timeStr, minutesToAdd) {
+                        if (!timeStr) return '';
+                        if (minutesToAdd === 0) return timeStr;
 
-                    // --- Handle explicit 'stay' or 'airport_service' legs ---
-                    if (currentLeg.travelMode === 'stay' || currentLeg.travelMode === 'airport_service') {
-                        // If the previous block was a generic location block for the same place, remove it.
-                        if (finalTimelineBlocks.length > 0) {
-                            const lastBlock = finalTimelineBlocks[finalTimelineBlocks.length - 1];
-                            if (lastBlock.type === 'location' && lastBlock.locationName === currentLeg.to && 
-                                !lastBlock.isStay && !lastBlock.isAirportService && lastBlock.date === currentLeg.date) {
-                                finalTimelineBlocks.pop(); // Remove the generic arrival card
-                            }
+                        let [time, period] = timeStr.split(' ');
+                        let [hours, minutes] = time.split(':').map(Number);
+
+                        if (period === 'PM' && hours !== 12) {
+                            hours += 12;
+                        } else if (period === 'AM' && hours === 12) {
+                            hours = 0;
                         }
+
+                        let totalMinutes = hours * 60 + minutes + minutesToAdd;
+
+                        const newHours = Math.floor(totalMinutes / 60);
+                        const newMinutes = totalMinutes % 60;
+
+                        const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
+                        const newPeriod = newHours >= 12 ? 'PM' : 'AM';
+
+                        return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
+                    }
+
+                    function calculateArrivalTime(departureTimeStr, durationStr, dateStr) {
+                        if (!departureTimeStr || !durationStr) return '';
+
+                        const durationMinutes = parseDurationToMinutes(durationStr);
                         
-                        finalTimelineBlocks.push({
-                            type: 'location',
-                            locationName: currentLeg.to, // 'to' is the stay/service location
-                            date: currentLeg.date,
-                            time: currentLeg.departureTime || (currentLeg.travelMode === 'stay' ? '晚上' : ''),
-                            details: (currentLeg.travelMode === 'stay' ? currentLeg.duration : `服務詳情: ${currentLeg.route}`),
-                            link: currentLeg.link,
-                            emoji: travelInfo.emoji,
-                            cardClass: (currentLeg.travelMode === 'stay' ? 'timeline-stay-card' : 'timeline-service-card'),
-                            isStay: currentLeg.travelMode === 'stay',
-                            isAirportService: currentLeg.travelMode === 'airport_service'
-                        });
-                        lastLocationAddedName = currentLeg.to; // Update last added location
-                        return; // Move to the next leg as this leg is fully processed
+                        let [time, period] = departureTimeStr.split(' ');
+                        let [hours, minutes] = time.split(':').map(Number);
+
+                        if (period === 'PM' && hours !== 12) {
+                            hours += 12;
+                        } else if (period === 'AM' && hours === 12) {
+                            hours = 0;
+                        }
+
+                        let totalMinutes = hours * 60 + minutes + durationMinutes;
+
+                        const newHours = Math.floor(totalMinutes / 60);
+                        const newMinutes = totalMinutes % 60;
+
+                        const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
+                        const newPeriod = newHours >= 12 ? 'PM' : 'AM';
+
+                        return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
                     }
 
-                    // --- Handle regular travel methods (driving, walking, flight, boat, bus, ropeway) ---
-
-                    // Add 'from' location card if it's genuinely a new starting point.
-                    if (shouldAddFromLocationCard) {
-                        finalTimelineBlocks.push({
-                            type: 'location',
-                            locationName: currentLeg.from,
-                            date: currentLeg.date,
-                            time: currentLeg.departureTime,
-                            details: '出發點',
-                            link: '',
-                            emoji: '📍',
-                            cardClass: 'timeline-card'
-                        });
+                    // Helper function to format Kanji with Furigana using <ruby> tags
+                    function formatFurigana(nameWithFurigana) {
+                        const match = nameWithFurigana.match(/(.+)\s\((.+)\)/);
+                        if (match && match[1] && match[2]) {
+                            const kanji = match[1].trim();
+                            const furigana = match[2].trim();
+                            return `<ruby>${kanji}<rt>${furigana}</rt></ruby>`;
+                        }
+                        return nameWithFurigana; // Return original if no furigana found
                     }
 
-                    // Add the travel method card
-                    const arrivalTime = calculateArrivalTime(currentLeg.departureTime, currentLeg.duration, currentLeg.date);
-                    finalTimelineBlocks.push({
-                        type: 'travel_method',
-                        label: travelInfo.label,
-                        duration: currentLeg.duration,
-                        distance: currentLeg.distance,
-                        timeRange: `${currentLeg.departureTime} - ${arrivalTime}`,
-                        from: currentLeg.from,
-                        to: currentLeg.to,
-                        route: currentLeg.route,
-                        link: currentLeg.link,
-                        emoji: travelInfo.emoji,
-                        date: currentLeg.date
+
+                    // Filter out the specific hotel and its stay leg
+                    const filteredTravelData = travelData.filter(leg => {
+                        const isTargetHotel = (leg.from === '大湯温泉 湯元庄屋 和泉屋旅館 (おおゆおんせんゆもとしょうやいずみやりょかん)' ||
+                                             leg.to === '大湯温泉 湯元庄屋 和泉屋旅館 (おおゆおんせんゆもとしょうやいずみやりょかん)');
+                        
+                        // Keep legs that are NOT related to the target hotel
+                        return !isTargetHotel;
                     });
 
-                    // Add the 'to' location card.
-                    // This is handled by ensuring that if a special event follows, the generic 'to' is not added.
-                    // If this is the *last* leg of the day and there's no explicit stay/service, it will be marked as accommodation later.
-                    const isNextLegSpecialEventAtCurrentDestination = dailyLegs.slice(dailyLegs.indexOf(currentLeg) + 1).some(futureLeg =>
-                        (futureLeg.travelMode === 'stay' || futureLeg.travelMode === 'airport_service') && futureLeg.to === currentLeg.to
-                    );
+                    // Update the leg that previously went to 'Kozanso' to now go to 'Kozanso'
+                    filteredTravelData.forEach(leg => {
+                        if (leg.to === '折立温泉　やまきや旅館' && leg.from === '羽黒山 三光院 (はぐろさんさんこういん)' && leg.date === '10月1日') {
+                            leg.distance = 280; // Updated distance from tool output
+                            leg.duration = '4時間10分'; // Updated duration from tool output
+                            leg.route = '新潟区間/日本海東北自動車道'; // Updated route from tool output
+                            leg.link = 'https://www.google.com/maps/dir/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8B%E6%8A%98%E7%AB%8B,+%E5%AD%97%E5%8C%97%E3%83%8E%E5%8F%881038,+Kozanso/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJi_IQhV6I9V8RTXT37oz8hmU!2m2!1d139.13869689999999!2d37.1354283!3e0'; // Updated link from tool output
+                        }
+                    });
 
-                    if (!isNextLegSpecialEventAtCurrentDestination) {
-                        finalTimelineBlocks.push({
-                            type: 'location',
-                            locationName: currentLeg.to,
-                            date: currentLeg.date,
-                            time: arrivalTime,
-                            details: '抵達點',
-                            link: '',
-                            emoji: '📍',
-                            cardClass: 'timeline-card'
+                    // Update the leg that previously went from 'Kozanso' to '奥只見ダム無料駐車場'
+                    filteredTravelData.forEach(leg => {
+                        if (leg.from === '折立温泉　やまきや旅館' && leg.to === '奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)' && leg.date === '10月2日') {
+
+                            leg.distance = 11.4; // Updated distance from tool output
+                            leg.duration = '21分'; // Updated duration from tool output
+                            leg.link = 'https://www.google.com/maps/dir/Kozanso,+%E6%97%A5%E6%9C%AC,+%E3%80%92946-0085+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8B%E6%8A%98%E7%AB%8B%E5%AD%97%E5%8C%97%E3%83%8E%E5%8F%881038/%E5%A5%A5%E5%8F%AA%E8%A6%8B%E3%83%80%E3%83%A0%E7%84%A1%E6%96%99%E9%A7%90%E8%BB%8A%E5%A0%B4,+%E6%97%A5%E6%9C%AC,+%E3%80%92946-0085+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E6%B9%AF%E3%83%8E%E8%B0%B7%E8%8A%8B%E5%B7%9D%EF%BC%9１%EF%BC%9３%EF%BC%9１%EF%BC%9７%E2%88%92%EF%BC%9１%EF%BC%9０/data=!4m14!4m13!1m5!1m1!19sChIJi_IQhV6I9V8RTXT37oz8hmU!2m2!1d139.13869689999999!2d37.1354283!1m5!1m1!19sChIJgRxT50GH9V8RJoimHj5zCsM!2m2!1d139.24516649999998!2d37.156281799999995!3e0';
+                        }
+                    });
+
+                    // Update the leg that previously went from '東電小屋' to '沼山峠'
+                    filteredTravelData.forEach(leg => {
+                        if (leg.from === '尾瀬 温泉小屋' && leg.to === '沼山峠 (ぬまやまとうげ)' && leg.date === '10月4日') {
+                            leg.distance = 6.5; // Updated distance based on Oze common routes
+                            leg.duration = '2時間30分'; // Updated duration based on Oze common routes
+                            leg.link = 'https://yamap.com/maps/39'; // General Oze map link
+                        }
+                    });
+
+                    // Update the leg that previously went from '尾瀬沼山荘' to '東電小屋'
+                    filteredTravelData.forEach(leg => {
+                        if (leg.from === '尾瀬沼山荘 (おぜぬまさんそう)' && leg.to === '尾瀬 温泉小屋' && leg.date === '10月3日') {
+                            leg.distance = 2.2; // Updated distance based on Oze common routes
+                            leg.duration = '1時間10分'; // Updated duration based on Oze common routes
+                            leg.link = 'https://yamap.com/maps/39'; // General Oze map link
+                        }
+                    });
+
+
+                    // Re-assign originalIndex for all travelData entries after modifications
+                    filteredTravelData.forEach((leg, index) => {
+                        leg.originalIndex = index;
+                    });
+
+                    // Calculate total distance and duration for overall summary
+                    const totalDistance = filteredTravelData.reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? leg.distance : 0), 0);
+                    const totalMinutes = filteredTravelData.reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? parseDurationToMinutes(leg.duration) : 0), 0);
+
+
+                    document.getElementById('total-distance').textContent = `${totalDistance.toFixed(1)} km`;
+                    document.getElementById('total-duration').textContent = formatMinutesToHours(totalMinutes);
+                    document.getElementById('total-legs').textContent = `${filteredTravelData.length} 区間`;
+
+                    // Calculate breakdown by transport mode
+                    const transportBreakdown = {};
+                    for (const mode in travelModeInfo) {
+                        transportBreakdown[mode] = { distance: 0, durationMinutes: 0 };
+                    }
+
+                    filteredTravelData.forEach(leg => {
+                        if (transportBreakdown[leg.travelMode]) {
+                            transportBreakdown[leg.travelMode].distance += leg.distance;
+                            transportBreakdown[leg.travelMode].durationMinutes += parseDurationToMinutes(leg.duration);
+                        }
+                    });
+
+                    const transportBreakdownContainer = document.getElementById('transport-breakdown');
+                    transportBreakdownContainer.innerHTML = '';
+
+                    for (const mode in transportBreakdown) {
+                        const info = travelModeInfo[mode];
+                        const breakdown = transportBreakdown[mode];
+                        if (breakdown.distance > 0 || breakdown.durationMinutes > 0 || mode === 'stay' || mode === 'flight' || mode === 'airport_service') { 
+                            const card = document.createElement('div');
+                            card.className = 'stat-card p-4 rounded-xl';
+
+                            let contentHtml = `<div class="text-3xl font-bold text-stone-800">${info.emoji}</div>
+                                               <p class="text-stone-600 mt-1">${info.label}</p>`;
+
+                            if (mode === 'stay') {
+                                const stayCount = filteredTravelData.filter(leg => leg.travelMode === 'stay' && leg.from === leg.to && leg.duration === '一泊').length;
+                                contentHtml += `<p class="text-sm text-stone-500 mt-2">${stayCount} 晚</p>`;
+                            } else {
+                                contentHtml += `<p class="text-sm text-stone-500 mt-2">${breakdown.distance.toFixed(1)} km</p>
+                                                <p class="text-sm text-stone-500">${formatMinutesToHours(breakdown.durationMinutes)}</p>`;
+                            }
+                            card.innerHTML = contentHtml;
+                            transportBreakdownContainer.appendChild(card);
+                        }
+                    }
+
+
+                    const timelineContainer = document.getElementById('timeline-container');
+                    timelineContainer.innerHTML = '';
+
+                    // --- Generate structured data for rendering the timeline ---
+                    const finalTimelineBlocks = []; 
+
+                    // Group original travelData by date
+                    const groupedByDate = filteredTravelData.reduce((acc, leg) => {
+                        if (!acc[leg.date]) {
+                            acc[leg.date] = [];
+                        }
+                        acc[leg.date].push(leg);
+                        return acc;
+                    }, {});
+
+                    const sortedDates = Object.keys(groupedByDate).sort((a, b) => new Date(a) - new Date(b));
+
+                    sortedDates.forEach(date => {
+                        finalTimelineBlocks.push({ type: 'date_header', date: date }); // Add date header block
+
+                        const dailyLegs = groupedByDate[date];
+                        // Sort legs by time within the day
+                        dailyLegs.sort((a, b) => {
+                            const timeA = a.departureTime ? new Date(`${a.date} ${a.departureTime}`) : new Date(a.date + ' 00:00 AM');
+                            const timeB = b.departureTime ? new Date(`${b.date} ${b.departureTime}`) : new Date(b.date + ' 00:00 AM');
+                            return timeA - timeB;
                         });
-                    }
-                    lastLocationAddedName = currentLeg.to; // Crucial: Update last added location
-                });
 
-                // --- Final post-processing for the day: Mark last location as accommodation if not explicitly defined ---
-                let lastBlockOfCurrentDay = null;
-                for (let i = finalTimelineBlocks.length - 1; i >= 0; i--) {
-                    if (finalTimelineBlocks[i].date === date && finalTimelineBlocks[i].type !== 'date_header') {
-                        lastBlockOfCurrentDay = finalTimelineBlocks[i];
-                        break;
-                    }
-                }
+                        let lastLocationAddedName = null; // Tracks the name of the last *physical location* added to `finalTimelineBlocks`
 
-                if (lastBlockOfCurrentDay && !lastBlockOfCurrentDay.isStay && !lastBlockOfCurrentDay.isAirportService) {
-                    lastBlockOfCurrentDay.details = '住宿點';
-                    lastBlockOfCurrentDay.emoji = travelModeInfo.stay.emoji;
-                    lastBlockOfCurrentDay.cardClass = 'timeline-card timeline-stay-card';
-                    lastBlockOfCurrentDay.isAccommodation = true;
-                    lastBlockOfCurrentDay.time = lastBlockOfCurrentDay.time || "晚上";
+                        dailyLegs.forEach((currentLeg) => {
+                            const travelInfo = travelModeInfo[currentLeg.travelMode];
 
-                    const originalStayLink = filteredTravelData.find(leg => 
-                        leg.travelMode === 'stay' && leg.date === date && leg.to === lastBlockOfCurrentDay.locationName
-                    );
-                    if (originalStayLink && originalStayLink.link) {
-                        lastBlockOfCurrentDay.link = originalStayLink.link;
-                    }
-                }
-            });
+                            // Determine if the currentLeg's 'from' location should be added as a card
+                            let shouldAddFromLocationCard = true;
+                            // If the previous block was a generic location block for the same place, and this isn't a special event, suppress 'from' card.
+                            if (lastLocationAddedName === currentLeg.from && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
+                                shouldAddFromLocationCard = false;
+                            }
+                            // Special case for first leg of the day, it always needs a 'from' location card if it's travel
+                            // (and not already covered by a preceding special event like fast track)
+                            if (finalTimelineBlocks.length > 0 && finalTimelineBlocks[finalTimelineBlocks.length - 1].type === 'date_header' && 
+                                currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
+                                shouldAddFromLocationCard = true; // Always add 'from' after date header for a travel leg
+                            } else if (finalTimelineBlocks.length === 0 && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
+                                shouldAddFromLocationCard = true; // First ever block, if it's a travel leg
+                            } else if (lastLocationAddedName === currentLeg.from && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
+                                shouldAddFromLocationCard = false; // Don't add if it's a direct continuation from previous arrival
+                            }
 
 
-            // --- Final rendering into the DOM ---
-            timelineContainer.innerHTML = '';
-            finalTimelineBlocks.forEach((block) => {
-                if (block.type === 'date_header') {
-                    const dateHeaderDiv = document.createElement('div');
-                    dateHeaderDiv.className = 'text-center text-2xl font-bold text-stone-700 mt-8 mb-4 pb-2 border-b-2 border-stone-300';
-                    dateHeaderDiv.textContent = `${block.date} - 總距離: ${groupedByDate[block.date].reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? leg.distance : 0), 0).toFixed(1)} km / 總時間: ${formatMinutesToHours(groupedByDate[block.date].reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? parseDurationToMinutes(leg.duration) : 0), 0))}`;
-                    timelineContainer.appendChild(dateHeaderDiv);
-                    return;
-                }
+                            // --- Handle explicit 'stay' or 'airport_service' legs ---
+                            if (currentLeg.travelMode === 'stay' || currentLeg.travelMode === 'airport_service') {
+                                // If the previous block was a generic location block for the same place, remove it.
+                                if (finalTimelineBlocks.length > 0) {
+                                    const lastBlock = finalTimelineBlocks[finalTimelineBlocks.length - 1];
+                                    if (lastBlock.type === 'location' && lastBlock.locationName === currentLeg.to && 
+                                        !lastBlock.isStay && !lastBlock.isAirportService && lastBlock.date === currentLeg.date) {
+                                        finalTimelineBlocks.pop(); // Remove the generic arrival card
+                                    }
+                                }
+                                
+                                finalTimelineBlocks.push({
+                                    type: 'location',
+                                    locationName: currentLeg.to, // 'to' is the stay/service location
+                                    date: currentLeg.date,
+                                    time: currentLeg.departureTime || (currentLeg.travelMode === 'stay' ? '晚上' : ''),
+                                    details: (currentLeg.travelMode === 'stay' ? currentLeg.duration : `服務詳情: ${currentLeg.route}`),
+                                    link: currentLeg.link,
+                                    emoji: travelInfo.emoji,
+                                    cardClass: (currentLeg.travelMode === 'stay' ? 'timeline-stay-card' : 'timeline-service-card'),
+                                    isStay: currentLeg.travelMode === 'stay',
+                                    isAirportService: currentLeg.travelMode === 'airport_service'
+                                });
+                                lastLocationAddedName = currentLeg.to; // Update last added location
+                                return; // Move to the next leg as this leg is fully processed
+                            }
 
-                const item = document.createElement('div');
-                item.className = 'timeline-item';
+                            // --- Handle regular travel methods (driving, walking, flight, boat, bus, ropeway) ---
 
-                const markerColDiv = document.createElement('div');
-                markerColDiv.className = 'timeline-marker-col';
-                
-                const cardDiv = document.createElement('div');
-                cardDiv.className = block.cardClass;
-                
-                let iconHtml;
-                let cardHtmlContent;
-                
-                if (block.type === 'location') {
-                    iconHtml = `<div class="location-icon">${block.emoji}</div>`;
-                    
-                    cardHtmlContent = `
-                        <h3 class="timeline-title">${formatFurigana(block.locationName)}</h3>
-                        <p class="timeline-time">${block.time}</p>
-                        ${block.details ? `<p class="timeline-detail">${block.details}</p>` : ''}
-                    `;
-                    
-                    if (block.link && (block.isStay || block.isAirportService || block.isAccommodation)) { 
-                         cardHtmlContent += `
-                            <div class="timeline-item-content">
-                                <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                    <a href="${block.link}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${block.isStay || block.isAccommodation ? '查看住宿資訊' : '查看服務詳情'} →</a>
+                            // Add 'from' location card if it's genuinely a new starting point.
+                            if (shouldAddFromLocationCard) {
+                                finalTimelineBlocks.push({
+                                    type: 'location',
+                                    locationName: currentLeg.from,
+                                    date: currentLeg.date,
+                                    time: currentLeg.departureTime,
+                                    details: '出發點',
+                                    link: '',
+                                    emoji: '📍',
+                                    cardClass: 'timeline-card'
+                                });
+                            }
+
+                            // Add the travel method card
+                            const arrivalTime = calculateArrivalTime(currentLeg.departureTime, currentLeg.duration, currentLeg.date);
+                            finalTimelineBlocks.push({
+                                type: 'travel_method',
+                                label: travelInfo.label,
+                                duration: currentLeg.duration,
+                                distance: currentLeg.distance,
+                                timeRange: `${currentLeg.departureTime} - ${arrivalTime}`,
+                                from: currentLeg.from,
+                                to: currentLeg.to,
+                                route: currentLeg.route,
+                                link: currentLeg.link,
+                                emoji: travelInfo.emoji,
+                                date: currentLeg.date
+                            });
+
+                            // Add the 'to' location card.
+                            // This is handled by ensuring that if a special event follows, the generic 'to' is not added.
+                            // If this is the *last* leg of the day and there's no explicit stay/service, it will be marked as accommodation later.
+                            const isNextLegSpecialEventAtCurrentDestination = dailyLegs.slice(dailyLegs.indexOf(currentLeg) + 1).some(futureLeg =>
+                                (futureLeg.travelMode === 'stay' || futureLeg.travelMode === 'airport_service') && futureLeg.to === currentLeg.to
+                            );
+
+                            if (!isNextLegSpecialEventAtCurrentDestination) {
+                                finalTimelineBlocks.push({
+                                    type: 'location',
+                                    locationName: currentLeg.to,
+                                    date: currentLeg.date,
+                                    time: arrivalTime,
+                                    details: '抵達點',
+                                    link: '',
+                                    emoji: '📍',
+                                    cardClass: 'timeline-card'
+                                });
+                            }
+                            lastLocationAddedName = currentLeg.to; // Crucial: Update last added location
+                        });
+
+                        // --- Final post-processing for the day: Mark last location as accommodation if not explicitly defined ---
+                        let lastBlockOfCurrentDay = null;
+                        for (let i = finalTimelineBlocks.length - 1; i >= 0; i--) {
+                            if (finalTimelineBlocks[i].date === date && finalTimelineBlocks[i].type !== 'date_header') {
+                                lastBlockOfCurrentDay = finalTimelineBlocks[i];
+                                break;
+                            }
+                        }
+
+                        if (lastBlockOfCurrentDay && !lastBlockOfCurrentDay.isStay && !lastBlockOfCurrentDay.isAirportService) {
+                            lastBlockOfCurrentDay.details = '住宿點';
+                            lastBlockOfCurrentDay.emoji = travelModeInfo.stay.emoji;
+                            lastBlockOfCurrentDay.cardClass = 'timeline-card timeline-stay-card';
+                            lastBlockOfCurrentDay.isAccommodation = true;
+                            lastBlockOfCurrentDay.time = lastBlockOfCurrentDay.time || "晚上";
+
+                            const originalStayLink = filteredTravelData.find(leg => 
+                                leg.travelMode === 'stay' && leg.date === date && leg.to === lastBlockOfCurrentDay.locationName
+                            );
+                            if (originalStayLink && originalStayLink.link) {
+                                lastBlockOfCurrentDay.link = originalStayLink.link;
+                            }
+                        }
+                    });
+
+
+                    // --- Final rendering into the DOM ---
+                    timelineContainer.innerHTML = '';
+                    finalTimelineBlocks.forEach((block) => {
+                        if (block.type === 'date_header') {
+                            const dateHeaderDiv = document.createElement('div');
+                            dateHeaderDiv.className = 'text-center text-2xl font-bold text-stone-700 mt-8 mb-4 pb-2 border-b-2 border-stone-300';
+                            dateHeaderDiv.textContent = `${block.date} - 總距離: ${groupedByDate[block.date].reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? leg.distance : 0), 0).toFixed(1)} km / 總時間: ${formatMinutesToHours(groupedByDate[block.date].reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? parseDurationToMinutes(leg.duration) : 0), 0))}`;
+                            timelineContainer.appendChild(dateHeaderDiv);
+                            return;
+                        }
+
+                        const item = document.createElement('div');
+                        item.className = 'timeline-item';
+
+                        const markerColDiv = document.createElement('div');
+                        markerColDiv.className = 'timeline-marker-col';
+                        
+                        const cardDiv = document.createElement('div');
+                        cardDiv.className = block.cardClass;
+                        
+                        let iconHtml;
+                        let cardHtmlContent;
+                        
+                        if (block.type === 'location') {
+                            iconHtml = `<div class="location-icon">${block.emoji}</div>`;
+                            
+                            cardHtmlContent = `
+                                <h3 class="timeline-title">${formatFurigana(block.locationName)}</h3>
+                                <p class="timeline-time">${block.time}</p>
+                                ${block.details ? `<p class="timeline-detail">${block.details}</p>` : ''}
+                            `;
+                            
+                            if (block.link && (block.isStay || block.isAirportService || block.isAccommodation)) { 
+                                 cardHtmlContent += `
+                                    <div class="timeline-item-content">
+                                        <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                            <a href="${block.link}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${block.isStay || block.isAccommodation ? '查看住宿資訊' : '查看服務詳情'} →</a>
+                                        </div>
+                                    </div>
+                                `;
+                            }
+
+                        } else if (block.type === 'travel_method') {
+                            iconHtml = `<div class="travel-mode-icon">${block.emoji}</div>`;
+                            
+                            cardHtmlContent = `
+                                <h3 class="timeline-title">${block.label} - ${block.duration}</h3>
+                                <p class="timeline-detail">${block.distance.toFixed(1)} km</p>
+                                <p class="timeline-time">${block.timeRange}</p>
+                                <div class="timeline-item-content">
+                                    <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                        <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
+                                        <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
+                                        <p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>
+                                        ${block.link ? `<a href="${block.link}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
+                                    </div>
                                 </div>
-                            </div>
-                        `;
+                            `;
+                        }
+
+                        markerColDiv.innerHTML = `${iconHtml}<div class="timeline-line"></div>`;
+                        item.appendChild(markerColDiv);
+                        cardDiv.innerHTML = `<div class="flex flex-col w-full"><div>${cardHtmlContent}</div></div>`;
+                        item.appendChild(cardDiv);
+                        
+                        timelineContainer.appendChild(item);
+
+                        cardDiv.addEventListener('click', (event) => {
+                           if (!event.target.closest('a')) {
+                               const contentDiv = event.currentTarget.querySelector('.timeline-item-content');
+                               if (contentDiv) {
+                                   contentDiv.closest('.timeline-item').classList.toggle('active');
+                               }
+                           }
+                        });
+                    });
+
+
+                    const labels = filteredTravelData.map(leg => `${leg.from} → ${leg.to}`);
+                    const distances = filteredTravelData.map(leg => leg.distance);
+                    const durations = filteredTravelData.map(leg => parseDurationToMinutes(leg.duration));
+
+                    const combinedCtx = document.getElementById('combinedChart').getContext('2d');
+                    if (window.combinedChartInstance) {
+                        window.combinedChartInstance.destroy();
                     }
-
-                } else if (block.type === 'travel_method') {
-                    iconHtml = `<div class="travel-mode-icon">${block.emoji}</div>`;
-                    
-                    cardHtmlContent = `
-                        <h3 class="timeline-title">${block.label} - ${block.duration}</h3>
-                        <p class="timeline-detail">${block.distance.toFixed(1)} km</p>
-                        <p class="timeline-time">${block.timeRange}</p>
-                        <div class="timeline-item-content">
-                            <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
-                                <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
-                                <p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>
-                                ${block.link ? `<a href="${block.link}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
-                            </div>
-                        </div>
-                    `;
-                }
-
-                markerColDiv.innerHTML = `${iconHtml}<div class="timeline-line"></div>`;
-                item.appendChild(markerColDiv);
-                cardDiv.innerHTML = `<div class="flex flex-col w-full"><div>${cardHtmlContent}</div></div>`;
-                item.appendChild(cardDiv);
-                
-                timelineContainer.appendChild(item);
-
-                cardDiv.addEventListener('click', (event) => {
-                   if (!event.target.closest('a')) {
-                       const contentDiv = event.currentTarget.querySelector('.timeline-item-content');
-                       if (contentDiv) {
-                           contentDiv.closest('.timeline-item').classList.toggle('active');
-                       }
-                   }
-                });
-            });
-
-
-            const labels = filteredTravelData.map(leg => `${leg.from} → ${leg.to}`);
-            const distances = filteredTravelData.map(leg => leg.distance);
-            const durations = filteredTravelData.map(leg => parseDurationToMinutes(leg.duration));
-
-            const combinedCtx = document.getElementById('combinedChart').getContext('2d');
-            if (window.combinedChartInstance) {
-                window.combinedChartInstance.destroy();
-            }
-            window.combinedChartInstance = new Chart(combinedCtx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: '距離 (km)',
-                            data: distances,
-                            backgroundColor: 'rgba(13, 148, 136, 0.6)',
-                            borderColor: 'rgba(13, 148, 136, 1)',
-                            borderWidth: 1,
-                            yAxisID: 'y-distance',
-                            order: 1
-                        },
-                        {
-                            label: '所要時間 (分)',
-                            data: durations,
-                            backgroundColor: 'rgba(217, 119, 6, 0.6)',
-                            borderColor: 'rgba(217, 119, 6, 1)',
-                            borderWidth: 1,
-                            yAxisID: 'y-duration',
-                            order: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        'y-distance': {
-                            type: 'linear',
-                            position: 'left',
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: '距離 (km)',
-                                color: '#57534e'
-                            },
-                            ticks: {
-                                color: '#78716c'
-                            }
-                        },
-                        'y-duration': {
-                            type: 'linear',
-                            position: 'right',
-                            beginAtZero: true,
-                            grid: {
-                                drawOnChartArea: false,
-                            },
-                            title: {
-                                display: true,
-                                text: '所要時間 (分)',
-                                color: '#57534e'
-                            },
-                            ticks: {
-                                callback: function(value, index, values) {
-                                    return formatMinutesToHours(value);
+                    window.combinedChartInstance = new Chart(combinedCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: '距離 (km)',
+                                    data: distances,
+                                    backgroundColor: 'rgba(13, 148, 136, 0.6)',
+                                    borderColor: 'rgba(13, 148, 136, 1)',
+                                    borderWidth: 1,
+                                    yAxisID: 'y-distance',
+                                    order: 1
                                 },
-                                color: '#78716c'
-                            }
+                                {
+                                    label: '所要時間 (分)',
+                                    data: durations,
+                                    backgroundColor: 'rgba(217, 119, 6, 0.6)',
+                                    borderColor: 'rgba(217, 119, 6, 1)',
+                                    borderWidth: 1,
+                                    yAxisID: 'y-duration',
+                                    order: 2
+                                }
+                            ]
                         },
-                        x: {
-                            ticks: {
-                                color: '#78716c'
-                            }
-                        }
-                    },
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                title: (context) => filteredTravelData[context[0].dataIndex].to,
-                                afterTitle: (context) => filteredTravelData[context[0].dataIndex].from,
-                                label: (context) => {
-                                    if (context.dataset.label === '距離 (km)') {
-                                        return `${context.dataset.label}: ${context.raw} km`;
-                                    } else {
-                                        return `${context.dataset.label}: ${context.raw}分 (${formatMinutesToHours(context.raw)})`;
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                'y-distance': {
+                                    type: 'linear',
+                                    position: 'left',
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: '距離 (km)',
+                                        color: '#57534e'
+                                    },
+                                    ticks: {
+                                        color: '#78716c'
+                                    }
+                                },
+                                'y-duration': {
+                                    type: 'linear',
+                                    position: 'right',
+                                    beginAtZero: true,
+                                    grid: {
+                                        drawOnChartArea: false,
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: '所要時間 (分)',
+                                        color: '#57534e'
+                                    },
+                                    ticks: {
+                                        callback: function(value, index, values) {
+                                            return formatMinutesToHours(value);
+                                        },
+                                        color: '#78716c'
+                                    }
+                                },
+                                x: {
+                                    ticks: {
+                                        color: '#78716c'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        title: (context) => filteredTravelData[context[0].dataIndex].to,
+                                        afterTitle: (context) => filteredTravelData[context[0].dataIndex].from,
+                                        label: (context) => {
+                                            if (context.dataset.label === '距離 (km)') {
+                                                return `${context.dataset.label}: ${context.raw} km`;
+                                            } else {
+                                                return `${context.dataset.label}: ${context.raw}分 (${formatMinutesToHours(context.raw)})`;
+                                            }
+                                        }
+                                    }
+                                },
+                                legend: {
+                                    labels: {
+                                        color: '#57534e'
                                     }
                                 }
                             }
-                        },
-                        legend: {
-                            labels: {
-                                color: '#57534e'
-                            }
                         }
-                    }
-                }
-            });
+                    });
+                });
         });
     </script>
 </body>
