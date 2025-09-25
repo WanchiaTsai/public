@@ -33,7 +33,7 @@
         /* Timeline Styles */
         .timeline-item {
             display: grid;
-            grid-template-columns: 8rem 2.2rem 1fr;
+            grid-template-columns: 12rem 2.2rem 1fr;
             gap: 0 1rem;
             margin-bottom: 1rem;
         }
@@ -237,6 +237,35 @@
                         return `${h}時間${m > 0 ? ` ${m}分` : ''}`;
                     }
 
+                    function addMinutesToTime(timeStr, minutesToAdd) {
+                        if (!timeStr) return '';
+                        if (minutesToAdd === 0) return timeStr;
+
+                        let hours, minutes, period;
+                        
+                        if (timeStr.includes('AM') || timeStr.includes('PM')) {
+                            let [time, period] = timeStr.split(' ');
+                            [hours, minutes] = time.split(':').map(Number);
+                            if (period === 'PM' && hours !== 12) {
+                                hours += 12;
+                            } else if (period === 'AM' && hours === 12) {
+                                hours = 0; // Midnight case
+                            }
+                        } else { // Assume 24-hour format
+                            [hours, minutes] = timeStr.split(':').map(Number);
+                        }
+
+                        let totalMinutes = hours * 60 + minutes + minutesToAdd;
+
+                        const newHours = Math.floor(totalMinutes / 60);
+                        const newMinutes = totalMinutes % 60;
+
+                        const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
+                        const newPeriod = newHours >= 12 ? 'PM' : 'AM';
+
+                        return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
+                    }
+
                     function formatFurigana(nameWithFurigana) {
                         if (!nameWithFurigana) return '';
                         const match = nameWithFurigana.match(/(.+)\s\((.+)\)/);
@@ -333,17 +362,23 @@
                                 lastDate = currentDate;
                             }
                             
-                                                    if (block.time || (block.type === 'movement' && block.duration)) {
-                                                        const timeDiv = document.createElement('div');
-                                                        timeDiv.className = 'time';
-                                                        if (block.type === 'movement' && block.startTime && block.arrivalTime) {
-                                                            timeDiv.textContent = `${block.startTime} - ${block.arrivalTime}`;
-                                                        } else {
-                                                            timeDiv.textContent = block.time || block.duration;
-                                                        }
-                                                        timeCol.appendChild(timeDiv);
-                                                    }
-                            const markerCol = document.createElement('div');
+                                                                            if (block.time || (block.type === 'movement' && block.duration)) {
+                                                                                const timeDiv = document.createElement('div');
+                                                                                timeDiv.className = 'time';
+                                                                                                            if (block.type === 'movement') {
+                                                                                                                if (block.startTime && block.arrivalTime) {
+                                                                                                                    timeDiv.textContent = `${block.startTime} - ${block.arrivalTime}`;
+                                                                                                                } else if (block.startTime && block.duration) {
+                                                                                                                    const durationMinutes = parseDurationToMinutes(block.duration);
+                                                                                                                    const estimatedArrivalTime = addMinutesToTime(block.startTime, durationMinutes);
+                                                                                                                    timeDiv.textContent = `${block.startTime} - ~${estimatedArrivalTime}`;
+                                                                                                                } else {
+                                                                                                                    timeDiv.textContent = block.duration;
+                                                                                                                }
+                                                                                                            } else { // location
+                                                                                                                timeDiv.textContent = block.time;
+                                                                                                            }                                                                                timeCol.appendChild(timeDiv);
+                                                                            }                            const markerCol = document.createElement('div');
                             markerCol.className = 'marker-col';
 
                             const cardCol = document.createElement('div');

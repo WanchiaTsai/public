@@ -36,6 +36,6 @@
 | `distance`       | `Number` | 這段行程的距離，單位為公里（km）。                                   | `2780`                                                                 |
 | `duration`       | `String` | 這段行程所需的時間。                                                 | `"4時間20分"`                                                          |
 | `route`          | `String` | 路線的簡要說明或航班號碼等資訊。                                     | `"航班號碼: IT256"`                                                    |
-| `startTime`      | `String` | (選填) 針對有固定班次的交通，標示其出發時間。                               | `"08:00 AM"`                                                           |
+| `startTime`      | `String` | (選填) 標示出發時間。可用於固定班次的交通，或為彈性行程(如駕車)標示一個「預計出發」時間。 | `"08:00 AM"`                                                           |
 | `arrivalTime`    | `String` | (選填) 針對有固定班次的交通，標示其抵達時間。                               | `"04:20 PM"`                                                           |
 | `navigationLink` | `String` | (選填) 提供導航用的連結，通常是 Google Maps 或類似服務的路線連結。 | `"https://www.google.com/maps/dir/..."` |

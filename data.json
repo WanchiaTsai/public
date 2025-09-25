@@ -43,7 +43,9 @@
         "travelMode": "driving",
         "distance": 91.9,
         "duration": "1時間23分",
-        "date": "9月28日"
+        "route": "日本海東北自動車道/日本海東北自動車道（秋田区間）/秋田区間",
+        "date": "9月28日",
+        "startTime": "02:20 PM"
     },
     {
         "type": "location",
@@ -65,7 +67,8 @@
         "duration": "3時間24分",
         "route": "登山道 (往返合計 6.6km, 3時間24分)",
         "isRoundTrip": true,
-        "date": "9月29日"
+        "date": "9月29日",
+        "startTime": "09:00 AM"
     },
     {
         "type": "location",
@@ -79,7 +82,9 @@
         "travelMode": "driving",
         "distance": 68.3,
         "duration": "1時間13分",
-        "date": "9月29日"
+        "route": "鳥海ブルーライン",
+        "date": "9月29日",
+        "startTime": "01:00 PM"
     },
     {
         "type": "location",
@@ -93,7 +98,9 @@
         "travelMode": "driving",
         "distance": 23.6,
         "duration": "35分",
-        "date": "9月30日"
+        "route": "県道211号",
+        "date": "9月30日",
+        "startTime": "08:00 AM"
     },
     {
         "type": "location",
@@ -116,7 +123,8 @@
                 "infoLink": "https://yamap.com/maps/39"
             }
         ],
-        "date": "9月30日"
+        "date": "9月30日",
+        "startTime": "08:40 AM"
     },
     {
         "type": "location",
@@ -130,7 +138,9 @@
         "travelMode": "driving",
         "distance": 23.4,
         "duration": "34分",
-        "date": "9月30日"
+        "route": "県道211号",
+        "date": "9月30日",
+        "startTime": "02:10 PM"
     },
     {
         "type": "location",
@@ -144,7 +154,9 @@
         "travelMode": "driving",
         "distance": 280,
         "duration": "4時間10分",
-        "date": "10月1日"
+        "route": "新潟区間/日本海東北自動車道",
+        "date": "10月1日",
+        "startTime": "08:00 AM"
     },
     {
         "type": "location",
@@ -164,7 +176,9 @@
         "travelMode": "driving",
         "distance": 11.4,
         "duration": "21分",
-        "date": "10月2日"
+        "route": "奥只見シルバーライン/県道50号",
+        "date": "10月2日",
+        "startTime": "08:00 AM"
     },
     {
         "type": "location",
@@ -231,7 +245,8 @@
                 "infoLink": "https://www.env.go.jp/park/oze/data/hike_map_oze_numamoto.pdf"
             }
         ],
-        "date": "10月2日"
+        "date": "10月2日",
+        "startTime": "11:20 AM"
     },
     {
         "type": "location",
@@ -252,7 +267,8 @@
                 "infoLink": "https://yamap.com/maps/39"
             }
         ],
-        "date": "10月3日"
+        "date": "10月3日",
+        "startTime": "07:00 AM"
     },
     {
         "type": "location",
@@ -279,7 +295,8 @@
                 "infoLink": "https://www.oze-info.jp/ozh-stay/miikelodge"
             }
         ],
-        "date": "10月4日"
+        "date": "10月4日",
+        "startTime": "07:00 AM"
     },
     {
         "type": "location",
@@ -339,7 +356,8 @@
         "travelMode": "driving",
         "distance": 24.7,
         "duration": "40分",
-        "date": "10月4日"
+        "date": "10月4日",
+        "startTime": "04:50 PM"
     },
     {
         "type": "location",
@@ -359,7 +377,8 @@
         "travelMode": "driving",
         "distance": 35.6,
         "duration": "46分",
-        "date": "10月5日"
+        "date": "10月5日",
+        "startTime": "08:00 AM"
     },
     {
         "type": "location",
@@ -380,7 +399,9 @@
                 "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
             }
         ],
-        "date": "10月5日"
+        "date": "10月5日",
+        "startTime": "08:47 AM",
+        "arrivalTime": "08:52 AM"
     },
     {
         "type": "location",
@@ -402,7 +423,8 @@
                 "infoLink": "https://yamap.com/activities/8183146"
             }
         ],
-        "date": "10月5日"
+        "date": "10月5日",
+        "startTime": "09:00 AM"
     },
     {
         "type": "location",
@@ -423,7 +445,9 @@
                 "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
             }
         ],
-        "date": "10月5日"
+        "date": "10月5日",
+        "startTime": "03:20 PM",
+        "arrivalTime": "03:17 PM"
     },
     {
         "type": "location",
@@ -437,7 +461,8 @@
         "travelMode": "driving",
         "distance": 35.6,
         "duration": "46分",
-        "date": "10月5日"
+        "date": "10月5日",
+        "startTime": "03:25 PM"
     },
     {
         "type": "location",
@@ -457,7 +482,8 @@
         "travelMode": "driving",
         "distance": 114,
         "duration": "1時間31分",
-        "date": "10月6日"
+        "date": "10月6日",
+        "startTime": "08:00 AM"
     },
     {
         "type": "location",
