@@ -78,9 +78,6 @@
             z-index: 10;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        .marker-icon.movement {
-             background-color: #0d9488;
-        }
 
         .timeline-card {
             background-color: #fff;
@@ -236,14 +233,14 @@
                     });
 
                     const travelModeInfo = {
-                        'flight': { emoji: '✈️', label: '飛機' },
-                        'driving': { emoji: '🚘', label: '開車' },
-                        'walking': { emoji: '🥾', label: '徒步' },
-                        'boat': { emoji: '🛥️', label: '乘船' },
-                        'bus': { emoji: '🚌', label: '巴士' },
-                        'ropeway': { emoji: '🚠', label: '纜車' },
-                        'stay': { emoji: '🏨', label: '住宿' },
-                        'airport_service': { emoji: '🛂', label: '禮遇通關' }
+                        'flight': { emoji: '✈️', label: '飛機', color: 'bg-sky-500' },
+                        'driving': { emoji: '🚘', label: '開車', color: 'bg-teal-500' },
+                        'walking': { emoji: '🥾', label: '徒步', color: 'bg-amber-500' },
+                        'boat': { emoji: '🛥️', label: '乘船', color: 'bg-blue-500' },
+                        'bus': { emoji: '🚌', label: '巴士', color: 'bg-indigo-500' },
+                        'ropeway': { emoji: '🚠', label: '纜車', color: 'bg-purple-500' },
+                        'stay': { emoji: '🏨', label: '住宿', color: 'bg-stone-500' },
+                        'airport_service': { emoji: '🛂', label: '禮遇通關', color: 'bg-gray-500' }
                     };
 
                     function formatMinutesToHours(minutes) {
@@ -419,40 +416,44 @@
                                     markerCol.innerHTML = `<div class="marker-icon">${isStay ? '🏨' : '📍'}</div><div class="marker-line"></div>`;
                                     cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
 
-                                    const googleMapsLink = block.googleMapsLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(block.name)}`;
-                                    cardHtmlContent = `
-                                        <h3 class="timeline-title">${formatFurigana(block.name)}
-                                            <a href="${googleMapsLink}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">📍</a>
-                                        </h3>
-                                        <p class="timeline-detail">${block.details || ''}</p>
-                                    `;
-
-                                    if (block.services && block.services.length > 0) {
-                                        cardHtmlContent += `<div class="timeline-item-content">
-                                            <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                                ${block.services.map(service => `
-                                                    <div>
-                                                        <strong>${service.name}:</strong> ${service.details}
-                                                        ${service.link ? `<a href="${service.link}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">→ 查看詳情</a>` : ''}
-                                                    </div>
-                                                `).join('')}
-                                            </div>
-                                        </div>`;
-                                    }
-
-                                    if (block.otherDetails && block.otherDetails.length > 0) {
-                                         cardHtmlContent += `
-                                            <div class="timeline-item-content">
-                                                <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                                    ${block.otherDetails.map(detail => `<a href="${detail.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${detail.info} →</a>`).join('')}
-                                                </div>
-                                            </div>
-                                        `;
-                                    }
-
+                                                                    const googleMapsLink = block.googleMapsLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(block.name)}`;
+                                                                    cardHtmlContent = `
+                                                                        <div class="flex justify-between items-start">
+                                                                            <div>
+                                                                                <h3 class="timeline-title">${formatFurigana(block.name)}</h3>
+                                                                                <p class="timeline-detail">${block.details || ''}</p>
+                                                                            </div>
+                                                                            <a href="${googleMapsLink}" target="_blank" title="在地圖上開啟" class="flex-shrink-0 ml-4 text-2xl hover:opacity-75 transition-opacity">🗺️</a>
+                                                                        </div>
+                                                                    `;
+                                    
+                                                                    let expandableContent = '';
+                                    
+                                                                    if (block.services && block.services.length > 0) {
+                                                                        expandableContent += `<div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                                                            ${block.services.map(service => `
+                                                                                <div>
+                                                                                    <strong>${service.name}:</strong> ${service.details}
+                                                                                    ${service.link ? `<a href="${service.link}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">→ 查看詳情</a>` : ''}
+                                                                                </div>
+                                                                            `).join('')}
+                                                                        </div>`;
+                                                                    }
+                                    
+                                                                    if (block.otherDetails && block.otherDetails.length > 0) {
+                                                                         expandableContent += `
+                                                                            <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                                                                ${block.otherDetails.map(detail => `<a href="${detail.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${detail.info} →</a>`).join('')}
+                                                                            </div>
+                                                                        `;
+                                                                    }
+                                    
+                                                                    if (expandableContent) {
+                                                                        cardHtmlContent += `<div class="timeline-item-content">${expandableContent}</div>`;
+                                                                    }
                                 } else if (block.type === 'movement') {
                                     const travelInfo = travelModeInfo[block.travelMode];
-                                    markerCol.innerHTML = `<div class="marker-icon movement">${travelInfo.emoji}</div><div class="marker-line"></div>`;
+                                    markerCol.innerHTML = `<div class="marker-icon ${travelInfo.color}">${travelInfo.emoji}</div><div class="marker-line"></div>`;
                                     cardDiv.className = 'timeline-card travel-method-card';
                                     
                                                                     cardHtmlContent = `
@@ -469,7 +470,7 @@
                                                                                     <span>${formatFurigana(block.to)}</span>
                                                                                     ${block.route ? `<strong class="text-stone-500">路徑:</strong><span>${block.route}</span>` : ''}
                                                                                 </div>
-                                                                                ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-4 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
+                                                                                ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" title="在地圖上開啟" class="inline-block mt-4 text-2xl hover:opacity-75 transition-opacity">🗺️</a>` : ''}
                                                                             </div>
                                                                         </div>
                                                                     `;                                }
