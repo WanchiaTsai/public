@@ -330,52 +330,7 @@
                     }
 
 
-                    // Filter out the specific hotel and its stay leg
-                    const filteredTravelData = travelData.filter(leg => {
-                        const isTargetHotel = (leg.from === '大湯温泉 湯元庄屋 和泉屋旅館 (おおゆおんせんゆもとしょうやいずみやりょかん)' ||
-                                             leg.to === '大湯温泉 湯元庄屋 和泉屋旅館 (おおゆおんせんゆもとしょうやいずみやりょかん)');
-                        
-                        // Keep legs that are NOT related to the target hotel
-                        return !isTargetHotel;
-                    });
-
-                    // Update the leg that previously went to 'Kozanso' to now go to 'Kozanso'
-                    filteredTravelData.forEach(leg => {
-                        if (leg.to === '折立温泉　やまきや旅館' && leg.from === '羽黒山 三光院 (はぐろさんさんこういん)' && leg.date === '10月1日') {
-                            leg.distance = 280; // Updated distance from tool output
-                            leg.duration = '4時間10分'; // Updated duration from tool output
-                            leg.route = '新潟区間/日本海東北自動車道'; // Updated route from tool output
-                            leg.link = 'https://www.google.com/maps/dir/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8B%E6%8A%98%E7%AB%8B,+%E5%AD%97%E5%8C%97%E3%83%8E%E5%8F%881038,+Kozanso/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJi_IQhV6I9V8RTXT37oz8hmU!2m2!1d139.13869689999999!2d37.1354283!3e0'; // Updated link from tool output
-                        }
-                    });
-
-                    // Update the leg that previously went from 'Kozanso' to '奥只見ダム無料駐車場'
-                    filteredTravelData.forEach(leg => {
-                        if (leg.from === '折立温泉　やまきや旅館' && leg.to === '奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)' && leg.date === '10月2日') {
-
-                            leg.distance = 11.4; // Updated distance from tool output
-                            leg.duration = '21分'; // Updated duration from tool output
-                            leg.link = 'https://www.google.com/maps/dir/Kozanso,+%E6%97%A5%E6%9C%AC,+%E3%80%92946-0085+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8B%E6%8A%98%E7%AB%8B%E5%AD%97%E5%8C%97%E3%83%8E%E5%8F%881038/%E5%A5%A5%E5%8F%AA%E8%A6%8B%E3%83%80%E3%83%A0%E7%84%A1%E6%96%99%E9%A7%90%E8%BB%8A%E5%A0%B4,+%E6%97%A5%E6%9C%AC,+%E3%80%92946-0085+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E6%B9%AF%E3%83%8E%E8%B0%B7%E8%8A%8B%E5%B7%9D%EF%BC%9１%EF%BC%9３%EF%BC%9１%EF%BC%9７%E2%88%92%EF%BC%9１%EF%BC%9０/data=!4m14!4m13!1m5!1m1!19sChIJi_IQhV6I9V8RTXT37oz8hmU!2m2!1d139.13869689999999!2d37.1354283!1m5!1m1!19sChIJgRxT50GH9V8RJoimHj5zCsM!2m2!1d139.24516649999998!2d37.156281799999995!3e0';
-                        }
-                    });
-
-                    // Update the leg that previously went from '東電小屋' to '沼山峠'
-                    filteredTravelData.forEach(leg => {
-                        if (leg.from === '尾瀬 温泉小屋' && leg.to === '沼山峠 (ぬまやまとうげ)' && leg.date === '10月4日') {
-                            leg.distance = 6.5; // Updated distance based on Oze common routes
-                            leg.duration = '2時間30分'; // Updated duration based on Oze common routes
-                            leg.link = 'https://yamap.com/maps/39'; // General Oze map link
-                        }
-                    });
-
-                    // Update the leg that previously went from '尾瀬沼山荘' to '東電小屋'
-                    filteredTravelData.forEach(leg => {
-                        if (leg.from === '尾瀬沼山荘 (おぜぬまさんそう)' && leg.to === '尾瀬 温泉小屋' && leg.date === '10月3日') {
-                            leg.distance = 2.2; // Updated distance based on Oze common routes
-                            leg.duration = '1時間10分'; // Updated duration based on Oze common routes
-                            leg.link = 'https://yamap.com/maps/39'; // General Oze map link
-                        }
-                    });
+                    const filteredTravelData = travelData;
 
 
                     // Re-assign originalIndex for all travelData entries after modifications
