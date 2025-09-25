@@ -60,12 +60,12 @@
         "type": "movement",
         "travelMode": "walking",
         "to": "鳥海湖 & 稲倉岳周遊 (ちょうかいこ & いなくらだけしゅうゆう)",
-        "distance": 6.6,
-        "duration": "3時間24分",
-        "route": "登山道 (往返合計 6.6km, 3時間24分)",
+        "distance": 8.7,
+        "duration": "5時間0分",
+        "route": "",
         "isRoundTrip": true,
         "date": "9月29日",
-        "startTime": "09:00 AM"
+        "startTime": "08:30 AM"
     },
     {
         "type": "location",
@@ -114,7 +114,7 @@
         "travelMode": "walking",
         "to": "月山山頂 (往返) (がっさんさんちょう (おうふく))",
         "distance": 11.0,
-        "duration": "5時間30分",
+        "duration": "6時間30分",
         "route": "登山道 (參考: YAMAP 月山地圖)",
         "isRoundTrip": true,
         "otherDetails": [
@@ -124,7 +124,7 @@
             }
         ],
         "date": "9月30日",
-        "startTime": "08:40 AM"
+        "startTime": "08:30 AM"
     },
     {
         "type": "location",
@@ -172,11 +172,11 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "distance": 26,
-        "duration": "25分",
+        "distance": 30,
+        "duration": "40分",
         "route": "奥只見シルバーライン/県道50号",
         "date": "10月2日",
-        "startTime": "08:00 AM"
+        "startTime": "07:50 AM"
     },
     {
         "type": "location",
@@ -235,7 +235,7 @@
         "type": "movement",
         "travelMode": "walking",
         "distance": 2.5,
-        "duration": "1時間15分",
+        "duration": "2時間15分",
         "route": "登山道",
         "otherDetails": [
             {
@@ -244,7 +244,7 @@
             }
         ],
         "date": "10月2日",
-        "startTime": "11:20 AM"
+        "startTime": "13:30 PM"
     },
     {
         "type": "location",
@@ -257,8 +257,8 @@
     {
         "type": "movement",
         "travelMode": "walking",
-        "distance": 2.2,
-        "duration": "1時間10分",
+        "distance": 13.1,
+        "duration": "4時間56分",
         "route": "登山道 (尾瀬ヶ原)",
         "otherDetails": [
             {
@@ -267,7 +267,7 @@
             }
         ],
         "date": "10月3日",
-        "startTime": "07:00 AM"
+        "startTime": "08:30 AM"
     },
     {
         "type": "location",
@@ -286,8 +286,8 @@
     {
         "type": "movement",
         "travelMode": "walking",
-        "distance": 2.0,
-        "duration": "1時間0分",
+        "distance": 8.0,
+        "duration": "4時間0分",
         "route": "登山道 (尾瀬ヶ原)",
         "otherDetails": [
             {
@@ -296,7 +296,7 @@
             }
         ],
         "date": "10月4日",
-        "startTime": "07:00 AM"
+        "startTime": "09:00 AM"
     },
     {
         "type": "location",
@@ -376,7 +376,7 @@
         "distance": 35.6,
         "duration": "46分",
         "date": "10月5日",
-        "startTime": "08:00 AM"
+        "startTime": "09:00 AM"
     },
     {
         "type": "location",
@@ -433,7 +433,7 @@
         "distance": 114,
         "duration": "1時間31分",
         "date": "10月6日",
-        "startTime": "08:00 AM"
+        "startTime": "10:00 AM"
     },
     {
         "type": "location",

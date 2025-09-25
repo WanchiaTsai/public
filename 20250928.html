@@ -369,17 +369,42 @@
                             timelineContainer.appendChild(dayContainer);
 
                             const dateSeparator = document.createElement('div');
-                            dateSeparator.className = 'flex items-center my-8 cursor-pointer';
-                            dateSeparator.innerHTML = `<hr class="flex-grow border-stone-300"><span class="px-4 py-1 bg-stone-200 text-stone-700 font-bold rounded-full">${date}</span><hr class="flex-grow border-stone-300">`;
+                            dateSeparator.className = 'flex items-center my-8';
+                            dateSeparator.innerHTML = `
+                                <hr class="flex-grow border-stone-300">
+                                <div class="flex items-center mx-4">
+                                    <span class="date-span px-4 py-1 bg-stone-200 text-stone-700 font-bold rounded-full cursor-pointer">${date}</span>
+                                    <button class="toggle-all-btn ml-3 px-3 py-1 text-xs font-semibold text-stone-600 bg-stone-100 hover:bg-stone-300 rounded-full transition-colors">展開/收合</button>
+                                </div>
+                                <hr class="flex-grow border-stone-300">
+                            `;
                             dayContainer.appendChild(dateSeparator);
 
                             const dayItemsContainer = document.createElement('div');
                             dayItemsContainer.className = 'day-items';
                             dayContainer.appendChild(dayItemsContainer);
 
-                            dateSeparator.addEventListener('click', () => {
+                            const dateSpan = dateSeparator.querySelector('.date-span');
+                            const toggleAllBtn = dateSeparator.querySelector('.toggle-all-btn');
+
+                            dateSpan.addEventListener('click', () => {
                                 const isHidden = dayItemsContainer.style.display === 'none';
                                 dayItemsContainer.style.display = isHidden ? 'block' : 'none';
+                                toggleAllBtn.classList.toggle('hidden');
+                            });
+
+                            toggleAllBtn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                const items = dayItemsContainer.querySelectorAll('.timeline-item');
+                                const expandableItems = Array.from(items).filter(item => item.querySelector('.timeline-item-content'));
+                                
+                                const isAnyInactive = expandableItems.some(item => !item.classList.contains('active'));
+
+                                if (isAnyInactive) {
+                                    expandableItems.forEach(item => item.classList.add('active'));
+                                } else {
+                                    expandableItems.forEach(item => item.classList.remove('active'));
+                                }
                             });
 
                             days[date].forEach(block => {
