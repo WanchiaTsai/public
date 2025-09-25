@@ -10,8 +10,8 @@
     <style>
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: #fdfcfb; /* Light background */
-            color: #44403c; /* Dark text color */
+            background-color: #fdfcfb;
+            color: #44403c;
         }
         .chart-container {
             position: relative;
@@ -21,156 +21,106 @@
             max-width: 800px;
         }
         .stat-card {
-            background-color: #fff; /* Light card background */
-            border: 1px solid #f0e9e4; /* Lighter border */
+            background-color: #fff;
+            border: 1px solid #f0e9e4;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .stat-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
         }
-        /* New timeline specific styles */
+
+        /* Timeline Styles */
         .timeline-item {
-            display: flex;
-            align-items: flex-start; /* Align content to the top */
-            position: relative; /* For the line positioning */
-            margin-bottom: 1rem; /* Adjusted for more vertical spacing */
+            display: grid;
+            grid-template-columns: 8rem 2.2rem 1fr;
+            gap: 0 1rem;
+            margin-bottom: 1rem;
         }
-        .timeline-marker-col {
-            flex-shrink: 0; /* Prevent from shrinking */
+        .time-col {
+            text-align: right;
+            padding-top: 0.25rem;
+        }
+        .time-col .date {
+            font-weight: 700;
+            color: #44403c;
+            font-size: 1.1rem;
+        }
+        .time-col .time {
+            font-size: 0.875rem;
+            color: #78716c;
+        }
+        .marker-col {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-right: 1rem; /* Space between marker and content */
-            position: relative; /* To position the line */
+            position: relative;
         }
-        .travel-mode-icon, .location-icon {
-            width: 2.2rem; /* Larger icon circle */
+        .marker-line {
+            width: 2px;
+            height: 100%;
+            background-color: #d4d4d4;
+        }
+        .timeline-item:last-child .marker-line {
+            display: none;
+        }
+        .marker-icon {
+            width: 2.2rem;
             height: 2.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background-color: #0d9488; /* Teal-600 */
+            background-color: #44403c;
             color: white;
-            font-size: 1.3rem; /* Larger emoji */
-            z-index: 10; /* Ensure icon is on top of the line */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+            font-size: 1.3rem;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        .location-icon {
-            background-color: #44403c; /* Stone-800 for location pins */
-        }
-        .timeline-line {
-            position: absolute;
-            left: 50%; /* Center the line */
-            transform: translateX(-50%); /* Adjust for line width */
-            top: 2.2rem; /* Start below the icon */
-            bottom: -0.5rem; /* Extend below the card */
-            width: 2px; /* Thicker line */
-            background-color: #d4d4d4; /* Light grey line */
-            z-index: 5; /* Behind the icon */
-        }
-        .timeline-item:last-child .timeline-line {
-            display: none; /* Hide line for the last item */
-        }
-        .timeline-card {
-            flex-grow: 1;
-            width: 100%; /* Ensure it takes full available width */
-            min-width: 0; /* Allow flex item to shrink below content size if needed, but in this case, helps it expand correctly */
-            background-color: #fff; /* Lightest background for cards */
-            padding: 1.25rem; /* Increased padding for better aesthetics */
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
-            border: 1px solid #f0e9e4; /* Lighter border */
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; /* Added transform and box-shadow to transition */
-        }
-        .timeline-card:hover {
-            border-color: #0d9488; /* Teal-400 on hover */
-            transform: translateY(-2px); /* Slight lift on hover */
-            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.12), 0 3px 6px -3px rgba(0, 0, 0, 0.08); /* More pronounced shadow on hover */
-        }
-        /* Differentiate stay cards */
-        .timeline-stay-card {
-            background-color: #FFFBF7; /* A very soft, warm white for stay */
-            border: 1px solid #D9C9C2; /* A warmer, slightly darker border */
-            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.06); /* Stronger shadow for depth */
-            padding: 1.5rem; /* Increased padding for stay cards */
-            width: 100%; /* Explicitly set width to 100% */
-            border-radius: 0.75rem; /* Ensure rounded corners are applied */
-        }
-        .timeline-stay-card:hover {
-            border-color: #BFACA3; /* A warm, medium brown for a more inviting hover state */
-            transform: translateY(-2px); /* Slight lift on hover */
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15), 0 5px 10px -5px rgba(0, 0, 0, 0.1); /* Even more pronounced shadow on hover */
-        }
-        /* Differentiate airport service cards */
-        .timeline-service-card {
-            background-color: #EBF4FB; /* Lighter, cooler blue-gray for services */
-            border: 1px solid #B3D1E6; /* Slightly darker, cooler border */
-            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.06); /* Stronger shadow */
-            padding: 1.5rem; /* Increased padding for service cards */
-            width: 100%; /* Explicitly set width to 100% */
-            border-radius: 0.75rem; /* Ensure rounded corners are applied */
-        }
-        .timeline-service-card:hover {
-            border-color: #80BCE8; /* More pronounced blue on hover */
-            transform: translateY(-2px); /* Slight lift on hover */
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15), 0 5px 10px -5px rgba(0, 0, 0, 0.1); /* Even more pronounced shadow on hover */
+        .marker-icon.movement {
+             background-color: #0d9488;
         }
 
-        .timeline-time {
-            color: #78716c; /* Stone-600 for time */
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
+        .timeline-card {
+            background-color: #fff;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+            border: 1px solid #f0e9e4;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-        .timeline-title {
-            color: #44403c; /* Stone-800 for titles */
-            font-weight: 600;
-            font-size: 1.125rem;
+        .timeline-card:hover {
+            border-color: #0d9488;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.12), 0 3px 6px -3px rgba(0, 0, 0, 0.08);
         }
-        .timeline-detail {
-            color: #57534e; /* Stone-700 for details */
-            font-size: 0.95rem;
-        }
-        .timeline-item-content {
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-        }
-        .timeline-item.active .timeline-item-content {
-            max-height: 500px; /* Max height to allow transition */
-            opacity: 1;
-        }
-        /* Specific styling for travel method cards */
+        .timeline-stay-card { background-color: #FFFBF7; border-color: #D9C9C2; }
         .travel-method-card {
-            background-color: #E0F7FA; /* Lighter, cooler green-blue for travel methods */
-            border-color: #A3D9E2; /* Slightly darker, cooler border */
-            box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05); /* Slightly stronger shadow */
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0.5rem 0;
+            cursor: default;
         }
         .travel-method-card:hover {
-            border-color: #4DBCCD; /* More pronounced green-blue on hover */
-            transform: translateY(-2px); /* Slight lift on hover */
-            box-shadow: 0 6px 12px -3px rgba(0, 0, 0, 0.12), 0 3px 6px -3px rgba(0, 0, 0, 0.08); /* More pronounced shadow on hover */
+            transform: none;
+            box-shadow: none;
+            border: none;
         }
-        .travel-method-icon-small {
-            width: 1.5rem;
-            height: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: #0d9488;
-            color: white;
-            font-size: 0.9rem;
-            margin-right: 0.5rem;
+        .travel-method-card .timeline-title {
+            font-size: 1rem;
+            font-weight: 500;
         }
-        /* Ruby text styling for furigana */
-        rt {
-            font-size: 0.7em; /* Make furigana smaller relative to kanji */
-            color: #78716c; /* Slightly lighter color than kanji for distinction */
+        .travel-method-card .timeline-detail {
+            font-size: 0.875rem;
         }
+
+        .timeline-title { color: #44403c; font-weight: 600; font-size: 1.125rem; }
+        .timeline-detail { color: #57534e; font-size: 0.95rem; }
+        .timeline-item-content { transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out; max-height: 0; opacity: 0; overflow: hidden; }
+        .timeline-item.active .timeline-item-content { max-height: 500px; opacity: 1; }
+        rt { font-size: 0.7em; color: #78716c; }
     </style>
 </head>
 <body>
@@ -212,7 +162,7 @@
         <section id="itinerary" class="mb-16">
             <h2 class="text-2xl font-bold text-stone-700 text-center mb-2">インタラクティブ旅程</h2>
             <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">このセクションでは、旅行の各行程を詳しく確認できます。各ステップをクリックすると、距離、所要時間、推奨ルートが表示され、ナビゲーションを開始できます。</p>
-            <div id="timeline-container" class="space-y-8 max-w-4xl mx-auto">
+            <div id="timeline-container" class="max-w-4xl mx-auto">
             </div>
         </section>
 
@@ -247,13 +197,11 @@
                         'walking': { emoji: '🥾', label: '徒步' },
                         'boat': { emoji: '🛥️', label: '乘船' },
                         'bus': { emoji: '🚌', label: '巴士' },
-                        'ropeway': { emoji: '🚠', label: '纜車' },
-                        'stay': { emoji: '🏨', label: '住宿' },
-                        'airport_service': { emoji: '🛂', label: '禮遇通關' }
+                        'ropeway': { emoji: '🚠', label: '纜車' }
                     };
 
                     function parseDurationToMinutes(durationStr) {
-                        if (durationStr === '一泊') return 0;
+                        if (!durationStr || durationStr === '一泊') return 0;
                         let totalMinutes = 0;
                         const hourMatch = durationStr.match(/(\d+)時間/);
                         const minMatch = durationStr.match(/(\d+)分/);
@@ -287,64 +235,49 @@
                     document.getElementById('total-duration').textContent = formatMinutesToHours(totalMinutes);
                     document.getElementById('total-legs').textContent = `${travelLegs.length} 区間`;
 
-                    const transportBreakdown = {};
-                    travelLegs.forEach(leg => {
-                        if (!transportBreakdown[leg.travelMode]) {
-                            transportBreakdown[leg.travelMode] = { distance: 0, durationMinutes: 0, count: 0 };
-                        }
-                        transportBreakdown[leg.travelMode].distance += (leg.distance || 0);
-                        transportBreakdown[leg.travelMode].durationMinutes += parseDurationToMinutes(leg.duration);
-                        transportBreakdown[leg.travelMode].count++;
-                    });
-
-                    const transportBreakdownContainer = document.getElementById('transport-breakdown');
-                    transportBreakdownContainer.innerHTML = '';
-                    for (const mode in travelModeInfo) {
-                        const breakdown = transportBreakdown[mode];
-                        if (breakdown) {
-                            const info = travelModeInfo[mode];
-                            const card = document.createElement('div');
-                            card.className = 'stat-card p-4 rounded-xl';
-                            let contentHtml = `<div class="text-3xl font-bold text-stone-800">${info.emoji}</div>
-                                               <p class="text-stone-600 mt-1">${info.label}</p>
-                                               <p class="text-sm text-stone-500 mt-2">${breakdown.distance.toFixed(1)} km</p>
-                                               <p class="text-sm text-stone-500">${formatMinutesToHours(breakdown.durationMinutes)}</p>`;
-                            card.innerHTML = contentHtml;
-                            transportBreakdownContainer.appendChild(card);
-                        }
-                    }
-
                     const timelineContainer = document.getElementById('timeline-container');
                     timelineContainer.innerHTML = '';
                     let lastDate = null;
 
                     timelineData.forEach(block => {
-                        const currentDate = block.date;
-                        if (currentDate && currentDate !== lastDate) {
-                            const dateHeaderDiv = document.createElement('div');
-                            dateHeaderDiv.className = 'text-center text-2xl font-bold text-stone-700 mt-8 mb-4 pb-2 border-b-2 border-stone-300';
-                            dateHeaderDiv.textContent = currentDate;
-                            timelineContainer.appendChild(dateHeaderDiv);
-                            lastDate = currentDate;
-                        }
-
                         const item = document.createElement('div');
                         item.className = 'timeline-item';
 
-                        const markerColDiv = document.createElement('div');
-                        markerColDiv.className = 'timeline-marker-col';
+                        const timeCol = document.createElement('div');
+                        timeCol.className = 'time-col';
+
+                        const currentDate = block.date;
+                        if (currentDate && currentDate !== lastDate) {
+                            const dateDiv = document.createElement('div');
+                            dateDiv.className = 'date';
+                            dateDiv.textContent = currentDate;
+                            timeCol.appendChild(dateDiv);
+                            lastDate = currentDate;
+                        }
                         
+                        if (block.time || (block.type === 'movement' && block.duration)) {
+                            const timeDiv = document.createElement('div');
+                            timeDiv.className = 'time';
+                            timeDiv.textContent = block.time || block.duration;
+                            timeCol.appendChild(timeDiv);
+                        }
+
+                        const markerCol = document.createElement('div');
+                        markerCol.className = 'marker-col';
+
+                        const cardCol = document.createElement('div');
+                        cardCol.className = 'card-col';
+
                         const cardDiv = document.createElement('div');
                         let iconHtml, cardHtmlContent;
 
                         if (block.type === 'location') {
                             const isStay = block.details && block.details.includes('住宿');
-                            iconHtml = `<div class="location-icon">${isStay ? '🏨' : '📍'}</div>`;
+                            markerCol.innerHTML = `<div class="marker-icon">${isStay ? '🏨' : '📍'}</div><div class="marker-line"></div>`;
                             cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
 
                             cardHtmlContent = `
                                 <h3 class="timeline-title">${formatFurigana(block.name)}</h3>
-                                <p class="timeline-time">${block.time || ''}</p>
                                 <p class="timeline-detail">${block.details || ''}</p>
                             `;
 
@@ -373,11 +306,11 @@
 
                         } else if (block.type === 'movement') {
                             const travelInfo = travelModeInfo[block.travelMode];
-                            iconHtml = `<div class="travel-mode-icon">${travelInfo.emoji}</div>`;
+                            markerCol.innerHTML = `<div class="marker-icon movement">${travelInfo.emoji}</div><div class="marker-line"></div>`;
                             cardDiv.className = 'timeline-card travel-method-card';
                             
                             cardHtmlContent = `
-                                <h3 class="timeline-title">${travelInfo.label} - ${block.duration}</h3>
+                                <h3 class="timeline-title">${travelInfo.label}</h3>
                                 <p class="timeline-detail">${(block.distance || 0).toFixed(1)} km</p>
                                 <div class="timeline-item-content">
                                     <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
@@ -389,19 +322,20 @@
                                 </div>
                             `;
                         }
-
-                        markerColDiv.innerHTML = `${iconHtml}<div class="timeline-line"></div>`;
-                        item.appendChild(markerColDiv);
-                        cardDiv.innerHTML = `<div class="flex flex-col w-full"><div>${cardHtmlContent}</div></div>`;
-                        item.appendChild(cardDiv);
                         
+                        cardDiv.innerHTML = cardHtmlContent;
+                        cardCol.appendChild(cardDiv);
+
+                        item.appendChild(timeCol);
+                        item.appendChild(markerCol);
+                        item.appendChild(cardCol);
                         timelineContainer.appendChild(item);
 
                         cardDiv.addEventListener('click', (event) => {
                            if (!event.target.closest('a')) {
-                               const contentDiv = event.currentTarget.querySelector('.timeline-item-content');
+                               const contentDiv = cardDiv.querySelector('.timeline-item-content');
                                if (contentDiv) {
-                                   contentDiv.closest('.timeline-item').classList.toggle('active');
+                                   item.classList.toggle('active');
                                }
                            }
                         });
