@@ -29,7 +29,6 @@
         "type": "location",
         "name": "AXT 秋田機場 (あきたくうこう)",
         "date": "9月28日",
-        "time": "04:20 PM",
         "details": "",
         "otherDetails": [
             {
@@ -74,7 +73,6 @@
         "type": "location",
         "name": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "date": "9月29日",
-        "time": "12:24 PM",
         "details": ""
     },
     {
@@ -90,7 +88,6 @@
         "type": "location",
         "name": "羽黒山 三光院 (はぐろさんさんこういん)",
         "date": "9月29日",
-        "time": "02:13 PM",
         "details": ""
     },
     {
@@ -106,7 +103,6 @@
         "type": "location",
         "name": "月山 八合目",
         "date": "9月30日",
-        "time": "08:35 AM",
         "details": ""
     },
     {
@@ -130,7 +126,6 @@
         "type": "location",
         "name": "月山登山口 (がっさんとざんぐち)",
         "date": "9月30日",
-        "time": "02:10 PM",
         "details": ""
     },
     {
@@ -146,7 +141,6 @@
         "type": "location",
         "name": "羽黒山 三光院 (はぐろさんさんこういん)",
         "date": "9月30日",
-        "time": "02:44 PM",
         "details": ""
     },
     {
@@ -162,7 +156,6 @@
         "type": "location",
         "name": "折立温泉　やまきや旅館",
         "date": "10月1日",
-        "time": "12:10 PM",
         "details": "",
         "otherDetails": [
             {
@@ -184,7 +177,6 @@
         "type": "location",
         "name": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
         "date": "10月2日",
-        "time": "08:21 AM",
         "details": ""
     },
     {
@@ -207,7 +199,6 @@
         "type": "location",
         "name": "尾瀬口船着場 (おぜぐちふなつきば)",
         "date": "10月2日",
-        "time": "10:10 AM",
         "details": ""
     },
     {
@@ -230,7 +221,6 @@
         "type": "location",
         "name": "沼山峠 (ぬまやまとうげ)",
         "date": "10月2日",
-        "time": "11:20 AM",
         "details": ""
     },
     {
@@ -252,7 +242,6 @@
         "type": "location",
         "name": "尾瀬沼山荘 (おぜぬまさんそう)",
         "date": "10月2日",
-        "time": "12:35 PM",
         "details": ""
     },
     {
@@ -274,7 +263,6 @@
         "type": "location",
         "name": "尾瀬 温泉小屋",
         "date": "10月3日",
-        "time": "08:10 AM",
         "details": "",
         "otherDetails": [
             {
@@ -302,7 +290,6 @@
         "type": "location",
         "name": "Mi-ike lodge (みいけろっじ)",
         "date": "10月4日",
-        "time": "08:00 AM",
         "details": ""
     },
     {
@@ -325,7 +312,6 @@
         "type": "location",
         "name": "尾瀬口船着場 (おぜぐちふなつきば)",
         "date": "10月4日",
-        "time": "04:05 PM",
         "details": ""
     },
     {
@@ -348,7 +334,6 @@
         "type": "location",
         "name": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
         "date": "10月4日",
-        "time": "04:50 PM",
         "details": ""
     },
     {
@@ -363,7 +348,6 @@
         "type": "location",
         "name": "魚沼ヒミツ基地 〜Farm stay〜",
         "date": "10月4日",
-        "time": "05:30 PM",
         "details": "",
         "otherDetails": [
             {
@@ -384,7 +368,6 @@
         "type": "location",
         "name": "八海山ロープウェー (はっかいさんろーぷうぇー)",
         "date": "10月5日",
-        "time": "08:46 AM",
         "details": ""
     },
     {
@@ -407,7 +390,6 @@
         "type": "location",
         "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
         "date": "10月5日",
-        "time": "08:52 AM",
         "details": ""
     },
     {
@@ -430,7 +412,6 @@
         "type": "location",
         "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
         "date": "10月5日",
-        "time": "03:12 PM",
         "details": ""
     },
     {
@@ -453,7 +434,6 @@
         "type": "location",
         "name": "八海山ロープウェー (はっかいさんろーぷうぇー)",
         "date": "10月5日",
-        "time": "03:17 PM",
         "details": ""
     },
     {
@@ -468,7 +448,6 @@
         "type": "location",
         "name": "魚沼ヒミツ基地 〜Farm stay〜",
         "date": "10月5日",
-        "time": "04:03 PM",
         "details": "",
         "otherDetails": [
             {
@@ -489,7 +468,6 @@
         "type": "location",
         "name": "KIJ 新潟機場 (にいがたくうこう)",
         "date": "10月6日",
-        "time": "09:31 AM",
         "details": ""
     },
     {
@@ -508,7 +486,6 @@
         "type": "location",
         "name": "TPE 桃園國際機場",
         "date": "10月6日",
-        "time": "09:25 PM",
         "details": "",
         "services": [
             {
