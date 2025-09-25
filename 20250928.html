@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>東北・新潟 ドライブ旅行プランナー</title>
+    <title>東北・新潟 自駕遊規劃</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -36,6 +36,7 @@
             grid-template-columns: 8rem 2.2rem 1fr;
             gap: 0 1rem;
             margin-bottom: 1rem;
+            align-items: center;
         }
         .time-col {
             text-align: right;
@@ -128,26 +129,26 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         <header class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-stone-800 tracking-tight">東北・新潟 ドライブ旅行</h1>
-            <p class="mt-2 text-lg text-stone-600">旅程全体の概要と各区間の詳細</p>
+            <h1 class="text-4xl font-bold text-stone-800 tracking-tight">東北・新潟 自駕遊</h1>
+            <p class="mt-2 text-lg text-stone-600">旅程總覽與各路段詳情</p>
         </header>
 
         <section id="summary" class="mb-16">
-            <h2 class="text-2xl font-bold text-stone-700 text-center mb-8">旅の全体像</h2>
+            <h2 class="text-2xl font-bold text-stone-700 text-center mb-8">旅程總覽</h2>
              <div class="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-lg border border-stone-200">
-                <p class="text-center text-stone-600 mb-6">この旅は、雄大な自然と豊かな文化を巡る壮大なドライブ旅行です。以下の統計は、この冒險の規模を示しています。</p>
+                <p class="text-center text-stone-600 mb-6">這是一趟巡遊雄偉自然與豐富文化的壯闊自駕之旅。以下統計數據呈現了這次冒險的規模。</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                     <div class="stat-card p-6 rounded-xl">
                         <div class="text-4xl font-bold text-teal-600" id="total-distance">0 km</div>
-                        <p class="text-stone-500 mt-1">総移動距離</p>
+                        <p class="text-stone-500 mt-1">總移動距離</p>
                     </div>
                     <div class="stat-card p-6 rounded-xl">
                         <div class="text-4xl font-bold text-amber-600" id="total-duration">0 時間</div>
-                        <p class="text-stone-500 mt-1">総運転時間</p>
+                        <p class="text-stone-500 mt-1">總駕駛時間</p>
                     </div>
                     <div class="stat-card p-6 rounded-xl">
                         <div class="text-4xl font-bold text-sky-600" id="total-legs">0 区間</div>
-                        <p class="text-stone-500 mt-1">総行程数</p>
+                        <p class="text-stone-500 mt-1">總行程數</p>
                     </div>
                 </div>
 
@@ -160,18 +161,18 @@
         </section>
 
         <section id="itinerary" class="mb-16">
-            <h2 class="text-2xl font-bold text-stone-700 text-center mb-2">インタラクティブ旅程</h2>
-            <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">このセクションでは、旅行の各行程を詳しく確認できます。各ステップをクリックすると、距離、所要時間、推奨ルートが表示され、ナビゲーションを開始できます。</p>
+            <h2 class="text-2xl font-bold text-stone-700 text-center mb-2">互動式旅程</h2>
+            <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">在此區塊中，您可以詳細確認旅行的每個行程。點擊各個步驟，即可顯示距離、所需時間、建議路線，並開始導航。</p>
             <div id="timeline-container" class="max-w-4xl mx-auto">
             </div>
         </section>
 
         <section id="visualizations" class="mb-16">
-            <h2 class="text-2xl font-bold text-stone-700 text-center mb-2">データで見る旅程</h2>
-            <p class="text-center text-stone-600 mb-12 max-w-2xl mx-auto">ここでは、旅行全体の各区間の距離と所要時間を視覚的に比較できます。どの区間が最も長く、どのくらいの時間がかかるかを一目で把握し、計画の参考にしてください。</p>
+            <h2 class="text-2xl font-bold text-stone-700 text-center mb-2">旅程數據視覺化</h2>
+            <p class="text-center text-stone-600 mb-12 max-w-2xl mx-auto">在此，您可以直觀地比較整個旅程中每個路段的距離和所需時間。一目了然地掌握哪個路段最長、需要多少時間，以供規劃參考。</p>
             <div class="grid grid-cols-1 gap-12">
                 <div class="bg-white p-6 rounded-2xl shadow-lg border border-stone-200">
-                    <h3 class="text-xl font-bold text-stone-700 text-center mb-4">各区間の距離と所要時間</h3>
+                    <h3 class="text-xl font-bold text-stone-700 text-center mb-4">各路段距離與所需時間</h3>
                     <div class="chart-container">
                         <canvas id="combinedChart"></canvas>
                     </div>
@@ -182,7 +183,7 @@
     </div>
 
     <footer class="text-center py-8 mt-12 border-t border-stone-200">
-        <p class="text-stone-500">インタラクティブ旅行プランナー</p>
+        <p class="text-stone-500">互動式旅程規劃</p>
     </footer>
 
     <script>
@@ -236,7 +237,7 @@
 
                     const travelModeInfo = {
                         'flight': { emoji: '✈️', label: '飛機' },
-                        'driving': { emoji: '🚘', label: '駕車' },
+                        'driving': { emoji: '🚘', label: '開車' },
                         'walking': { emoji: '🥾', label: '徒步' },
                         'boat': { emoji: '🛥️', label: '乘船' },
                         'bus': { emoji: '🚌', label: '巴士' },
@@ -366,7 +367,7 @@
                             let cardHtmlContent;
 
                             if (block.type === 'location') {
-                                const isStay = block.details && block.details.includes('住宿');
+                                const isStay = block.isStay;
                                 markerCol.innerHTML = `<div class="marker-icon">${isStay ? '🏨' : '📍'}</div><div class="marker-line"></div>`;
                                 cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
 
@@ -469,7 +470,7 @@
                                 labels: labels,
                                 datasets: [
                                     {
-                                        label: '距離 (km)',
+                                        label: '距離 (公里)',
                                         data: distances,
                                         backgroundColor: 'rgba(13, 148, 136, 0.6)',
                                         borderColor: 'rgba(13, 148, 136, 1)',
@@ -478,7 +479,7 @@
                                         order: 1
                                     },
                                     {
-                                        label: '所要時間 (分)',
+                                        label: '所需時間 (分鐘)',
                                         data: durations,
                                         backgroundColor: 'rgba(217, 119, 6, 0.6)',
                                         borderColor: 'rgba(217, 119, 6, 1)',
@@ -498,7 +499,7 @@
                                         beginAtZero: true,
                                         title: {
                                             display: true,
-                                            text: '距離 (km)',
+                                            text: '距離 (公里)',
                                             color: '#57534e'
                                         },
                                         ticks: {
@@ -514,7 +515,7 @@
                                         },
                                         title: {
                                             display: true,
-                                            text: '所要時間 (分)',
+                                            text: '所需時間 (分鐘)',
                                             color: '#57534e'
                                         },
                                         ticks: {
@@ -536,10 +537,10 @@
                                             title: (context) => filteredChartLegs[context[0].dataIndex].to,
                                             afterTitle: (context) => filteredChartLegs[context[0].dataIndex].from,
                                             label: (context) => {
-                                                if (context.dataset.label === '距離 (km)') {
-                                                    return `${context.dataset.label}: ${context.raw} km`;
+                                                if (context.dataset.label === '距離 (公里)') {
+                                                    return `${context.dataset.label}: ${context.raw} 公里`;
                                                 } else {
-                                                    return `${context.dataset.label}: ${context.raw}分 (${formatMinutesToHours(context.raw)})`;
+                                                    return `${context.dataset.label}: ${context.raw}分鐘 (${formatMinutesToHours(context.raw)})`;
                                                 }
                                             }
                                         }

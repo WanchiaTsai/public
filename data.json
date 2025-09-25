@@ -53,6 +53,7 @@
         "name": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "date": "9月28日",
         "details": "",
+        "isStay": true,
         "googleMapsLink": "https://maps.app.goo.gl/R4FiV7bgZ4emk5cz8",
         "otherDetails": [
             {
@@ -78,6 +79,7 @@
         "date": "9月29日",
         "time": "12:24 PM",
         "details": "",
+        "isStay": true,
         "googleMapsLink": "https://maps.app.goo.gl/R4FiV7bgZ4emk5cz8"
     },
     {
@@ -94,6 +96,7 @@
         "name": "羽黒山 三光院 (はぐろさんさんこういん)",
         "date": "9月29日",
         "details": "",
+        "isStay": true,
         "googleMapsLink": "https://maps.app.goo.gl/5MfACYUWRckdWQS6A"
     },
     {
@@ -131,7 +134,7 @@
     },
     {
         "type": "location",
-        "name": "月山 八合目",
+        "name": "月山登山口 (がっさんとざんぐち)",
         "date": "9月30日",
         "details": "",
         "googleMapsLink": "https://maps.app.goo.gl/gEWiAYpxegkYNCqu5"
@@ -150,6 +153,7 @@
         "name": "羽黒山 三光院 (はぐろさんさんこういん)",
         "date": "9月30日",
         "details": "",
+        "isStay": true,
         "googleMapsLink": "https://maps.app.goo.gl/5MfACYUWRckdWQS6A"
     },
     {
@@ -166,6 +170,7 @@
         "name": "折立温泉　やまきや旅館",
         "date": "10月1日",
         "details": "",
+        "isStay": true,
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -256,6 +261,7 @@
         "name": "尾瀬沼山荘 (おぜぬまさんそう)",
         "date": "10月2日",
         "details": "",
+        "isStay": true,
         "googleMapsLink": "https://maps.app.goo.gl/n9er8W3iuKcF8BUq5"
     },
     {
@@ -278,6 +284,7 @@
         "name": "尾瀬 温泉小屋",
         "date": "10月3日",
         "details": "",
+        "isStay": true,
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -306,6 +313,7 @@
         "name": "尾瀬御池ロッジ (みいけろっじ)",
         "date": "10月4日",
         "details": "",
+        "isStay": true,
         "googleMapsLink": "https://maps.app.goo.gl/1hGuBu5GZeYJqXzu8"
     },
     {
@@ -367,6 +375,7 @@
         "name": "魚沼ヒミツ基地 〜Farm stay〜",
         "date": "10月4日",
         "details": "",
+        "isStay": true,
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -392,6 +401,29 @@
     },
     {
         "type": "movement",
+        "travelMode": "ropeway",
+        "distance": 2.217,
+        "duration": "5分",
+        "route": "八海山纜車",
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
+            }
+        ],
+        "date": "10月5日",
+        "startTime": "08:47 AM",
+        "arrivalTime": "08:52 AM"
+    },
+    {
+        "type": "location",
+        "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
+        "date": "10月5日",
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/CNCWj5EWLjygjhCk6"
+    },
+    {
+        "type": "movement",
         "travelMode": "walking",
         "to": "八海山 (入道岳) 周遊 (池ノ峰經由) (はっかいさん (にゅうどうだけ) しゅうゆう (いけのねけいゆ))",
         "distance": 9.1,
@@ -406,6 +438,22 @@
         "date": "10月5日",
         "startTime": "09:00 AM",
         "isRoundTrip": true
+    },
+    {
+        "type": "movement",
+        "travelMode": "ropeway",
+        "distance": 2.217,
+        "duration": "5分",
+        "route": "八海山纜車",
+        "otherDetails": [
+            {
+                "info": "詳細資訊",
+                "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
+            }
+        ],
+        "date": "10月5日",
+        "startTime": "03:20 PM",
+        "arrivalTime": "03:17 PM"
     },
     {
         "type": "location",
@@ -427,6 +475,7 @@
         "name": "魚沼ヒミツ基地 〜Farm stay〜",
         "date": "10月5日",
         "details": "",
+        "isStay": true,
         "otherDetails": [
             {
                 "info": "詳細資訊",
