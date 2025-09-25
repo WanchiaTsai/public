@@ -33,7 +33,7 @@
         /* Timeline Styles */
         .timeline-item {
             display: grid;
-            grid-template-columns: 12rem 2.2rem 1fr;
+            grid-template-columns: 8rem 2.2rem 1fr;
             gap: 0 1rem;
             margin-bottom: 1rem;
         }
@@ -190,36 +190,23 @@
             fetch('data.json')
                 .then(response => response.json())
                 .then(timelineData => {
-                    console.log("Data loaded:", timelineData);
 
-                    // --- Data Pre-processing ---
-                    try {
-                        timelineData.forEach((block, index) => {
-                            if (block.type === 'movement') {
-                                if (!block.from && index > 0) {
-                                    block.from = timelineData[index - 1].name;
-                                }
-                                if (!block.to && !block.isRoundTrip && index < timelineData.length - 1) {
-                                    block.to = timelineData[index + 1].name;
-                                }
-                                if (!block.navigationLink && block.from && block.to && (block.travelMode === 'driving' || block.travelMode === 'walking')) {
-                                    block.navigationLink = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(block.from)}&destination=${encodeURIComponent(block.to)}`;
-                                }
-                            }
-                        });
-                        console.log("Data after pre-processing:", timelineData);
-                    } catch (e) {
-                        console.error("Error during data pre-processing:", e);
+                    function addMinutesToTime(timeStr, minutesToAdd) {
+                        if (!timeStr) return '';
+                        if (minutesToAdd === 0) return timeStr;
+                        let hours, minutes;
+                        const period = timeStr.includes('AM') || timeStr.includes('PM') ? timeStr.split(' ')[1] : null;
+                        const timePart = period ? timeStr.split(' ')[0] : timeStr;
+                        [hours, minutes] = timePart.split(':').map(Number);
+                        if (period === 'PM' && hours !== 12) hours += 12;
+                        if (period === 'AM' && hours === 12) hours = 0;
+                        let totalMinutes = hours * 60 + minutes + minutesToAdd;
+                        const newHours = Math.floor(totalMinutes / 60);
+                        const newMinutes = totalMinutes % 60;
+                        const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
+                        const newPeriod = newHours >= 12 ? 'PM' : 'AM';
+                        return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
                     }
-
-                    const travelModeInfo = {
-                        'flight': { emoji: '✈️', label: '飛機' },
-                        'driving': { emoji: '🚘', label: '駕車' },
-                        'walking': { emoji: '🥾', label: '徒步' },
-                        'boat': { emoji: '🛥️', label: '乘船' },
-                        'bus': { emoji: '🚌', label: '巴士' },
-                        'ropeway': { emoji: '🚠', label: '纜車' }
-                    };
 
                     function parseDurationToMinutes(durationStr) {
                         if (!durationStr || durationStr === '一泊') return 0;
@@ -231,39 +218,40 @@
                         return totalMinutes;
                     }
 
+                    // --- Data Pre-processing ---
+                    timelineData.forEach((block, index) => {
+                        if (block.type === 'movement') {
+                            if (!block.from && index > 0) block.from = timelineData[index - 1].name;
+                            if (!block.to && !block.isRoundTrip && index < timelineData.length - 1) block.to = timelineData[index + 1].name;
+                            if (!block.navigationLink && block.from && block.to && (block.travelMode === 'driving' || block.travelMode === 'walking')) {
+                                block.navigationLink = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(block.from)}&destination=${encodeURIComponent(block.to)}`;
+                            }
+                            if (block.startTime && block.duration && !block.arrivalTime) {
+                                const durationMinutes = parseDurationToMinutes(block.duration);
+                                const estimatedArrivalTime = addMinutesToTime(block.startTime, durationMinutes);
+                                if (index < timelineData.length - 1 && timelineData[index + 1].type === 'location') {
+                                    timelineData[index + 1].time = estimatedArrivalTime;
+                                    timelineData[index + 1].isEstimated = true;
+                                }
+                            }
+                        }
+                    });
+
+                    const travelModeInfo = {
+                        'flight': { emoji: '✈️', label: '飛機' },
+                        'driving': { emoji: '🚘', label: '駕車' },
+                        'walking': { emoji: '🥾', label: '徒步' },
+                        'boat': { emoji: '🛥️', label: '乘船' },
+                        'bus': { emoji: '🚌', label: '巴士' },
+                        'ropeway': { emoji: '🚠', label: '纜車' },
+                        'stay': { emoji: '🏨', label: '住宿' },
+                        'airport_service': { emoji: '🛂', label: '禮遇通關' }
+                    };
+
                     function formatMinutesToHours(minutes) {
                         const h = Math.floor(minutes / 60);
                         const m = minutes % 60;
                         return `${h}時間${m > 0 ? ` ${m}分` : ''}`;
-                    }
-
-                    function addMinutesToTime(timeStr, minutesToAdd) {
-                        if (!timeStr) return '';
-                        if (minutesToAdd === 0) return timeStr;
-
-                        let hours, minutes, period;
-                        
-                        if (timeStr.includes('AM') || timeStr.includes('PM')) {
-                            let [time, period] = timeStr.split(' ');
-                            [hours, minutes] = time.split(':').map(Number);
-                            if (period === 'PM' && hours !== 12) {
-                                hours += 12;
-                            } else if (period === 'AM' && hours === 12) {
-                                hours = 0; // Midnight case
-                            }
-                        } else { // Assume 24-hour format
-                            [hours, minutes] = timeStr.split(':').map(Number);
-                        }
-
-                        let totalMinutes = hours * 60 + minutes + minutesToAdd;
-
-                        const newHours = Math.floor(totalMinutes / 60);
-                        const newMinutes = totalMinutes % 60;
-
-                        const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
-                        const newPeriod = newHours >= 12 ? 'PM' : 'AM';
-
-                        return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
                     }
 
                     function formatFurigana(nameWithFurigana) {
@@ -277,17 +265,15 @@
                         return nameWithFurigana;
                     }
 
+                    // Calculate and display totals
                     try {
                         const travelLegs = timelineData.filter(item => item.type === 'movement');
-
-                        // Calculate main totals
                         const totalDistance = travelLegs.reduce((acc, leg) => acc + (leg.distance || 0), 0);
                         const totalMinutes = travelLegs.reduce((acc, leg) => acc + parseDurationToMinutes(leg.duration), 0);
                         document.getElementById('total-distance').textContent = `${totalDistance.toFixed(1)} km`;
                         document.getElementById('total-duration').textContent = formatMinutesToHours(totalMinutes);
                         document.getElementById('total-legs').textContent = `${travelLegs.length} 区間`;
 
-                        // Calculate transport breakdown
                         const transportBreakdown = {};
                         timelineData.forEach(block => {
                             let mode = null;
@@ -300,7 +286,6 @@
                                     mode = 'airport_service';
                                 }
                             }
-
                             if (mode) {
                                 if (!transportBreakdown[mode]) {
                                     transportBreakdown[mode] = { distance: 0, durationMinutes: 0, count: 0 };
@@ -323,7 +308,6 @@
                                 card.className = 'stat-card p-4 rounded-xl';
                                 let contentHtml = `<div class="text-3xl font-bold text-stone-800">${info.emoji}</div>
                                                    <p class="text-stone-600 mt-1">${info.label}</p>`;
-
                                 if (mode === 'stay') {
                                     contentHtml += `<p class="text-sm text-stone-500 mt-2">${breakdown.count} 晚</p>`;
                                 } else if (mode === 'airport_service') {
@@ -340,13 +324,13 @@
                         console.error("Error calculating totals and breakdown:", e);
                     }
 
+                    // Render Timeline
                     const timelineContainer = document.getElementById('timeline-container');
                     timelineContainer.innerHTML = '';
                     let lastDate = null;
 
                     try {
                         timelineData.forEach((block, index) => {
-                            console.log(`Rendering block ${index}:`, block);
                             const item = document.createElement('div');
                             item.className = 'timeline-item';
 
@@ -362,23 +346,16 @@
                                 lastDate = currentDate;
                             }
                             
-                                                                            if (block.time || (block.type === 'movement' && block.duration)) {
-                                                                                const timeDiv = document.createElement('div');
-                                                                                timeDiv.className = 'time';
-                                                                                                            if (block.type === 'movement') {
-                                                                                                                if (block.startTime && block.arrivalTime) {
-                                                                                                                    timeDiv.textContent = `${block.startTime} - ${block.arrivalTime}`;
-                                                                                                                } else if (block.startTime && block.duration) {
-                                                                                                                    const durationMinutes = parseDurationToMinutes(block.duration);
-                                                                                                                    const estimatedArrivalTime = addMinutesToTime(block.startTime, durationMinutes);
-                                                                                                                    timeDiv.textContent = `${block.startTime} - ~${estimatedArrivalTime}`;
-                                                                                                                } else {
-                                                                                                                    timeDiv.textContent = block.duration;
-                                                                                                                }
-                                                                                                            } else { // location
-                                                                                                                timeDiv.textContent = block.time;
-                                                                                                            }                                                                                timeCol.appendChild(timeDiv);
-                                                                            }                            const markerCol = document.createElement('div');
+                            const timeDiv = document.createElement('div');
+                            timeDiv.className = 'time';
+                            if (block.type === 'location') {
+                                timeDiv.innerHTML = `${block.time || ''} ${block.isEstimated ? '<span class="text-amber-600">(預估)</span>' : ''}`;
+                            } else if (block.type === 'movement') {
+                                timeDiv.textContent = block.startTime || block.duration;
+                            }
+                            if(timeDiv.textContent) timeCol.appendChild(timeDiv);
+
+                            const markerCol = document.createElement('div');
                             markerCol.className = 'marker-col';
 
                             const cardCol = document.createElement('div');
@@ -397,7 +374,6 @@
                                     <h3 class="timeline-title">${formatFurigana(block.name)}
                                         <a href="${googleMapsLink}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">📍</a>
                                     </h3>
-                                    <p class="timeline-time">${block.time || ''}</p>
                                     <p class="timeline-detail">${block.details || ''}</p>
                                 `;
 
@@ -438,8 +414,9 @@
                                         <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
                                             <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
                                             <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
-                                                                                    ${block.route ? `<p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>` : ''}
-                                                                                    ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}                                        </div>
+                                            ${block.route ? `<p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>` : ''}
+                                            ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
+                                        </div>
                                     </div>
                                 `;
                             }
@@ -465,6 +442,7 @@
                         console.error("Error during timeline rendering:", e);
                     }
 
+                    // Chart rendering logic
                     try {
                         const chartLegs = [];
                         timelineData.forEach((block, index) => {
