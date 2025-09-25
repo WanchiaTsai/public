@@ -16,7 +16,8 @@
 | `date`          | `String` | 行程發生的日期。                                                     | `"9月28日"`                                                            |
 | `departureTime` | `String` | 出發時間。                                                           | `"08:00 AM"`                                                           |
 | `travelMode`    | `String` | 交通方式。可能的值包括：`flight`, `driving`, `walking`, `boat`, `bus`, `ropeway`, `stay`, `airport_service`。 | `"flight"`                                                             |
-| `link`          | `String` | 提供額外資訊的連結，例如 Google Maps 路線、住宿網站或參考資料。      | `"https://maps.app.goo.gl/xYy6kR25EYDUyB4a9"`                           |
+| `navigationLink`| `String` | (選填) 提供導航用的連結，通常是 Google Maps 或類似服務的路線連結。 | `"https://www.google.com/maps/dir/..."` |
+| `infoLink`      | `String` | (選填) 提供額外資訊的連結，例如住宿網站、參考資料或官方網站。   | `"https://maps.app.goo.gl/xYy6kR25EYDUyB4a9"` |
 | `airline`       | `String` | (選填) 航空公司的名稱，僅在 `travelMode` 為 `flight` 時使用。        | `"tigersmart"`                                                         |
 | `flightNumber`  | `String` | (選填) 航班號碼，僅在 `travelMode` 為 `flight` 時使用。              | `"IT256"`                                                              |
 | `isRoundTrip`   | `Boolean`| (選填) 標示這是否為一個往返行程，主要用於登山等活動。                | `true`                                                                 |

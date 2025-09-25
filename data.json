@@ -8,7 +8,7 @@
         "date": "9月28日",
         "departureTime": "06:30 AM",
         "travelMode": "airport_service",
-        "link": "https://68666.tw/MscA"
+        "infoLink": "https://68666.tw/MscA"
     },
     {
         "from": "TPE 桃園國際機場 (Terminal 1)",
@@ -21,7 +21,7 @@
         "travelMode": "flight",
         "airline": "tigersmart",
         "flightNumber": "IT256",
-        "link": ""
+        "infoLink": ""
     },
     {
         "from": "AXT 秋田機場 (あきたくうこう)",
@@ -32,7 +32,7 @@
         "date": "9月28日",
         "departureTime": "03:00 PM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/Akita+Airport,+Yamagomori-%EF%BC%94%EF%BC%9９+Yuwatsubakigawa,+Akita,+Japan/%E6%97%A5%E6%9C%AC,+%E5%B1%B1%E5%BD%A2%E7%9C%8C%E9%81%8A%E4%BD%90%E7%94%BA%E5%90%B9%E6%B5%A6,+%E5%A4%A7%E5%B9%B3%E5%B1%B1%E8%8D%98/data=!4m14!4m13!1m5!1m1!19sChIJlYkpCSW-j18RQs7MMGKmAQE!2m2!1d140.2177165!2d39.614477799999996!1m5!1m1!19sChIJRwx4Rh2Njl8Rmj9Tw-6-De0!2m2!1d139.9784133!2d39.107180299999996!3e0"
+        "navigationLink": "https://www.google.com/maps/dir/Akita+Airport,+Yamagomori-%EF%BC%94%EF%BC%9９+Yuwatsubakigawa,+Akita,+Japan/%E6%97%A5%E6%9C%AC,+%E5%B1%B1%E5%BD%A2%E7%9C%8C%E9%81%8A%E4%BD%90%E7%94%BA%E5%90%B9%E6%B5%A6,+%E5%A4%A7%E5%B9%B3%E5%B1%B1%E8%8D%98/data=!4m14!4m13!1m5!1m1!19sChIJlYkpCSW-j18RQs7MMGKmAQE!2m2!1d140.2177165!2d39.614477799999996!1m5!1m1!19sChIJRwx4Rh2Njl8Rmj9Tw-6-De0!2m2!1d139.9784133!2d39.107180299999996!3e0"
     },
     {
         "from": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
@@ -42,7 +42,7 @@
         "route": "住宿",
         "date": "9月28日",
         "travelMode": "stay",
-        "link": ""
+        "infoLink": ""
     },
     {
         "from": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
@@ -53,7 +53,7 @@
         "date": "9月29日",
         "departureTime": "08:55 AM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/%E9%B3%A8%E6%B5%B7%E5%B1%B1+%E4%BA%94%E5%90%88%E7%9B%AE%E9%89%BE%E7%AB%8B%E3%80%8E%E8%B1%A1%E6%BD%9F%E5%8F%A3%E3%80%8F,+Kisakatamachi+Kodaki,+Nikaho,+Akita,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJlYkpCSW-j18RQs7MMGKmAQE!2m2!1d140.2177165!2d39.614477799999996!1m5!1m1!19sChIJYbrSwlbyjl8RVaL7JwckjRo!2m2!1d139.9915595!2d39.1218077!3e0"
+        "navigationLink": "https://www.google.com/maps/dir/%E9%B3%A8%E6%B5%B7%E5%B1%B1+%E4%BA%94%E5%90%88%E7%9B%AE%E9%89%BE%E7%AB%8B%E3%80%8E%E8%B1%A1%E6%BD%9F%E5%8F%A3%E3%80%8F,+Kisakatamachi+Kodaki,+Nikaho,+Akita,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJlYkpCSW-j18RQs7MMGKmAQE!2m2!1d140.2177165!2d39.614477799999996!1m5!1m1!19sChIJYbrSwlbyjl8RVaL7JwckjRo!2m2!1d139.9915595!2d39.1218077!3e0"
     },
     {
         "from": "鳥海山 五合目鉾立『象潟口』 (ちょうかいさんごごうめほこたて『きさかたぐち』)",
@@ -64,7 +64,7 @@
         "date": "9月29日",
         "departureTime": "09:00 AM",
         "travelMode": "walking",
-        "link": "https://yamap.com/model-courses/25567",
+        "infoLink": "https://yamap.com/model-courses/25567",
         "isRoundTrip": true
     },
     {
@@ -76,7 +76,7 @@
         "date": "9月29日",
         "departureTime": "01:00 PM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/%E9%B3%A8%E6%B5%B7%E5%B1%B1+%E4%BA%94%E5%90%88%E7%9B%AE%E9%89%BE%E7%AB%8B%E3%80%8E%E8%B1%A1%E6%BD%9F%E5%8F%A3%E3%80%8F,+Kisakatamachi+Kodaki,+Nikaho,+Akita,+Japan/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJYbrSwlbyjl8RVaL7JwckjRo!2m2!1d139.9915595!2d39.1218077!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!3e0"
+        "navigationLink": "https://www.google.com/maps/dir/%E9%B3%A8%E6%B5%B7%E5%B1%B1+%E4%BA%94%E5%90%88%E7%9B%AE%E9%89%BE%E7%AB%8B%E3%80%8E%E8%B1%A1%E6%BD%9F%E5%8F%A3%E3%80%8F,+Kisakatamachi+Kodaki,+Nikaho,+Akita,+Japan/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJYbrSwlbyjl8RVaL7JwckjRo!2m2!1d139.9915595!2d39.1218077!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!3e0"
     },
     {
         "from": "羽黒山 三光院 (はぐろさんさんこういん)",
@@ -86,7 +86,7 @@
         "route": "住宿",
         "date": "9月29日",
         "travelMode": "stay",
-        "link": ""
+        "infoLink": ""
     },
     {
         "from": "羽黒山 三光院 (はぐろさんさんこういん)",
@@ -97,7 +97,7 @@
         "date": "9月30日",
         "departureTime": "08:00 AM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/Mt.+Gassan+8th+Station,+Tsuruoka,+Yamagata,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJs4EjiBL3i18Rq_4mDVSpHps!2m2!1d140.016636!2d38.5861759!3e0"
+        "navigationLink": "https://www.google.com/maps/dir/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/Mt.+Gassan+8th+Station,+Tsuruoka,+Yamagata,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJs4EjiBL3i18Rq_4mDVSpHps!2m2!1d140.016636!2d38.5861759!3e0"
     },
     {
         "from": "月山登山口 (がっさんとざんぐち)",
@@ -108,7 +108,7 @@
         "date": "9月30日",
         "departureTime": "08:40 AM",
         "travelMode": "walking",
-        "link": "https://yamap.com/maps/39",
+        "infoLink": "https://yamap.com/maps/39",
         "isRoundTrip": true
     },
     {
@@ -120,7 +120,7 @@
         "date": "9月30日",
         "departureTime": "02:20 PM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/Mt.+Gassan+8th+Station,+Tsuruoka,+Yamagata,+Japan/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJs4EjiBL3i18Rq_4mDVSpHps!2m2!1d140.016636!2d38.5861759!3e0"
+        "navigationLink": "https://www.google.com/maps/dir/Mt.+Gassan+8th+Station,+Tsuruoka,+Yamagata,+Japan/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJs4EjiBL3i18Rq_4mDVSpHps!2m2!1d140.016636!2d38.5861759!3e0"
     },
     {
         "from": "羽黒山 三光院 (はぐろさんさんこういん)",
@@ -130,7 +130,7 @@
         "route": "住宿",
         "date": "9月30日",
         "travelMode": "stay",
-        "link": ""
+        "infoLink": ""
     },
     {
         "from": "羽黒山 三光院 (はぐろさんさんこういん)",
@@ -141,7 +141,7 @@
         "date": "10月1日",
         "departureTime": "08:00 AM",
         "travelMode": "driving",
-        "link": "https://maps.app.goo.gl/Zsvg7JYMdfDM6w9V7"
+        "navigationLink": "https://maps.app.goo.gl/Zsvg7JYMdfDM6w9V7"
     },
     {
         "from": "折立温泉　やまきや旅館",
@@ -151,7 +151,7 @@
         "route": "住宿",
         "date": "10月1日",
         "travelMode": "stay",
-        "link": "https://maps.app.goo.gl/xYy6kR25EYDUyB4a9"
+        "infoLink": "https://maps.app.goo.gl/xYy6kR25EYDUyB4a9"
     },
     {
         "from": "折立温泉　やまきや旅館",
@@ -162,7 +162,7 @@
         "date": "10月2日",
         "departureTime": "08:00 AM",
         "travelMode": "driving",
-        "link": "https://maps.app.goo.gl/4mudZpRmQqh9FzS27"
+        "navigationLink": "https://maps.app.goo.gl/4mudZpRmQqh9FzS27"
     },
     {
         "from": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
@@ -173,7 +173,7 @@
         "date": "10月2日",
         "departureTime": "09:30 AM",
         "travelMode": "boat",
-        "link": "https://enjoyniigata.com/tc/spot/8397"
+        "infoLink": "https://enjoyniigata.com/tc/spot/8397"
     },
     {
         "from": "尾瀬口船着場 (おぜぐちふなつきば)",
@@ -184,7 +184,7 @@
         "date": "10月2日",
         "departureTime": "10:15 AM",
         "travelMode": "bus",
-        "link": "https://www.aizubus.com/travel/oze/"
+        "infoLink": "https://www.aizubus.com/travel/oze/"
     },
     {
         "from": "沼山峠 (ぬまやまとうげ)",
@@ -195,7 +195,7 @@
         "date": "10月2日",
         "departureTime": "11:20 AM",
         "travelMode": "walking",
-        "link": "https://www.env.go.jp/park/oze/data/hike_map_oze_numamoto.pdf"
+        "infoLink": "https://www.env.go.jp/park/oze/data/hike_map_oze_numamoto.pdf"
     },
     {
         "from": "尾瀬沼山荘 (おぜぬまさんそう)",
@@ -205,7 +205,7 @@
         "route": "住宿",
         "date": "10月2日",
         "travelMode": "stay",
-        "link": ""
+        "infoLink": ""
     },
     {
         "from": "尾瀬沼山荘 (おぜぬまさんそう)",
@@ -216,7 +216,7 @@
         "date": "10月3日",
         "departureTime": "07:00 AM",
         "travelMode": "walking",
-        "link": "https://yamap.com/maps/39"
+        "infoLink": "https://yamap.com/maps/39"
     },
     {
         "from": "尾瀬 温泉小屋",
@@ -226,7 +226,7 @@
         "route": "住宿",
         "date": "10月3日",
         "travelMode": "stay",
-        "link": "https://maps.app.goo.gl/W8XT8uvVTZ532TZ69"
+        "infoLink": "https://maps.app.goo.gl/W8XT8uvVTZ532TZ69"
     },
     {
         "from": "尾瀬 温泉小屋",
@@ -237,7 +237,7 @@
         "date": "10月4日",
         "departureTime": "07:00 AM",
         "travelMode": "walking",
-        "link": "https://www.oze-info.jp/ozh-stay/miikelodge"
+        "infoLink": "https://www.oze-info.jp/ozh-stay/miikelodge"
     },
     {
         "from": "Mi-ike lodge (みいけろっじ)",
@@ -248,7 +248,7 @@
         "date": "10月4日",
         "departureTime": "03:00 PM",
         "travelMode": "bus",
-        "link": "https://www.aizubus.com/travel/oze/"
+        "infoLink": "https://www.aizubus.com/travel/oze/"
     },
     {
         "from": "尾瀬口船着場 (おぜぐちふなつきば)",
@@ -259,7 +259,7 @@
         "date": "10月4日",
         "departureTime": "04:10 PM",
         "travelMode": "boat",
-        "link": "https://enjoyniigata.com/tc/spot/8397"
+        "infoLink": "https://enjoyniigata.com/tc/spot/8397"
     },
     {
         "from": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
@@ -270,7 +270,7 @@
         "date": "10月4日",
         "departureTime": "05:00 PM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8A%E6%8A%98%E7%AB%8B,+%E6%B9%AF%E6%B2%BB%E3%81%AE%E5%AE%BF+%E7%A5%9E%E9%A2%A8%E9%A4%A8/data=!4m14!4m13!1m5!1m1!19sChIJgRxT50GH9V8RJoimHj5zCsM!2m2!1d139.24516649999998!2d37.156281799999995!1m5!1m1!19sChIJ-TE3mniP9V8RfrBniRUGDhc!2m2!1d139.085947!2d37.185475!3e0"
+        "navigationLink": "https://maps.app.goo.gl/mxv9nNLzXpHCDf8Q7"
     },
     {
         "from": "魚沼ヒミツ基地 〜Farm stay〜",
@@ -280,7 +280,7 @@
         "route": "住宿",
         "date": "10月4日",
         "travelMode": "stay",
-        "link": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
+        "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
     },
     {
         "from": "魚沼ヒミツ基地 〜Farm stay〜",
@@ -291,7 +291,7 @@
         "date": "10月5日",
         "departureTime": "08:00 AM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8A%E6%8A%98%E7%AB%8B,+%E6%B9%AF%E6%B2%BB%E3%81%AE%E5%AE%BF+%E7%A5%9E%E9%A2%A8%E9%A4%A8/data=!4m14!4m13!1m5!1m1!19sChIJ-TE3mniP9V8RfrBniRUGDhc!2m2!1d139.085947!2d37.185475!1m5!1m1!19sChIJJu0D4tKaM9V8RfrBniRUGDhc!2m2!1d138.98037069999998!2d37.1110792!3e0"
+        "navigationLink": "https://maps.app.goo.gl/AyYNLwy6ufEs46Nv5"
     },
     {
         "from": "八海山ロープウェー (はっかいさんろーぷうぇー)",
@@ -302,7 +302,7 @@
         "date": "10月5日",
         "departureTime": "08:47 AM",
         "travelMode": "ropeway",
-        "link": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
+        "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
     },
     {
         "from": "八海山山頂駅 (はっかいさんさんちょうえき)",
@@ -313,7 +313,7 @@
         "date": "10月5日",
         "departureTime": "09:00 AM",
         "travelMode": "walking",
-        "link": "https://yamap.com/activities/8183146"
+        "infoLink": "https://yamap.com/activities/8183146"
     },
     {
         "from": "八海山山頂駅 (はっかいさんさんちょうえき)",
@@ -324,7 +324,7 @@
         "date": "10月5日",
         "departureTime": "03:20 PM",
         "travelMode": "ropeway",
-        "link": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
+        "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
     },
     {
         "from": "八海山ロープウェー (はっかいさんろーぷうぇー)",
@@ -335,7 +335,7 @@
         "date": "10月5日",
         "departureTime": "03:25 PM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/Hakkaisan+ropeway,+1610+%E5%B1%B1%E5%8F%A3,+%E5%8D%97%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8A%E6%8A%98%E7%AB%8B,+%E6%B9%AF%E6%B2%BB%E3%81%AE%E5%AE%BF+%E7%A5%9E%E9%A2%A8%E9%A4%A8/data=!4m14!4m13!1m5!1m1!19sChIJJu0D4tKaM9V8RfrBniRUGDhc!2m2!1d138.98037069999998!2d37.1110792!1m5!1m1!19sChIJ-TE3mniP9V9RfrBniRUGDhc!2m2!1d139.085947!2d37.185475!3e0"
+        "navigationLink": "https://maps.app.goo.gl/Podq9ZEQhsDj5K646"
     },
     {
         "from": "魚沼ヒミツ基地 〜Farm stay〜",
@@ -345,18 +345,18 @@
         "route": "住宿",
         "date": "10月5日",
         "travelMode": "stay",
-        "link": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
+        "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
     },
     {
         "from": "魚沼ヒミツ基地 〜Farm stay〜",
-        "to": "新潟 (にいがた)",
+        "to": "KIJ 新潟機場 (にいがたくうこう)",
         "distance": 114,
         "duration": "1時間31分",
         "route": "関越自動車道 and 北陸自動車道",
         "date": "10月6日",
         "departureTime": "08:00 AM",
         "travelMode": "driving",
-        "link": "https://www.google.com/maps/dir/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%B4/%E6%97%A5%E6%9C%AC,+%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82%E4%B8%8A%E6%8A%98%E7%AB%8B,+%E6%B9%AF%E6%B2%BB%E3%81%AE%E5%AE%BF+%E7%A5%9E%E9%A2%A8%E9%A4%A8/data=!4m14!4m13!1m5!1m1!19sChIJ-TE3mniP9V8RfrBniRUGDhc!2m2!1d139.085947!2d37.185475!1m5!1m1!19sChIJ98DHVcLF9F8RDSOQycubUPE!2m2!1d139.069444!2d37.9185345!3e0"
+        "navigationLink": "https://maps.app.goo.gl/K3bTiaMDXegtt2AJ6"
     },
     {
         "from": "KIJ 新潟機場 (にいがたくうこう)",
@@ -369,7 +369,7 @@
         "travelMode": "flight",
         "airline": "tigersmart",
         "flightNumber": "IT229",
-        "link": ""
+        "infoLink": ""
     },
     {
         "from": "TPE 桃園國際機場",
@@ -380,6 +380,6 @@
         "date": "10月6日",
         "departureTime": "09:25 PM",
         "travelMode": "airport_service",
-        "link": "https://68666.tw/2tyt"
+        "infoLink": "https://68666.tw/2tyt"
     }
 ]

@@ -454,7 +454,7 @@
                                     date: currentLeg.date,
                                     time: currentLeg.departureTime || (currentLeg.travelMode === 'stay' ? '晚上' : ''),
                                     details: (currentLeg.travelMode === 'stay' ? currentLeg.duration : `服務詳情: ${currentLeg.route}`),
-                                    link: currentLeg.link,
+                                    infoLink: currentLeg.infoLink,
                                     emoji: travelInfo.emoji,
                                     cardClass: (currentLeg.travelMode === 'stay' ? 'timeline-stay-card' : 'timeline-service-card'),
                                     isStay: currentLeg.travelMode === 'stay',
@@ -474,7 +474,7 @@
                                     date: currentLeg.date,
                                     time: currentLeg.departureTime,
                                     details: '出發點',
-                                    link: '',
+                                    infoLink: '',
                                     emoji: '📍',
                                     cardClass: 'timeline-card'
                                 });
@@ -491,7 +491,7 @@
                                 from: currentLeg.from,
                                 to: currentLeg.to,
                                 route: currentLeg.route,
-                                link: currentLeg.link,
+                                navigationLink: currentLeg.navigationLink,
                                 emoji: travelInfo.emoji,
                                 date: currentLeg.date
                             });
@@ -510,7 +510,7 @@
                                     date: currentLeg.date,
                                     time: arrivalTime,
                                     details: '抵達點',
-                                    link: '',
+                                    infoLink: '',
                                     emoji: '📍',
                                     cardClass: 'timeline-card'
                                 });
@@ -537,8 +537,8 @@
                             const originalStayLink = filteredTravelData.find(leg => 
                                 leg.travelMode === 'stay' && leg.date === date && leg.to === lastBlockOfCurrentDay.locationName
                             );
-                            if (originalStayLink && originalStayLink.link) {
-                                lastBlockOfCurrentDay.link = originalStayLink.link;
+                            if (originalStayLink && originalStayLink.infoLink) {
+                                lastBlockOfCurrentDay.infoLink = originalStayLink.infoLink;
                             }
                         }
                     });
@@ -576,11 +576,11 @@
                                 ${block.details ? `<p class="timeline-detail">${block.details}</p>` : ''}
                             `;
                             
-                            if (block.link && (block.isStay || block.isAirportService || block.isAccommodation)) { 
+                            if (block.infoLink && (block.isStay || block.isAirportService || block.isAccommodation)) { 
                                  cardHtmlContent += `
                                     <div class="timeline-item-content">
                                         <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                            <a href="${block.link}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${block.isStay || block.isAccommodation ? '查看住宿資訊' : '查看服務詳情'} →</a>
+                                            <a href="${block.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${block.isStay || block.isAccommodation ? '查看住宿資訊' : '查看服務詳情'} →</a>
                                         </div>
                                     </div>
                                 `;
@@ -598,7 +598,7 @@
                                         <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
                                         <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
                                         <p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>
-                                        ${block.link ? `<a href="${block.link}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
+                                        ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
                                     </div>
                                 </div>
                             `;
