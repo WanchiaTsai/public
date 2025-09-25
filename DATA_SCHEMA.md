@@ -18,6 +18,7 @@
 | `time`         | `String` | 事件發生的時間（例如抵達或出發時間）。                                                              | `"04:20 PM"`                                                           |
 | `details`      | `String` | 關於這個地點的簡要說明，例如「抵達點」、「住宿點」等。                                               | `"抵達點"`                                                             |
 | `services`     | `Array`  | (選填) 在此地點發生的服務，例如機場禮遇通關。每個物件包含 `name`、`details` 和 `link`。                     | `[{"name": "禮遇通關", "details": "...", "link": "..."}]`                |
+
 | `otherDetails` | `Array`  | (選填) 一個包含額外資訊連結的物件陣列。每個物件包含 `info` (連結說明) 和 `infoLink` (連結網址)。 | `[{"info": "住宿預訂", "infoLink": "https://..."}]`                |
 
 ---
