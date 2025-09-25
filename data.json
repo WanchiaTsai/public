@@ -131,7 +131,7 @@
     },
     {
         "type": "location",
-        "name": "月山登山口 (がっさんとざんぐち)",
+        "name": "月山 八合目",
         "date": "9月30日",
         "details": "",
         "googleMapsLink": "https://maps.app.goo.gl/gEWiAYpxegkYNCqu5"
@@ -392,29 +392,6 @@
     },
     {
         "type": "movement",
-        "travelMode": "ropeway",
-        "distance": 2.217,
-        "duration": "5分",
-        "route": "八海山纜車",
-        "otherDetails": [
-            {
-                "info": "詳細資訊",
-                "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
-            }
-        ],
-        "date": "10月5日",
-        "startTime": "08:47 AM",
-        "arrivalTime": "08:52 AM"
-    },
-    {
-        "type": "location",
-        "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
-        "date": "10月5日",
-        "details": "",
-        "googleMapsLink": "https://maps.app.goo.gl/CNCWj5EWLjygjhCk6"
-    },
-    {
-        "type": "movement",
         "travelMode": "walking",
         "to": "八海山 (入道岳) 周遊 (池ノ峰經由) (はっかいさん (にゅうどうだけ) しゅうゆう (いけのねけいゆ))",
         "distance": 9.1,
@@ -429,22 +406,6 @@
         "date": "10月5日",
         "startTime": "09:00 AM",
         "isRoundTrip": true
-    },
-    {
-        "type": "movement",
-        "travelMode": "ropeway",
-        "distance": 2.217,
-        "duration": "5分",
-        "route": "八海山纜車",
-        "otherDetails": [
-            {
-                "info": "詳細資訊",
-                "infoLink": "https://www.princehotels.com/zh-hant/ski/autumn/hakkaisan.html"
-            }
-        ],
-        "date": "10月5日",
-        "startTime": "03:20 PM",
-        "arrivalTime": "03:17 PM"
     },
     {
         "type": "location",

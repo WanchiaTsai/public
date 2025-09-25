@@ -228,11 +228,8 @@
                             }
                             if (block.startTime && block.duration && !block.arrivalTime) {
                                 const durationMinutes = parseDurationToMinutes(block.duration);
-                                const estimatedArrivalTime = addMinutesToTime(block.startTime, durationMinutes);
-                                if (index < timelineData.length - 1 && timelineData[index + 1].type === 'location') {
-                                    timelineData[index + 1].time = estimatedArrivalTime;
-                                    timelineData[index + 1].isEstimated = true;
-                                }
+                                block.arrivalTime = addMinutesToTime(block.startTime, durationMinutes);
+                                block.isEstimated = true;
                             }
                         }
                     });
@@ -351,7 +348,11 @@
                             if (block.type === 'location') {
                                 timeDiv.innerHTML = `${block.time || ''} ${block.isEstimated ? '<span class="text-amber-600">(預估)</span>' : ''}`;
                             } else if (block.type === 'movement') {
-                                timeDiv.textContent = block.startTime || block.duration;
+                                if (block.startTime && block.arrivalTime) {
+                                    timeDiv.innerHTML = `${block.isEstimated ? '<span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-amber-600 bg-amber-200">預估</span><br>' : ''}${block.startTime}<br>↓<br>${block.arrivalTime}`;
+                                } else {
+                                    timeDiv.textContent = block.startTime || block.duration;
+                                }
                             }
                             if(timeDiv.textContent) timeCol.appendChild(timeDiv);
 
