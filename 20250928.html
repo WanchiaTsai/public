@@ -190,6 +190,27 @@
             fetch('data.json')
                 .then(response => response.json())
                 .then(timelineData => {
+                    console.log("Data loaded:", timelineData);
+
+                    // --- Data Pre-processing ---
+                    try {
+                        timelineData.forEach((block, index) => {
+                            if (block.type === 'movement') {
+                                if (!block.from && index > 0) {
+                                    block.from = timelineData[index - 1].name;
+                                }
+                                if (!block.to && !block.isRoundTrip && index < timelineData.length - 1) {
+                                    block.to = timelineData[index + 1].name;
+                                }
+                                if (!block.navigationLink && block.from && block.to && (block.travelMode === 'driving' || block.travelMode === 'walking')) {
+                                    block.navigationLink = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(block.from)}&destination=${encodeURIComponent(block.to)}`;
+                                }
+                            }
+                        });
+                        console.log("Data after pre-processing:", timelineData);
+                    } catch (e) {
+                        console.error("Error during data pre-processing:", e);
+                    }
 
                     const travelModeInfo = {
                         'flight': { emoji: '✈️', label: '飛機' },
@@ -217,6 +238,7 @@
                     }
 
                     function formatFurigana(nameWithFurigana) {
+                        if (!nameWithFurigana) return '';
                         const match = nameWithFurigana.match(/(.+)\s\((.+)\)/);
                         if (match && match[1] && match[2]) {
                             const kanji = match[1].trim();
@@ -226,225 +248,247 @@
                         return nameWithFurigana;
                     }
 
-                    const travelLegs = timelineData.filter(item => item.type === 'movement');
+                    try {
+                        const travelLegs = timelineData.filter(item => item.type === 'movement');
 
-                    const totalDistance = travelLegs.reduce((acc, leg) => acc + (leg.distance || 0), 0);
-                    const totalMinutes = travelLegs.reduce((acc, leg) => acc + parseDurationToMinutes(leg.duration), 0);
+                        const totalDistance = travelLegs.reduce((acc, leg) => acc + (leg.distance || 0), 0);
+                        const totalMinutes = travelLegs.reduce((acc, leg) => acc + parseDurationToMinutes(leg.duration), 0);
 
-                    document.getElementById('total-distance').textContent = `${totalDistance.toFixed(1)} km`;
-                    document.getElementById('total-duration').textContent = formatMinutesToHours(totalMinutes);
-                    document.getElementById('total-legs').textContent = `${travelLegs.length} 区間`;
+                        document.getElementById('total-distance').textContent = `${totalDistance.toFixed(1)} km`;
+                        document.getElementById('total-duration').textContent = formatMinutesToHours(totalMinutes);
+                        document.getElementById('total-legs').textContent = `${travelLegs.length} 区間`;
+                    } catch (e) {
+                        console.error("Error calculating totals:", e);
+                    }
 
                     const timelineContainer = document.getElementById('timeline-container');
                     timelineContainer.innerHTML = '';
                     let lastDate = null;
 
-                    timelineData.forEach(block => {
-                        const item = document.createElement('div');
-                        item.className = 'timeline-item';
+                    try {
+                        timelineData.forEach((block, index) => {
+                            console.log(`Rendering block ${index}:`, block);
+                            const item = document.createElement('div');
+                            item.className = 'timeline-item';
 
-                        const timeCol = document.createElement('div');
-                        timeCol.className = 'time-col';
+                            const timeCol = document.createElement('div');
+                            timeCol.className = 'time-col';
 
-                        const currentDate = block.date;
-                        if (currentDate && currentDate !== lastDate) {
-                            const dateDiv = document.createElement('div');
-                            dateDiv.className = 'date';
-                            dateDiv.textContent = currentDate;
-                            timeCol.appendChild(dateDiv);
-                            lastDate = currentDate;
-                        }
-                        
-                        if (block.time || (block.type === 'movement' && block.duration)) {
-                            const timeDiv = document.createElement('div');
-                            timeDiv.className = 'time';
-                            timeDiv.textContent = block.time || block.duration;
-                            timeCol.appendChild(timeDiv);
-                        }
-
-                        const markerCol = document.createElement('div');
-                        markerCol.className = 'marker-col';
-
-                        const cardCol = document.createElement('div');
-                        cardCol.className = 'card-col';
-
-                        const cardDiv = document.createElement('div');
-                        let iconHtml, cardHtmlContent;
-
-                        if (block.type === 'location') {
-                            const isStay = block.details && block.details.includes('住宿');
-                            markerCol.innerHTML = `<div class="marker-icon">${isStay ? '🏨' : '📍'}</div><div class="marker-line"></div>`;
-                            cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
-
-                            const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(block.name)}`;
-                            cardHtmlContent = `
-                                <h3 class="timeline-title">${formatFurigana(block.name)}
-                                    <a href="${googleMapsLink}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">📍</a>
-                                </h3>
-                                <p class="timeline-time">${block.time || ''}</p>
-                                <p class="timeline-detail">${block.details || ''}</p>
-                            `;
-
-                            if (block.services && block.services.length > 0) {
-                                cardHtmlContent += `<div class="timeline-item-content">
-                                    <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                        ${block.services.map(service => `
-                                            <div>
-                                                <strong>${service.name}:</strong> ${service.details}
-                                                ${service.link ? `<a href="${service.link}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">→ 查看詳情</a>` : ''}
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                </div>`;
+                            const currentDate = block.date;
+                            if (currentDate && currentDate !== lastDate) {
+                                const dateDiv = document.createElement('div');
+                                dateDiv.className = 'date';
+                                dateDiv.textContent = currentDate;
+                                timeCol.appendChild(dateDiv);
+                                lastDate = currentDate;
+                            }
+                            
+                            if (block.time || (block.type === 'movement' && block.duration)) {
+                                const timeDiv = document.createElement('div');
+                                timeDiv.className = 'time';
+                                timeDiv.textContent = block.time || block.duration;
+                                timeCol.appendChild(timeDiv);
                             }
 
-                            if (block.otherDetails && block.otherDetails.length > 0) {
-                                 cardHtmlContent += `
+                            const markerCol = document.createElement('div');
+                            markerCol.className = 'marker-col';
+
+                            const cardCol = document.createElement('div');
+                            cardCol.className = 'card-col';
+
+                            const cardDiv = document.createElement('div');
+                            let cardHtmlContent;
+
+                            if (block.type === 'location') {
+                                const isStay = block.details && block.details.includes('住宿');
+                                markerCol.innerHTML = `<div class="marker-icon">${isStay ? '🏨' : '📍'}</div><div class="marker-line"></div>`;
+                                cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
+
+                                const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(block.name)}`;
+                                cardHtmlContent = `
+                                    <h3 class="timeline-title">${formatFurigana(block.name)}
+                                        <a href="${googleMapsLink}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">📍</a>
+                                    </h3>
+                                    <p class="timeline-time">${block.time || ''}</p>
+                                    <p class="timeline-detail">${block.details || ''}</p>
+                                `;
+
+                                if (block.services && block.services.length > 0) {
+                                    cardHtmlContent += `<div class="timeline-item-content">
+                                        <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                            ${block.services.map(service => `
+                                                <div>
+                                                    <strong>${service.name}:</strong> ${service.details}
+                                                    ${service.link ? `<a href="${service.link}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">→ 查看詳情</a>` : ''}
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>`;
+                                }
+
+                                if (block.otherDetails && block.otherDetails.length > 0) {
+                                     cardHtmlContent += `
+                                        <div class="timeline-item-content">
+                                            <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                                ${block.otherDetails.map(detail => `<a href="${detail.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${detail.info} →</a>`).join('')}
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+
+                            } else if (block.type === 'movement') {
+                                const travelInfo = travelModeInfo[block.travelMode];
+                                markerCol.innerHTML = `<div class="marker-icon movement">${travelInfo.emoji}</div><div class="marker-line"></div>`;
+                                cardDiv.className = 'timeline-card travel-method-card';
+                                
+                                cardHtmlContent = `
+                                    <h3 class="timeline-title">${travelInfo.label} - ${block.duration}
+                                        ${block.isRoundTrip ? `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">來回</span>` : ''}
+                                    </h3>
+                                    <p class="timeline-detail">${(block.distance || 0).toFixed(1)} km</p>
                                     <div class="timeline-item-content">
                                         <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                            ${block.otherDetails.map(detail => `<a href="${detail.infoLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">${detail.info} →</a>`).join('')}
+                                            <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
+                                            <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
+                                            <p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>
+                                            ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
                                         </div>
                                     </div>
                                 `;
                             }
-
-                        } else if (block.type === 'movement') {
-                            const travelInfo = travelModeInfo[block.travelMode];
-                            markerCol.innerHTML = `<div class="marker-icon movement">${travelInfo.emoji}</div><div class="marker-line"></div>`;
-                            cardDiv.className = 'timeline-card travel-method-card';
                             
-                            cardHtmlContent = `
-                                <h3 class="timeline-title">${travelInfo.label} - ${block.duration}
-                                    ${block.isRoundTrip ? `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">來回</span>` : ''}
-                                </h3>
-                                <p class="timeline-detail">${(block.distance || 0).toFixed(1)} km</p>
-                                <div class="timeline-item-content">
-                                    <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                        <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
-                                        <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
-                                        <p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>
-                                        ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
-                                    </div>
-                                </div>
-                            `;
-                        }
-                        
-                        cardDiv.innerHTML = cardHtmlContent;
-                        cardCol.appendChild(cardDiv);
+                            cardDiv.innerHTML = cardHtmlContent;
+                            cardCol.appendChild(cardDiv);
 
-                        item.appendChild(timeCol);
-                        item.appendChild(markerCol);
-                        item.appendChild(cardCol);
-                        timelineContainer.appendChild(item);
+                            item.appendChild(timeCol);
+                            item.appendChild(markerCol);
+                            item.appendChild(cardCol);
+                            timelineContainer.appendChild(item);
 
-                        cardDiv.addEventListener('click', (event) => {
-                           if (!event.target.closest('a')) {
-                               const contentDiv = cardDiv.querySelector('.timeline-item-content');
-                               if (contentDiv) {
-                                   item.classList.toggle('active');
+                            cardDiv.addEventListener('click', (event) => {
+                               if (!event.target.closest('a')) {
+                                   const contentDiv = cardDiv.querySelector('.timeline-item-content');
+                                   if (contentDiv) {
+                                       item.classList.toggle('active');
+                                   }
                                }
-                           }
+                            });
                         });
-                    });
-
-                    const chartLegs = travelLegs.filter(leg => leg.distance > 0 || parseDurationToMinutes(leg.duration) > 0);
-                    const labels = chartLegs.map(leg => `${leg.from} → ${leg.to}`);
-                    const distances = chartLegs.map(leg => leg.distance);
-                    const durations = chartLegs.map(leg => parseDurationToMinutes(leg.duration));
-
-                    const combinedCtx = document.getElementById('combinedChart').getContext('2d');
-                    if (window.combinedChartInstance) {
-                        window.combinedChartInstance.destroy();
+                    } catch (e) {
+                        console.error("Error during timeline rendering:", e);
                     }
-                    window.combinedChartInstance = new Chart(combinedCtx, {
-                        type: 'bar',
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                {
-                                    label: '距離 (km)',
-                                    data: distances,
-                                    backgroundColor: 'rgba(13, 148, 136, 0.6)',
-                                    borderColor: 'rgba(13, 148, 136, 1)',
-                                    borderWidth: 1,
-                                    yAxisID: 'y-distance',
-                                    order: 1
-                                },
-                                {
-                                    label: '所要時間 (分)',
-                                    data: durations,
-                                    backgroundColor: 'rgba(217, 119, 6, 0.6)',
-                                    borderColor: 'rgba(217, 119, 6, 1)',
-                                    borderWidth: 1,
-                                    yAxisID: 'y-duration',
-                                    order: 2
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                'y-distance': {
-                                    type: 'linear',
-                                    position: 'left',
-                                    beginAtZero: true,
-                                    title: {
-                                        display: true,
-                                        text: '距離 (km)',
-                                        color: '#57534e'
+
+                    try {
+                        const chartLegs = [];
+                        timelineData.forEach((block, index) => {
+                            if (block.type === 'movement') {
+                                const from = timelineData[index - 1].name;
+                                const to = block.isRoundTrip ? block.to : timelineData[index + 1].name;
+                                chartLegs.push({ ...block, from, to });
+                            }
+                        });
+
+                        const filteredChartLegs = chartLegs.filter(leg => (leg.distance || 0) > 0 || parseDurationToMinutes(leg.duration) > 0);
+                        const labels = filteredChartLegs.map(leg => `${leg.from} → ${leg.to}`);
+                        const distances = filteredChartLegs.map(leg => leg.distance);
+                        const durations = filteredChartLegs.map(leg => parseDurationToMinutes(leg.duration));
+
+                        const combinedCtx = document.getElementById('combinedChart').getContext('2d');
+                        if (window.combinedChartInstance) {
+                            window.combinedChartInstance.destroy();
+                        }
+                        window.combinedChartInstance = new Chart(combinedCtx, {
+                            type: 'bar',
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: '距離 (km)',
+                                        data: distances,
+                                        backgroundColor: 'rgba(13, 148, 136, 0.6)',
+                                        borderColor: 'rgba(13, 148, 136, 1)',
+                                        borderWidth: 1,
+                                        yAxisID: 'y-distance',
+                                        order: 1
                                     },
-                                    ticks: {
-                                        color: '#78716c'
+                                    {
+                                        label: '所要時間 (分)',
+                                        data: durations,
+                                        backgroundColor: 'rgba(217, 119, 6, 0.6)',
+                                        borderColor: 'rgba(217, 119, 6, 1)',
+                                        borderWidth: 1,
+                                        yAxisID: 'y-duration',
+                                        order: 2
                                     }
-                                },
-                                'y-duration': {
-                                    type: 'linear',
-                                    position: 'right',
-                                    beginAtZero: true,
-                                    grid: {
-                                        drawOnChartArea: false,
-                                    },
-                                    title: {
-                                        display: true,
-                                        text: '所要時間 (分)',
-                                        color: '#57534e'
-                                    },
-                                    ticks: {
-                                        callback: function(value, index, values) {
-                                            return formatMinutesToHours(value);
-                                        },
-                                        color: '#78716c'
-                                    }
-                                },
-                                x: {
-                                    ticks: {
-                                        color: '#78716c'
-                                    }
-                                }
+                                ]
                             },
-                            plugins: {
-                                tooltip: {
-                                    callbacks: {
-                                        title: (context) => chartLegs[context[0].dataIndex].to,
-                                        afterTitle: (context) => chartLegs[context[0].dataIndex].from,
-                                        label: (context) => {
-                                            if (context.dataset.label === '距離 (km)') {
-                                                return `${context.dataset.label}: ${context.raw} km`;
-                                            } else {
-                                                return `${context.dataset.label}: ${context.raw}分 (${formatMinutesToHours(context.raw)})`;
-                                            }
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    'y-distance': {
+                                        type: 'linear',
+                                        position: 'left',
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: '距離 (km)',
+                                            color: '#57534e'
+                                        },
+                                        ticks: {
+                                            color: '#78716c'
+                                        }
+                                    },
+                                    'y-duration': {
+                                        type: 'linear',
+                                        position: 'right',
+                                        beginAtZero: true,
+                                        grid: {
+                                            drawOnChartArea: false,
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: '所要時間 (分)',
+                                            color: '#57534e'
+                                        },
+                                        ticks: {
+                                            callback: function(value, index, values) {
+                                                return formatMinutesToHours(value);
+                                            },
+                                            color: '#78716c'
+                                        }
+                                    },
+                                    x: {
+                                        ticks: {
+                                            color: '#78716c'
                                         }
                                     }
                                 },
-                                legend: {
-                                    labels: {
-                                        color: '#57534e'
+                                plugins: {
+                                    tooltip: {
+                                        callbacks: {
+                                            title: (context) => filteredChartLegs[context[0].dataIndex].to,
+                                            afterTitle: (context) => filteredChartLegs[context[0].dataIndex].from,
+                                            label: (context) => {
+                                                if (context.dataset.label === '距離 (km)') {
+                                                    return `${context.dataset.label}: ${context.raw} km`;
+                                                } else {
+                                                    return `${context.dataset.label}: ${context.raw}分 (${formatMinutesToHours(context.raw)})`;
+                                                }
+                                            }
+                                        }
+                                    },
+                                    legend: {
+                                        labels: {
+                                            color: '#57534e'
+                                        }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
+                    } catch (e) {
+                        console.error("Error during chart rendering:", e);
+                    }
                 });
         });
     </script>

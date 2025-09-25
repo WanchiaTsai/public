@@ -16,8 +16,6 @@
     {
         "type": "movement",
         "travelMode": "flight",
-        "from": "TPE 桃園國際機場 (Terminal 1)",
-        "to": "AXT 秋田機場 (あきたくうこう)",
         "distance": 2780,
         "duration": "4時間20分",
         "route": "航班號碼: IT256",
@@ -41,12 +39,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "AXT 秋田機場 (あきたくうこう)",
-        "to": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "distance": 91.9,
         "duration": "1時間23分",
         "route": "日本海東北自動車道/日本海東北自動車道（秋田区間）/秋田区間",
-        "navigationLink": "https://www.google.com/maps/dir/Akita+Airport,+Yamagomori-%EF%BC%9４%EF%BC%9９+Yuwatsubakigawa,+Akita,+Japan/%E6%97%A5%E6%9C%AC,+%E5%B1%B1%E5%BD%A2%E7%9C%8C%E9%81%8A%E4%BD%90%E7%94%BA%E5%90%B9%E6%B5%A6,+%E5%A4%A7%E5%B9%B3%E5%B1%B1%E8%8D%98/data=!4m14!4m13!1m5!1m1!19sChIJlYkpCSW-j18RQs7MMGKmAQE!2m2!1d140.2177165!2d39.614477799999996!1m5!1m1!19sChIJRwx4Rh2Njl8Rmj9Tw-6-De0!2m2!1d139.9784133!2d39.107180299999996!3e0",
         "date": "9月28日"
     },
     {
@@ -65,7 +60,6 @@
     {
         "type": "movement",
         "travelMode": "walking",
-        "from": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "to": "鳥海湖 & 稲倉岳周遊 (ちょうかいこ & いなくらだけしゅうゆう)",
         "distance": 6.6,
         "duration": "3時間24分",
@@ -83,12 +77,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
-        "to": "羽黒山 三光院 (はぐろさんさんこういん)",
         "distance": 68.3,
         "duration": "1時間13分",
         "route": "鳥海ブルーライン",
-        "navigationLink": "https://www.google.com/maps/dir/%E9%B3%A8%E6%B5%B7%E5%B1%B1+%E4%BA%94%E5%90%88%E7%9B%AE%E9%89%BE%E7%AB%8B%E3%80%8E%E8%B1%A1%E6%BD%9F%E5%8F%A3%E3%80%8F,+Kisakatamachi+Kodaki,+Nikaho,+Akita,+Japan/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJYbrSwlbyjl8RVaL7JwckjRo!2m2!1d139.9915595!2d39.1218077!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!3e0",
         "date": "9月29日"
     },
     {
@@ -101,12 +92,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "羽黒山 三光院 (はぐろさんさんこういん)",
-        "to": "月山 八合目",
         "distance": 23.6,
         "duration": "35分",
         "route": "県道211号",
-        "navigationLink": "https://www.google.com/maps/dir/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/Mt.+Gassan+8th+Station,+Tsuruoka,+Yamagata,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJs4EjiBL3i18Rq_4mDVSpHps!2m2!1d140.016636!2d38.5861759!3e0",
         "date": "9月30日"
     },
     {
@@ -119,7 +107,6 @@
     {
         "type": "movement",
         "travelMode": "walking",
-        "from": "月山登山口 (がっさんとざんぐち)",
         "to": "月山山頂 (往返) (がっさんさんちょう (おうふく))",
         "distance": 11.0,
         "duration": "5時間30分",
@@ -143,12 +130,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "月山登山口 (がっさんとざんぐち)",
-        "to": "羽黒山 三光院 (はぐろさんさんこういん)",
         "distance": 23.4,
         "duration": "34分",
         "route": "県道211号",
-        "navigationLink": "https://www.google.com/maps/dir/Mt.+Gassan+8th+Station,+Tsuruoka,+Yamagata,+Japan/Hagurosan+Sankoin,+%E6%89%8B%E5%90%91-92+%E7%BE%BD%E9%BB%92%E7%94%BA%E6%89%8B%E5%90%91,+%E9%B6%B4%E5%B2%A1%E5%B8%82+%E5%B1%B1%E5%BD%A2%E7%9C%8C,+Japan/data=!4m14!4m13!1m5!1m1!19sChIJ0wIoS2oEjF8RinlGS0z0oc4!2m2!1d139.961053!2d38.708588999999996!1m5!1m1!19sChIJs4EjiBL3i18Rq_4mDVSpHps!2m2!1d140.016636!2d38.5861759!3e0",
         "date": "9月30日"
     },
     {
@@ -161,12 +145,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "羽黒山 三光院 (はぐろさんさんこういん)",
-        "to": "折立温泉　やまきや旅館",
         "distance": 280,
         "duration": "4時間10分",
         "route": "新潟区間/日本海東北自動車道",
-        "navigationLink": "https://maps.app.goo.gl/Zsvg7JYMdfDM6w9V7",
         "date": "10月1日"
     },
     {
@@ -185,12 +166,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "折立温泉　やまきや旅館",
-        "to": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
         "distance": 11.4,
         "duration": "21分",
         "route": "奥只見シルバーライン/県道50号",
-        "navigationLink": "https://maps.app.goo.gl/4mudZpRmQqh9FzS27",
         "date": "10月2日"
     },
     {
@@ -203,8 +181,6 @@
     {
         "type": "movement",
         "travelMode": "boat",
-        "from": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
-        "to": "尾瀬口船着場 (おぜぐちふなつきば)",
         "distance": 0,
         "duration": "40分",
         "route": "奧只見遊船",
@@ -226,8 +202,6 @@
     {
         "type": "movement",
         "travelMode": "bus",
-        "from": "尾瀬口船着場 (おぜぐちふなつきば)",
-        "to": "沼山峠 (ぬまやまとうげ)",
         "distance": 38,
         "duration": "1時間5分",
         "route": "巴士",
@@ -249,8 +223,6 @@
     {
         "type": "movement",
         "travelMode": "walking",
-        "from": "沼山峠 (ぬまやまとうげ)",
-        "to": "尾瀬沼山荘 (おぜぬまさんそう)",
         "distance": 2.5,
         "duration": "1時間15分",
         "route": "登山道",
@@ -272,8 +244,6 @@
     {
         "type": "movement",
         "travelMode": "walking",
-        "from": "尾瀬沼山荘 (おぜぬまさんそう)",
-        "to": "尾瀬 温泉小屋",
         "distance": 2.2,
         "duration": "1時間10分",
         "route": "登山道 (尾瀬ヶ原)",
@@ -301,8 +271,6 @@
     {
         "type": "movement",
         "travelMode": "walking",
-        "from": "尾瀬 温泉小屋",
-        "to": "Mi-ike lodge (みいけろっじ)",
         "distance": 2.0,
         "duration": "1時間0分",
         "route": "登山道 (尾瀬ヶ原)",
@@ -324,8 +292,6 @@
     {
         "type": "movement",
         "travelMode": "bus",
-        "from": "Mi-ike lodge (みいけろっじ)",
-        "to": "尾瀬口船着場 (おぜぐちふなつきば)",
         "distance": 38.0,
         "duration": "1時間5分",
         "route": "巴士",
@@ -347,8 +313,6 @@
     {
         "type": "movement",
         "travelMode": "boat",
-        "from": "尾瀬口船着場 (おぜぐちふなつきば)",
-        "to": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
         "distance": 0,
         "duration": "40分",
         "route": "奧只見遊船",
@@ -370,12 +334,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
-        "to": "魚沼ヒミツ基地 〜Farm stay〜",
         "distance": 24.7,
         "duration": "40分",
         "route": "奥只見シルバーライン/県道50号",
-        "navigationLink": "https://maps.app.goo.gl/mxv9nNLzXpHCDf8Q7",
         "date": "10月4日"
     },
     {
@@ -394,12 +355,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "魚沼ヒミツ基地 〜Farm stay〜",
-        "to": "八海山ロープウェー (はっかいさんろーぷうぇー)",
         "distance": 35.6,
         "duration": "46分",
         "route": "国道352号 and 国道291号",
-        "navigationLink": "https://maps.app.goo.gl/AyYNLwy6ufEs46Nv5",
         "date": "10月5日"
     },
     {
@@ -412,8 +370,6 @@
     {
         "type": "movement",
         "travelMode": "ropeway",
-        "from": "八海山ロープウェー (はっかいさんろーぷうぇー)",
-        "to": "八海山ロープウェー 山頂駅 (はっかいさんろーぷうぇー さんちょうえき)",
         "distance": 2.217,
         "duration": "5分",
         "route": "八海山纜車",
@@ -427,7 +383,7 @@
     },
     {
         "type": "location",
-        "to": "八海山ロープウェー 山頂駅 (はっかいさんろーぷうぇー さんちょうえき)",
+        "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
         "date": "10月5日",
         "time": "08:52 AM",
         "details": "登山起點"
@@ -435,7 +391,6 @@
     {
         "type": "movement",
         "travelMode": "walking",
-        "from": "八海山ロープウェー 山頂駅 (はっかいさんろーぷうぇー さんちょうえき)",
         "to": "八海山 (入道岳) 周遊 (池ノ峰經由) (はっかいさん (にゅうどうだけ) しゅうゆう (いけのねけいゆ))",
         "distance": 9.1,
         "duration": "6時間20分",
@@ -458,8 +413,6 @@
     {
         "type": "movement",
         "travelMode": "ropeway",
-        "from": "八海山山頂駅 (はっかいさんさんちょうえき)",
-        "to": "八海山ロープウェー (はっかいさんろーぷうぇー)",
         "distance": 2.217,
         "duration": "5分",
         "route": "八海山纜車",
@@ -481,12 +434,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "八海山ロープウェー (はっかいさんろーぷうぇー)",
-        "to": "魚沼ヒミツ基地 〜Farm stay〜",
         "distance": 35.6,
         "duration": "46分",
         "route": "国道291号 and 国道352号",
-        "navigationLink": "https://maps.app.goo.gl/Podq9ZEQhsDj5K646",
         "date": "10月5日"
     },
     {
@@ -505,12 +455,9 @@
     {
         "type": "movement",
         "travelMode": "driving",
-        "from": "魚沼ヒミツ基地 〜Farm stay〜",
-        "to": "KIJ 新潟機場 (にいがたくうこう)",
         "distance": 114,
         "duration": "1時間31分",
         "route": "関越自動車道 and 北陸自動車道",
-        "navigationLink": "https://maps.app.goo.gl/K3bTiaMDXegtt2AJ6",
         "date": "10月6日"
     },
     {
@@ -523,8 +470,6 @@
     {
         "type": "movement",
         "travelMode": "flight",
-        "from": "KIJ 新潟機場 (にいがたくうこう)",
-        "to": "TPE 桃園國際機場 (Terminal 1)",
         "distance": 2780,
         "duration": "2時間35分",
         "route": "航班號碼: IT229",
