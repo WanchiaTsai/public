@@ -21,7 +21,9 @@
         "route": "航班號碼: IT256",
         "airline": "tigersmart",
         "flightNumber": "IT256",
-        "date": "9月28日"
+        "date": "9月28日",
+        "startTime": "08:00 AM",
+        "arrivalTime": "12:20 PM"
     },
     {
         "type": "location",
@@ -181,10 +183,12 @@
         "otherDetails": [
             {
                 "info": "詳細資訊",
-                "infoLink": "https://enjoyniigata.com/tc/spot/8397"
+                "infoLink": "https://iine-uonuma.j-server.com/LUCUONUMAK/ns/tl.cgi/https://www.iine-uonuma.jp/activity/climbing/oze/oze06/?SLANG=ja&TLANG=zhb&XMODE=0&XCHARSET=utf-8&XJSID=0"
             }
         ],
-        "date": "10月2日"
+        "date": "10月2日",
+        "startTime": "09:25 AM",
+        "arrivalTime": "10:05 AM"
     },
     {
         "type": "location",
@@ -205,7 +209,9 @@
                 "infoLink": "https://www.aizubus.com/travel/oze/"
             }
         ],
-        "date": "10月2日"
+        "date": "10月2日",
+        "startTime": "10:10 AM",
+        "arrivalTime": "11:15 AM"
     },
     {
         "type": "location",
@@ -295,7 +301,9 @@
                 "infoLink": "https://www.aizubus.com/travel/oze/"
             }
         ],
-        "date": "10月4日"
+        "date": "10月4日",
+        "startTime": "03:20 PM",
+        "arrivalTime": "04:05 PM"
     },
     {
         "type": "location",
@@ -316,7 +324,9 @@
                 "infoLink": "https://enjoyniigata.com/tc/spot/8397"
             }
         ],
-        "date": "10月4日"
+        "date": "10月4日",
+        "startTime": "04:10 PM",
+        "arrivalTime": "04:50 PM"
     },
     {
         "type": "location",
@@ -465,7 +475,9 @@
         "route": "航班號碼: IT229",
         "airline": "tigersmart",
         "flightNumber": "IT229",
-        "date": "10月6日"
+        "date": "10月6日",
+        "startTime": "06:50 PM",
+        "arrivalTime": "09:25 PM"
     },
     {
         "type": "location",

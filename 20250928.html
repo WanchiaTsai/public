@@ -283,13 +283,16 @@
                                 lastDate = currentDate;
                             }
                             
-                            if (block.time || (block.type === 'movement' && block.duration)) {
-                                const timeDiv = document.createElement('div');
-                                timeDiv.className = 'time';
-                                timeDiv.textContent = block.time || block.duration;
-                                timeCol.appendChild(timeDiv);
-                            }
-
+                                                    if (block.time || (block.type === 'movement' && block.duration)) {
+                                                        const timeDiv = document.createElement('div');
+                                                        timeDiv.className = 'time';
+                                                        if (block.type === 'movement' && block.startTime && block.arrivalTime) {
+                                                            timeDiv.textContent = `${block.startTime} - ${block.arrivalTime}`;
+                                                        } else {
+                                                            timeDiv.textContent = block.time || block.duration;
+                                                        }
+                                                        timeCol.appendChild(timeDiv);
+                                                    }
                             const markerCol = document.createElement('div');
                             markerCol.className = 'marker-col';
 
