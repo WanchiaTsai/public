@@ -5,6 +5,7 @@
         "date": "9月28日",
         "time": "06:30 AM",
         "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/y6YXot6ieCCmTVHr5",
         "services": [
             {
                 "name": "禮遇通關 (出境)",
@@ -30,6 +31,7 @@
         "name": "AXT 秋田機場 (あきたくうこう)",
         "date": "9月28日",
         "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/AHxosVSyd6D72xYVA",
         "otherDetails": [
             {
                 "info": "租車公司",
@@ -51,6 +53,7 @@
         "name": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "date": "9月28日",
         "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/R4FiV7bgZ4emk5cz8",
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -73,7 +76,9 @@
         "type": "location",
         "name": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "date": "9月29日",
-        "details": ""
+        "time": "12:24 PM",
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/R4FiV7bgZ4emk5cz8"
     },
     {
         "type": "movement",
@@ -88,7 +93,8 @@
         "type": "location",
         "name": "羽黒山 三光院 (はぐろさんさんこういん)",
         "date": "9月29日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/5MfACYUWRckdWQS6A"
     },
     {
         "type": "movement",
@@ -103,7 +109,8 @@
         "type": "location",
         "name": "月山 八合目",
         "date": "9月30日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/gEWiAYpxegkYNCqu5"
     },
     {
         "type": "movement",
@@ -126,7 +133,8 @@
         "type": "location",
         "name": "月山登山口 (がっさんとざんぐち)",
         "date": "9月30日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/gEWiAYpxegkYNCqu5"
     },
     {
         "type": "movement",
@@ -141,7 +149,8 @@
         "type": "location",
         "name": "羽黒山 三光院 (はぐろさんさんこういん)",
         "date": "9月30日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/5MfACYUWRckdWQS6A"
     },
     {
         "type": "movement",
@@ -162,13 +171,14 @@
                 "info": "詳細資訊",
                 "infoLink": "https://maps.app.goo.gl/xYy6kR25EYDUyB4a9"
             }
-        ]
+        ],
+        "googleMapsLink": "https://maps.app.goo.gl/t7RdF84favSch9ac7"
     },
     {
         "type": "movement",
         "travelMode": "driving",
-        "distance": 11.4,
-        "duration": "21分",
+        "distance": 26,
+        "duration": "25分",
         "route": "奥只見シルバーライン/県道50号",
         "date": "10月2日",
         "startTime": "08:00 AM"
@@ -177,7 +187,8 @@
         "type": "location",
         "name": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
         "date": "10月2日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/RruHxYrDwdPF3HTp9"
     },
     {
         "type": "movement",
@@ -199,7 +210,8 @@
         "type": "location",
         "name": "尾瀬口船着場 (おぜぐちふなつきば)",
         "date": "10月2日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/2TgmZZjenPjmbYPfA"
     },
     {
         "type": "movement",
@@ -221,7 +233,8 @@
         "type": "location",
         "name": "沼山峠 (ぬまやまとうげ)",
         "date": "10月2日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/ixC3WmZBCDxzHX9s8"
     },
     {
         "type": "movement",
@@ -242,7 +255,8 @@
         "type": "location",
         "name": "尾瀬沼山荘 (おぜぬまさんそう)",
         "date": "10月2日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/n9er8W3iuKcF8BUq5"
     },
     {
         "type": "movement",
@@ -269,7 +283,8 @@
                 "info": "詳細資訊",
                 "infoLink": "https://maps.app.goo.gl/W8XT8uvVTZ532TZ69"
             }
-        ]
+        ],
+        "googleMapsLink": "https://maps.app.goo.gl/W8XT8uvVTZ532TZ69"
     },
     {
         "type": "movement",
@@ -288,9 +303,10 @@
     },
     {
         "type": "location",
-        "name": "Mi-ike lodge (みいけろっじ)",
+        "name": "尾瀬御池ロッジ (みいけろっじ)",
         "date": "10月4日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/1hGuBu5GZeYJqXzu8"
     },
     {
         "type": "movement",
@@ -312,7 +328,8 @@
         "type": "location",
         "name": "尾瀬口船着場 (おぜぐちふなつきば)",
         "date": "10月4日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/2TgmZZjenPjmbYPfA"
     },
     {
         "type": "movement",
@@ -334,7 +351,8 @@
         "type": "location",
         "name": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
         "date": "10月4日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/RruHxYrDwdPF3HTp9"
     },
     {
         "type": "movement",
@@ -354,7 +372,8 @@
                 "info": "詳細資訊",
                 "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
             }
-        ]
+        ],
+        "googleMapsLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
     },
     {
         "type": "movement",
@@ -368,7 +387,8 @@
         "type": "location",
         "name": "八海山ロープウェー (はっかいさんろーぷうぇー)",
         "date": "10月5日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/wZuA39oMAKdWW15v6"
     },
     {
         "type": "movement",
@@ -390,7 +410,8 @@
         "type": "location",
         "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
         "date": "10月5日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/CNCWj5EWLjygjhCk6"
     },
     {
         "type": "movement",
@@ -406,13 +427,8 @@
             }
         ],
         "date": "10月5日",
-        "startTime": "09:00 AM"
-    },
-    {
-        "type": "location",
-        "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
-        "date": "10月5日",
-        "details": ""
+        "startTime": "09:00 AM",
+        "isRoundTrip": true
     },
     {
         "type": "movement",
@@ -434,7 +450,8 @@
         "type": "location",
         "name": "八海山ロープウェー (はっかいさんろーぷうぇー)",
         "date": "10月5日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/wZuA39oMAKdWW15v6"
     },
     {
         "type": "movement",
@@ -454,7 +471,8 @@
                 "info": "詳細資訊",
                 "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
             }
-        ]
+        ],
+        "googleMapsLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
     },
     {
         "type": "movement",
@@ -468,7 +486,8 @@
         "type": "location",
         "name": "KIJ 新潟機場 (にいがたくうこう)",
         "date": "10月6日",
-        "details": ""
+        "details": "",
+        "googleMapsLink": "https://maps.app.goo.gl/Mt6son6uguq6CLpS7"
     },
     {
         "type": "movement",
@@ -493,6 +512,7 @@
                 "details": "航班IT229, 預約編號FT14004875, 票券驗證碼 1198",
                 "link": "https://68666.tw/2tyt"
             }
-        ]
+        ],
+        "googleMapsLink": "https://maps.app.goo.gl/y6YXot6ieCCmTVHr5"
     }
 ]
