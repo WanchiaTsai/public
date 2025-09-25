@@ -31,13 +31,7 @@
         "name": "AXT 秋田機場 (あきたくうこう)",
         "date": "9月28日",
         "details": "",
-        "googleMapsLink": "https://maps.app.goo.gl/AHxosVSyd6D72xYVA",
-        "otherDetails": [
-            {
-                "info": "租車公司",
-                "infoLink": "https://maps.app.goo.gl/wtECfmuNsfCcrw8x7"
-            }
-        ]
+        "googleMapsLink": "https://maps.app.goo.gl/AHxosVSyd6D72xYVA"
     },
     {
         "type": "movement",
@@ -172,10 +166,6 @@
         "details": "",
         "isStay": true,
         "otherDetails": [
-            {
-                "info": "詳細資訊",
-                "infoLink": "https://maps.app.goo.gl/xYy6kR25EYDUyB4a9"
-            }
         ],
         "googleMapsLink": "https://maps.app.goo.gl/t7RdF84favSch9ac7"
     },
@@ -377,10 +367,6 @@
         "details": "",
         "isStay": true,
         "otherDetails": [
-            {
-                "info": "詳細資訊",
-                "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
-            }
         ],
         "googleMapsLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
     },
@@ -438,10 +424,6 @@
         "details": "",
         "isStay": true,
         "otherDetails": [
-            {
-                "info": "詳細資訊",
-                "infoLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
-            }
         ],
         "googleMapsLink": "https://maps.app.goo.gl/cg7QYa29ZpZekFHs6"
     },
