@@ -329,20 +329,20 @@
 
                     try {
                         timelineData.forEach((block, index) => {
+                            const currentDate = block.date;
+                            if (currentDate && currentDate !== lastDate) {
+                                const dateSeparator = document.createElement('div');
+                                dateSeparator.className = 'flex items-center my-8';
+                                dateSeparator.innerHTML = `<hr class="flex-grow border-stone-300"><span class="px-4 py-1 bg-stone-200 text-stone-700 font-bold rounded-full">${currentDate}</span><hr class="flex-grow border-stone-300">`;
+                                timelineContainer.appendChild(dateSeparator);
+                                lastDate = currentDate;
+                            }
+
                             const item = document.createElement('div');
                             item.className = 'timeline-item';
 
                             const timeCol = document.createElement('div');
                             timeCol.className = 'time-col';
-
-                            const currentDate = block.date;
-                            if (currentDate && currentDate !== lastDate) {
-                                const dateDiv = document.createElement('div');
-                                dateDiv.className = 'date';
-                                dateDiv.textContent = currentDate;
-                                timeCol.appendChild(dateDiv);
-                                lastDate = currentDate;
-                            }
                             
                             const timeDiv = document.createElement('div');
                             timeDiv.className = 'time';
