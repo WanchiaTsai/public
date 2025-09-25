@@ -239,9 +239,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             fetch('data.json')
                 .then(response => response.json())
-                .then(travelData => {
+                .then(timelineData => {
 
-                    // Define a mapping from travelMode to icon emoji and Chinese label
                     const travelModeInfo = {
                         'flight': { emoji: '✈️', label: '飛機' },
                         'driving': { emoji: '🚘', label: '駕車' },
@@ -262,63 +261,13 @@
                         if (minMatch) totalMinutes += parseInt(minMatch[1], 10);
                         return totalMinutes;
                     }
-                    
+
                     function formatMinutesToHours(minutes) {
                         const h = Math.floor(minutes / 60);
                         const m = minutes % 60;
                         return `${h}時間${m > 0 ? ` ${m}分` : ''}`;
                     }
 
-                    function addMinutesToTime(timeStr, minutesToAdd) {
-                        if (!timeStr) return '';
-                        if (minutesToAdd === 0) return timeStr;
-
-                        let [time, period] = timeStr.split(' ');
-                        let [hours, minutes] = time.split(':').map(Number);
-
-                        if (period === 'PM' && hours !== 12) {
-                            hours += 12;
-                        } else if (period === 'AM' && hours === 12) {
-                            hours = 0;
-                        }
-
-                        let totalMinutes = hours * 60 + minutes + minutesToAdd;
-
-                        const newHours = Math.floor(totalMinutes / 60);
-                        const newMinutes = totalMinutes % 60;
-
-                        const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
-                        const newPeriod = newHours >= 12 ? 'PM' : 'AM';
-
-                        return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
-                    }
-
-                    function calculateArrivalTime(departureTimeStr, durationStr, dateStr) {
-                        if (!departureTimeStr || !durationStr) return '';
-
-                        const durationMinutes = parseDurationToMinutes(durationStr);
-                        
-                        let [time, period] = departureTimeStr.split(' ');
-                        let [hours, minutes] = time.split(':').map(Number);
-
-                        if (period === 'PM' && hours !== 12) {
-                            hours += 12;
-                        } else if (period === 'AM' && hours === 12) {
-                            hours = 0;
-                        }
-
-                        let totalMinutes = hours * 60 + minutes + durationMinutes;
-
-                        const newHours = Math.floor(totalMinutes / 60);
-                        const newMinutes = totalMinutes % 60;
-
-                        const displayHours = newHours % 12 === 0 ? 12 : newHours % 12;
-                        const newPeriod = newHours >= 12 ? 'PM' : 'AM';
-
-                        return `${String(displayHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')} ${newPeriod}`;
-                    }
-
-                    // Helper function to format Kanji with Furigana using <ruby> tags
                     function formatFurigana(nameWithFurigana) {
                         const match = nameWithFurigana.match(/(.+)\s\((.+)\)/);
                         if (match && match[1] && match[2]) {
@@ -326,233 +275,57 @@
                             const furigana = match[2].trim();
                             return `<ruby>${kanji}<rt>${furigana}</rt></ruby>`;
                         }
-                        return nameWithFurigana; // Return original if no furigana found
+                        return nameWithFurigana;
                     }
 
+                    const travelLegs = timelineData.filter(item => item.type === 'movement');
 
-                    const filteredTravelData = travelData;
-
-
-                    // Re-assign originalIndex for all travelData entries after modifications
-                    filteredTravelData.forEach((leg, index) => {
-                        leg.originalIndex = index;
-                    });
-
-                    // Calculate total distance and duration for overall summary
-                    const totalDistance = filteredTravelData.reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? leg.distance : 0), 0);
-                    const totalMinutes = filteredTravelData.reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? parseDurationToMinutes(leg.duration) : 0), 0);
-
+                    const totalDistance = travelLegs.reduce((acc, leg) => acc + (leg.distance || 0), 0);
+                    const totalMinutes = travelLegs.reduce((acc, leg) => acc + parseDurationToMinutes(leg.duration), 0);
 
                     document.getElementById('total-distance').textContent = `${totalDistance.toFixed(1)} km`;
                     document.getElementById('total-duration').textContent = formatMinutesToHours(totalMinutes);
-                    document.getElementById('total-legs').textContent = `${filteredTravelData.length} 区間`;
+                    document.getElementById('total-legs').textContent = `${travelLegs.length} 区間`;
 
-                    // Calculate breakdown by transport mode
                     const transportBreakdown = {};
-                    for (const mode in travelModeInfo) {
-                        transportBreakdown[mode] = { distance: 0, durationMinutes: 0 };
-                    }
-
-                    filteredTravelData.forEach(leg => {
-                        if (transportBreakdown[leg.travelMode]) {
-                            transportBreakdown[leg.travelMode].distance += leg.distance;
-                            transportBreakdown[leg.travelMode].durationMinutes += parseDurationToMinutes(leg.duration);
+                    travelLegs.forEach(leg => {
+                        if (!transportBreakdown[leg.travelMode]) {
+                            transportBreakdown[leg.travelMode] = { distance: 0, durationMinutes: 0, count: 0 };
                         }
+                        transportBreakdown[leg.travelMode].distance += (leg.distance || 0);
+                        transportBreakdown[leg.travelMode].durationMinutes += parseDurationToMinutes(leg.duration);
+                        transportBreakdown[leg.travelMode].count++;
                     });
 
                     const transportBreakdownContainer = document.getElementById('transport-breakdown');
                     transportBreakdownContainer.innerHTML = '';
-
-                    for (const mode in transportBreakdown) {
-                        const info = travelModeInfo[mode];
+                    for (const mode in travelModeInfo) {
                         const breakdown = transportBreakdown[mode];
-                        if (breakdown.distance > 0 || breakdown.durationMinutes > 0 || mode === 'stay' || mode === 'flight' || mode === 'airport_service') { 
+                        if (breakdown) {
+                            const info = travelModeInfo[mode];
                             const card = document.createElement('div');
                             card.className = 'stat-card p-4 rounded-xl';
-
                             let contentHtml = `<div class="text-3xl font-bold text-stone-800">${info.emoji}</div>
-                                               <p class="text-stone-600 mt-1">${info.label}</p>`;
-
-                            if (mode === 'stay') {
-                                const stayCount = filteredTravelData.filter(leg => leg.travelMode === 'stay' && leg.from === leg.to && leg.duration === '一泊').length;
-                                contentHtml += `<p class="text-sm text-stone-500 mt-2">${stayCount} 晚</p>`;
-                            } else {
-                                contentHtml += `<p class="text-sm text-stone-500 mt-2">${breakdown.distance.toFixed(1)} km</p>
-                                                <p class="text-sm text-stone-500">${formatMinutesToHours(breakdown.durationMinutes)}</p>`;
-                            }
+                                               <p class="text-stone-600 mt-1">${info.label}</p>
+                                               <p class="text-sm text-stone-500 mt-2">${breakdown.distance.toFixed(1)} km</p>
+                                               <p class="text-sm text-stone-500">${formatMinutesToHours(breakdown.durationMinutes)}</p>`;
                             card.innerHTML = contentHtml;
                             transportBreakdownContainer.appendChild(card);
                         }
                     }
 
-
                     const timelineContainer = document.getElementById('timeline-container');
                     timelineContainer.innerHTML = '';
+                    let lastDate = null;
 
-                    // --- Generate structured data for rendering the timeline ---
-                    const finalTimelineBlocks = []; 
-
-                    // Group original travelData by date
-                    const groupedByDate = filteredTravelData.reduce((acc, leg) => {
-                        if (!acc[leg.date]) {
-                            acc[leg.date] = [];
-                        }
-                        acc[leg.date].push(leg);
-                        return acc;
-                    }, {});
-
-                    const sortedDates = Object.keys(groupedByDate).sort((a, b) => new Date(a) - new Date(b));
-
-                    sortedDates.forEach(date => {
-                        finalTimelineBlocks.push({ type: 'date_header', date: date }); // Add date header block
-
-                        const dailyLegs = groupedByDate[date];
-                        // Sort legs by time within the day
-                        dailyLegs.sort((a, b) => {
-                            const timeA = a.departureTime ? new Date(`${a.date} ${a.departureTime}`) : new Date(a.date + ' 00:00 AM');
-                            const timeB = b.departureTime ? new Date(`${b.date} ${b.departureTime}`) : new Date(b.date + ' 00:00 AM');
-                            return timeA - timeB;
-                        });
-
-                        let lastLocationAddedName = null; // Tracks the name of the last *physical location* added to `finalTimelineBlocks`
-
-                        dailyLegs.forEach((currentLeg) => {
-                            const travelInfo = travelModeInfo[currentLeg.travelMode];
-
-                            // Determine if the currentLeg's 'from' location should be added as a card
-                            let shouldAddFromLocationCard = true;
-                            // If the previous block was a generic location block for the same place, and this isn't a special event, suppress 'from' card.
-                            if (lastLocationAddedName === currentLeg.from && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
-                                shouldAddFromLocationCard = false;
-                            }
-                            // Special case for first leg of the day, it always needs a 'from' location card if it's travel
-                            // (and not already covered by a preceding special event like fast track)
-                            if (finalTimelineBlocks.length > 0 && finalTimelineBlocks[finalTimelineBlocks.length - 1].type === 'date_header' && 
-                                currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
-                                shouldAddFromLocationCard = true; // Always add 'from' after date header for a travel leg
-                            } else if (finalTimelineBlocks.length === 0 && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
-                                shouldAddFromLocationCard = true; // First ever block, if it's a travel leg
-                            } else if (lastLocationAddedName === currentLeg.from && currentLeg.travelMode !== 'stay' && currentLeg.travelMode !== 'airport_service') {
-                                shouldAddFromLocationCard = false; // Don't add if it's a direct continuation from previous arrival
-                            }
-
-
-                            // --- Handle explicit 'stay' or 'airport_service' legs ---
-                            if (currentLeg.travelMode === 'stay' || currentLeg.travelMode === 'airport_service') {
-                                // If the previous block was a generic location block for the same place, remove it.
-                                if (finalTimelineBlocks.length > 0) {
-                                    const lastBlock = finalTimelineBlocks[finalTimelineBlocks.length - 1];
-                                    if (lastBlock.type === 'location' && lastBlock.locationName === currentLeg.to && 
-                                        !lastBlock.isStay && !lastBlock.isAirportService && lastBlock.date === currentLeg.date) {
-                                        finalTimelineBlocks.pop(); // Remove the generic arrival card
-                                    }
-                                }
-                                
-                                finalTimelineBlocks.push({
-                                    type: 'location',
-                                    locationName: currentLeg.to, // 'to' is the stay/service location
-                                    date: currentLeg.date,
-                                    time: currentLeg.departureTime || (currentLeg.travelMode === 'stay' ? '晚上' : ''),
-                                    details: (currentLeg.travelMode === 'stay' ? currentLeg.duration : `服務詳情: ${currentLeg.route}`),
-                                    otherDetails: currentLeg.otherDetails,
-                                    emoji: travelInfo.emoji,
-                                    cardClass: (currentLeg.travelMode === 'stay' ? 'timeline-stay-card' : 'timeline-service-card'),
-                                    isStay: currentLeg.travelMode === 'stay',
-                                    isAirportService: currentLeg.travelMode === 'airport_service'
-                                });
-                                lastLocationAddedName = currentLeg.to; // Update last added location
-                                return; // Move to the next leg as this leg is fully processed
-                            }
-
-                            // --- Handle regular travel methods (driving, walking, flight, boat, bus, ropeway) ---
-
-                            // Add 'from' location card if it's genuinely a new starting point.
-                            if (shouldAddFromLocationCard) {
-                                finalTimelineBlocks.push({
-                                    type: 'location',
-                                    locationName: currentLeg.from,
-                                    date: currentLeg.date,
-                                    time: currentLeg.departureTime,
-                                    details: '出發點',
-                                    emoji: '📍',
-                                    cardClass: 'timeline-card'
-                                });
-                            }
-
-                            // Add the travel method card
-                            const arrivalTime = calculateArrivalTime(currentLeg.departureTime, currentLeg.duration, currentLeg.date);
-                            finalTimelineBlocks.push({
-                                type: 'travel_method',
-                                label: travelInfo.label,
-                                duration: currentLeg.duration,
-                                distance: currentLeg.distance,
-                                timeRange: `${currentLeg.departureTime} - ${arrivalTime}`,
-                                from: currentLeg.from,
-                                to: currentLeg.to,
-                                route: currentLeg.route,
-                                navigationLink: currentLeg.navigationLink,
-                                otherDetails: currentLeg.otherDetails,
-                                emoji: travelInfo.emoji,
-                                date: currentLeg.date
-                            });
-
-                            // Add the 'to' location card.
-                            // This is handled by ensuring that if a special event follows, the generic 'to' is not added.
-                            // If this is the *last* leg of the day and there's no explicit stay/service, it will be marked as accommodation later.
-                            const isNextLegSpecialEventAtCurrentDestination = dailyLegs.slice(dailyLegs.indexOf(currentLeg) + 1).some(futureLeg =>
-                                (futureLeg.travelMode === 'stay' || futureLeg.travelMode === 'airport_service') && futureLeg.to === currentLeg.to
-                            );
-
-                            if (!isNextLegSpecialEventAtCurrentDestination) {
-                                finalTimelineBlocks.push({
-                                    type: 'location',
-                                    locationName: currentLeg.to,
-                                    date: currentLeg.date,
-                                    time: arrivalTime,
-                                    details: '抵達點',
-                                    otherDetails: currentLeg.otherDetails,
-                                    emoji: '📍',
-                                    cardClass: 'timeline-card'
-                                });
-                            }
-                            lastLocationAddedName = currentLeg.to; // Crucial: Update last added location
-                        });
-
-                        // --- Final post-processing for the day: Mark last location as accommodation if not explicitly defined ---
-                        let lastBlockOfCurrentDay = null;
-                        for (let i = finalTimelineBlocks.length - 1; i >= 0; i--) {
-                            if (finalTimelineBlocks[i].date === date && finalTimelineBlocks[i].type !== 'date_header') {
-                                lastBlockOfCurrentDay = finalTimelineBlocks[i];
-                                break;
-                            }
-                        }
-
-                        if (lastBlockOfCurrentDay && !lastBlockOfCurrentDay.isStay && !lastBlockOfCurrentDay.isAirportService) {
-                            lastBlockOfCurrentDay.details = '住宿點';
-                            lastBlockOfCurrentDay.emoji = travelModeInfo.stay.emoji;
-                            lastBlockOfCurrentDay.cardClass = 'timeline-card timeline-stay-card';
-                            lastBlockOfCurrentDay.isAccommodation = true;
-                            lastBlockOfCurrentDay.time = lastBlockOfCurrentDay.time || "晚上";
-
-                            const originalStayLink = filteredTravelData.find(leg => 
-                                leg.travelMode === 'stay' && leg.date === date && leg.to === lastBlockOfCurrentDay.locationName
-                            );
-                            if (originalStayLink && originalStayLink.otherDetails) {
-                                lastBlockOfCurrentDay.otherDetails = originalStayLink.otherDetails;
-                            }
-                        }
-                    });
-
-
-                    // --- Final rendering into the DOM ---
-                    timelineContainer.innerHTML = '';
-                    finalTimelineBlocks.forEach((block) => {
-                        if (block.type === 'date_header') {
+                    timelineData.forEach(block => {
+                        const currentDate = block.date;
+                        if (currentDate && currentDate !== lastDate) {
                             const dateHeaderDiv = document.createElement('div');
                             dateHeaderDiv.className = 'text-center text-2xl font-bold text-stone-700 mt-8 mb-4 pb-2 border-b-2 border-stone-300';
-                            dateHeaderDiv.textContent = `${block.date} - 總距離: ${groupedByDate[block.date].reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? leg.distance : 0), 0).toFixed(1)} km / 總時間: ${formatMinutesToHours(groupedByDate[block.date].reduce((acc, leg) => acc + (leg.travelMode !== 'stay' && leg.travelMode !== 'airport_service' ? parseDurationToMinutes(leg.duration) : 0), 0))}`;
+                            dateHeaderDiv.textContent = currentDate;
                             timelineContainer.appendChild(dateHeaderDiv);
-                            return;
+                            lastDate = currentDate;
                         }
 
                         const item = document.createElement('div');
@@ -562,21 +335,33 @@
                         markerColDiv.className = 'timeline-marker-col';
                         
                         const cardDiv = document.createElement('div');
-                        cardDiv.className = block.cardClass;
-                        
-                        let iconHtml;
-                        let cardHtmlContent;
-                        
+                        let iconHtml, cardHtmlContent;
+
                         if (block.type === 'location') {
-                            iconHtml = `<div class="location-icon">${block.emoji}</div>`;
-                            
+                            const isStay = block.details && block.details.includes('住宿');
+                            iconHtml = `<div class="location-icon">${isStay ? '🏨' : '📍'}</div>`;
+                            cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
+
                             cardHtmlContent = `
-                                <h3 class="timeline-title">${formatFurigana(block.locationName)}</h3>
-                                <p class="timeline-time">${block.time}</p>
-                                ${block.details ? `<p class="timeline-detail">${block.details}</p>` : ''}
+                                <h3 class="timeline-title">${formatFurigana(block.name)}</h3>
+                                <p class="timeline-time">${block.time || ''}</p>
+                                <p class="timeline-detail">${block.details || ''}</p>
                             `;
-                            
-                            if (block.otherDetails && block.otherDetails.length > 0) { 
+
+                            if (block.services && block.services.length > 0) {
+                                cardHtmlContent += `<div class="timeline-item-content">
+                                    <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
+                                        ${block.services.map(service => `
+                                            <div>
+                                                <strong>${service.name}:</strong> ${service.details}
+                                                ${service.link ? `<a href="${service.link}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">→ 查看詳情</a>` : ''}
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>`;
+                            }
+
+                            if (block.otherDetails && block.otherDetails.length > 0) {
                                  cardHtmlContent += `
                                     <div class="timeline-item-content">
                                         <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
@@ -586,13 +371,14 @@
                                 `;
                             }
 
-                        } else if (block.type === 'travel_method') {
-                            iconHtml = `<div class="travel-mode-icon">${block.emoji}</div>`;
+                        } else if (block.type === 'movement') {
+                            const travelInfo = travelModeInfo[block.travelMode];
+                            iconHtml = `<div class="travel-mode-icon">${travelInfo.emoji}</div>`;
+                            cardDiv.className = 'timeline-card travel-method-card';
                             
                             cardHtmlContent = `
-                                <h3 class="timeline-title">${block.label} - ${block.duration}</h3>
-                                <p class="timeline-detail">${block.distance.toFixed(1)} km</p>
-                                <p class="timeline-time">${block.timeRange}</p>
+                                <h3 class="timeline-title">${travelInfo.label} - ${block.duration}</h3>
+                                <p class="timeline-detail">${(block.distance || 0).toFixed(1)} km</p>
                                 <div class="timeline-item-content">
                                     <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
                                         <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
@@ -621,10 +407,10 @@
                         });
                     });
 
-
-                    const labels = filteredTravelData.map(leg => `${leg.from} → ${leg.to}`);
-                    const distances = filteredTravelData.map(leg => leg.distance);
-                    const durations = filteredTravelData.map(leg => parseDurationToMinutes(leg.duration));
+                    const chartLegs = travelLegs.filter(leg => leg.distance > 0 || parseDurationToMinutes(leg.duration) > 0);
+                    const labels = chartLegs.map(leg => `${leg.from} → ${leg.to}`);
+                    const distances = chartLegs.map(leg => leg.distance);
+                    const durations = chartLegs.map(leg => parseDurationToMinutes(leg.duration));
 
                     const combinedCtx = document.getElementById('combinedChart').getContext('2d');
                     if (window.combinedChartInstance) {
@@ -700,8 +486,8 @@
                             plugins: {
                                 tooltip: {
                                     callbacks: {
-                                        title: (context) => filteredTravelData[context[0].dataIndex].to,
-                                        afterTitle: (context) => filteredTravelData[context[0].dataIndex].from,
+                                        title: (context) => chartLegs[context[0].dataIndex].to,
+                                        afterTitle: (context) => chartLegs[context[0].dataIndex].from,
                                         label: (context) => {
                                             if (context.dataset.label === '距離 (km)') {
                                                 return `${context.dataset.label}: ${context.raw} km`;
