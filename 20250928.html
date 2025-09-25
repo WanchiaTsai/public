@@ -369,7 +369,7 @@
                                 markerCol.innerHTML = `<div class="marker-icon">${isStay ? '🏨' : '📍'}</div><div class="marker-line"></div>`;
                                 cardDiv.className = isStay ? 'timeline-card timeline-stay-card' : 'timeline-card';
 
-                                const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(block.name)}`;
+                                const googleMapsLink = block.googleMapsLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(block.name)}`;
                                 cardHtmlContent = `
                                     <h3 class="timeline-title">${formatFurigana(block.name)}
                                         <a href="${googleMapsLink}" target="_blank" class="inline-block ml-2 text-teal-600 hover:text-teal-800">📍</a>
