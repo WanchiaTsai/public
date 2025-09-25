@@ -350,9 +350,8 @@
                                         <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
                                             <p class="text-sm text-stone-700"><strong>從:</strong> ${formatFurigana(block.from)}</p>
                                             <p class="text-sm text-stone-700"><strong>到:</strong> ${formatFurigana(block.to)}</p>
-                                            <p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>
-                                            ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}
-                                        </div>
+                                                                                    ${block.route ? `<p class="text-sm text-stone-700"><strong>路徑:</strong> ${block.route}</p>` : ''}
+                                                                                    ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" class="inline-block mt-2 bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors">在地圖上開啟 →</a>` : ''}                                        </div>
                                     </div>
                                 `;
                             }

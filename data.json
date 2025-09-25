@@ -4,7 +4,7 @@
         "name": "TPE 桃園國際機場",
         "date": "9月28日",
         "time": "06:30 AM",
-        "details": "出發點",
+        "details": "",
         "services": [
             {
                 "name": "禮遇通關 (出境)",
@@ -28,7 +28,7 @@
         "name": "AXT 秋田機場 (あきたくうこう)",
         "date": "9月28日",
         "time": "04:20 PM",
-        "details": "抵達點",
+        "details": "",
         "otherDetails": [
             {
                 "info": "租車公司",
@@ -41,7 +41,6 @@
         "travelMode": "driving",
         "distance": 91.9,
         "duration": "1時間23分",
-        "route": "日本海東北自動車道/日本海東北自動車道（秋田区間）/秋田区間",
         "date": "9月28日"
     },
     {
@@ -49,7 +48,7 @@
         "name": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "date": "9月28日",
         "time": "05:43 PM",
-        "details": "住宿點",
+        "details": "",
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -72,14 +71,13 @@
         "name": "鳥海山四合目雲上の宿 大平山荘 (ちょうかいさんよんごうめうんじょうのやどおおひらさんそう)",
         "date": "9月29日",
         "time": "12:24 PM",
-        "details": "返回住宿點"
+        "details": ""
     },
     {
         "type": "movement",
         "travelMode": "driving",
         "distance": 68.3,
         "duration": "1時間13分",
-        "route": "鳥海ブルーライン",
         "date": "9月29日"
     },
     {
@@ -87,14 +85,13 @@
         "name": "羽黒山 三光院 (はぐろさんさんこういん)",
         "date": "9月29日",
         "time": "02:13 PM",
-        "details": "住宿點"
+        "details": ""
     },
     {
         "type": "movement",
         "travelMode": "driving",
         "distance": 23.6,
         "duration": "35分",
-        "route": "県道211号",
         "date": "9月30日"
     },
     {
@@ -102,7 +99,7 @@
         "name": "月山 八合目",
         "date": "9月30日",
         "time": "08:35 AM",
-        "details": "登山起點"
+        "details": ""
     },
     {
         "type": "movement",
@@ -125,14 +122,13 @@
         "name": "月山登山口 (がっさんとざんぐち)",
         "date": "9月30日",
         "time": "02:10 PM",
-        "details": "返回登山口"
+        "details": ""
     },
     {
         "type": "movement",
         "travelMode": "driving",
         "distance": 23.4,
         "duration": "34分",
-        "route": "県道211号",
         "date": "9月30日"
     },
     {
@@ -140,14 +136,13 @@
         "name": "羽黒山 三光院 (はぐろさんさんこういん)",
         "date": "9月30日",
         "time": "02:44 PM",
-        "details": "住宿點"
+        "details": ""
     },
     {
         "type": "movement",
         "travelMode": "driving",
         "distance": 280,
         "duration": "4時間10分",
-        "route": "新潟区間/日本海東北自動車道",
         "date": "10月1日"
     },
     {
@@ -155,7 +150,7 @@
         "name": "折立温泉　やまきや旅館",
         "date": "10月1日",
         "time": "12:10 PM",
-        "details": "住宿點",
+        "details": "",
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -168,7 +163,6 @@
         "travelMode": "driving",
         "distance": 11.4,
         "duration": "21分",
-        "route": "奥只見シルバーライン/県道50号",
         "date": "10月2日"
     },
     {
@@ -176,7 +170,7 @@
         "name": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
         "date": "10月2日",
         "time": "08:21 AM",
-        "details": "抵達"
+        "details": ""
     },
     {
         "type": "movement",
@@ -197,7 +191,7 @@
         "name": "尾瀬口船着場 (おぜぐちふなつきば)",
         "date": "10月2日",
         "time": "10:10 AM",
-        "details": "抵達"
+        "details": ""
     },
     {
         "type": "movement",
@@ -218,7 +212,7 @@
         "name": "沼山峠 (ぬまやまとうげ)",
         "date": "10月2日",
         "time": "11:20 AM",
-        "details": "登山起點"
+        "details": ""
     },
     {
         "type": "movement",
@@ -239,7 +233,7 @@
         "name": "尾瀬沼山荘 (おぜぬまさんそう)",
         "date": "10月2日",
         "time": "12:35 PM",
-        "details": "住宿點"
+        "details": ""
     },
     {
         "type": "movement",
@@ -260,7 +254,7 @@
         "name": "尾瀬 温泉小屋",
         "date": "10月3日",
         "time": "08:10 AM",
-        "details": "住宿點",
+        "details": "",
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -287,7 +281,7 @@
         "name": "Mi-ike lodge (みいけろっじ)",
         "date": "10月4日",
         "time": "08:00 AM",
-        "details": "抵達"
+        "details": ""
     },
     {
         "type": "movement",
@@ -308,7 +302,7 @@
         "name": "尾瀬口船着場 (おぜぐちふなつきば)",
         "date": "10月4日",
         "time": "04:05 PM",
-        "details": "抵達"
+        "details": ""
     },
     {
         "type": "movement",
@@ -329,14 +323,13 @@
         "name": "奥只見ダム無料駐車場 (おくただみだむむりょうちゅうしゃじょう)",
         "date": "10月4日",
         "time": "04:50 PM",
-        "details": "抵達"
+        "details": ""
     },
     {
         "type": "movement",
         "travelMode": "driving",
         "distance": 24.7,
         "duration": "40分",
-        "route": "奥只見シルバーライン/県道50号",
         "date": "10月4日"
     },
     {
@@ -344,7 +337,7 @@
         "name": "魚沼ヒミツ基地 〜Farm stay〜",
         "date": "10月4日",
         "time": "05:30 PM",
-        "details": "住宿點",
+        "details": "",
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -357,7 +350,6 @@
         "travelMode": "driving",
         "distance": 35.6,
         "duration": "46分",
-        "route": "国道352号 and 国道291号",
         "date": "10月5日"
     },
     {
@@ -365,7 +357,7 @@
         "name": "八海山ロープウェー (はっかいさんろーぷうぇー)",
         "date": "10月5日",
         "time": "08:46 AM",
-        "details": "抵達"
+        "details": ""
     },
     {
         "type": "movement",
@@ -386,7 +378,7 @@
         "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
         "date": "10月5日",
         "time": "08:52 AM",
-        "details": "登山起點"
+        "details": ""
     },
     {
         "type": "movement",
@@ -408,7 +400,7 @@
         "name": "八海山山頂駅 (はっかいさんさんちょうえき)",
         "date": "10月5日",
         "time": "03:12 PM",
-        "details": "返回登山口"
+        "details": ""
     },
     {
         "type": "movement",
@@ -429,14 +421,13 @@
         "name": "八海山ロープウェー (はっかいさんろーぷうぇー)",
         "date": "10月5日",
         "time": "03:17 PM",
-        "details": "抵達"
+        "details": ""
     },
     {
         "type": "movement",
         "travelMode": "driving",
         "distance": 35.6,
         "duration": "46分",
-        "route": "国道291号 and 国道352号",
         "date": "10月5日"
     },
     {
@@ -444,7 +435,7 @@
         "name": "魚沼ヒミツ基地 〜Farm stay〜",
         "date": "10月5日",
         "time": "04:03 PM",
-        "details": "住宿點",
+        "details": "",
         "otherDetails": [
             {
                 "info": "詳細資訊",
@@ -457,7 +448,6 @@
         "travelMode": "driving",
         "distance": 114,
         "duration": "1時間31分",
-        "route": "関越自動車道 and 北陸自動車道",
         "date": "10月6日"
     },
     {
@@ -465,7 +455,7 @@
         "name": "KIJ 新潟機場 (にいがたくうこう)",
         "date": "10月6日",
         "time": "09:31 AM",
-        "details": "抵達機場"
+        "details": ""
     },
     {
         "type": "movement",
@@ -482,7 +472,7 @@
         "name": "TPE 桃園國際機場",
         "date": "10月6日",
         "time": "09:25 PM",
-        "details": "抵達台灣",
+        "details": "",
         "services": [
             {
                 "name": "禮遇通關 (入境)",
