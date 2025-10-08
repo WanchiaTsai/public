@@ -5,20 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>東北・新潟 自駕遊規劃</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans JP', sans-serif;
             background-color: #fdfcfb;
             color: #44403c;
-        }
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 400px;
-            width: 100%;
-            max-width: 800px;
         }
         .stat-card {
             background-color: #fff;
@@ -145,9 +137,6 @@
             h2.text-2xl {
                 font-size: 1.25rem; /* equivalent to text-xl */
             }
-            .chart-container {
-                height: 300px;
-            }
         }
     </style>
 </head>
@@ -191,19 +180,6 @@
             <h2 class="text-2xl font-bold text-stone-700 text-center mb-2">互動式旅程</h2>
             <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">在此區塊中，您可以詳細確認旅行的每個行程。點擊各個步驟，即可顯示距離、所需時間、建議路線，並開始導航。</p>
             <div id="timeline-container" class="max-w-4xl mx-auto">
-            </div>
-        </section>
-
-        <section id="visualizations" class="mb-16">
-            <h2 class="text-2xl font-bold text-stone-700 text-center mb-2">旅程數據視覺化</h2>
-            <p class="text-center text-stone-600 mb-12 max-w-2xl mx-auto">在此，您可以直觀地比較整個旅程中每個路段的距離和所需時間。一目了然地掌握哪個路段最長、需要多少時間，以供規劃參考。</p>
-            <div class="grid grid-cols-1 gap-12">
-                <div class="bg-white p-6 rounded-2xl shadow-lg border border-stone-200">
-                    <h3 class="text-xl font-bold text-stone-700 text-center mb-4">各路段距離與所需時間</h3>
-                    <div class="chart-container">
-                        <canvas id="combinedChart"></canvas>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -528,7 +504,8 @@
                                                                                 ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" title="在地圖上開啟" class="inline-block mt-4 text-2xl hover:opacity-75 transition-opacity">🗺️</a>` : ''}
                                                                             </div>
                                                                         </div>
-                                                                    `;                                }
+                                                                    `;
+                                }
                                 
                                 cardDiv.innerHTML = cardHtmlContent;
                                 cardCol.appendChild(cardDiv);
@@ -552,118 +529,6 @@
                         console.error("Error during timeline rendering:", e);
                     }
 
-                    // Chart rendering logic
-                    try {
-                        const chartLegs = [];
-                        timelineData.forEach((block, index) => {
-                            if (block.type === 'movement') {
-                                const from = timelineData[index - 1].name;
-                                const to = block.isRoundTrip ? block.to : timelineData[index + 1].name;
-                                chartLegs.push({ ...block, from, to });
-                            }
-                        });
-
-                        const filteredChartLegs = chartLegs.filter(leg => (leg.distance || 0) > 0 || parseDurationToMinutes(leg.duration) > 0);
-                        const labels = filteredChartLegs.map(leg => `${leg.from} → ${leg.to}`);
-                        const distances = filteredChartLegs.map(leg => leg.distance);
-                        const durations = filteredChartLegs.map(leg => parseDurationToMinutes(leg.duration));
-
-                        const combinedCtx = document.getElementById('combinedChart').getContext('2d');
-                        if (window.combinedChartInstance) {
-                            window.combinedChartInstance.destroy();
-                        }
-                        window.combinedChartInstance = new Chart(combinedCtx, {
-                            type: 'bar',
-                            data: {
-                                labels: labels,
-                                datasets: [
-                                    {
-                                        label: '距離 (公里)',
-                                        data: distances,
-                                        backgroundColor: 'rgba(13, 148, 136, 0.6)',
-                                        borderColor: 'rgba(13, 148, 136, 1)',
-                                        borderWidth: 1,
-                                        yAxisID: 'y-distance',
-                                        order: 1
-                                    },
-                                    {
-                                        label: '所需時間 (分鐘)',
-                                        data: durations,
-                                        backgroundColor: 'rgba(217, 119, 6, 0.6)',
-                                        borderColor: 'rgba(217, 119, 6, 1)',
-                                        borderWidth: 1,
-                                        yAxisID: 'y-duration',
-                                        order: 2
-                                    }
-                                ]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                scales: {
-                                    'y-distance': {
-                                        type: 'linear',
-                                        position: 'left',
-                                        beginAtZero: true,
-                                        title: {
-                                            display: true,
-                                            text: '距離 (公里)',
-                                            color: '#57534e'
-                                        },
-                                        ticks: {
-                                            color: '#78716c'
-                                        }
-                                    },
-                                    'y-duration': {
-                                        type: 'linear',
-                                        position: 'right',
-                                        beginAtZero: true,
-                                        grid: {
-                                            drawOnChartArea: false,
-                                        },
-                                        title: {
-                                            display: true,
-                                            text: '所需時間 (分鐘)',
-                                            color: '#57534e'
-                                        },
-                                        ticks: {
-                                            callback: function(value, index, values) {
-                                                return formatMinutesToHours(value);
-                                            },
-                                            color: '#78716c'
-                                        }
-                                    },
-                                    x: {
-                                        ticks: {
-                                            color: '#78716c'
-                                        }
-                                    }
-                                },
-                                plugins: {
-                                    tooltip: {
-                                        callbacks: {
-                                            title: (context) => filteredChartLegs[context[0].dataIndex].to,
-                                            afterTitle: (context) => filteredChartLegs[context[0].dataIndex].from,
-                                            label: (context) => {
-                                                if (context.dataset.label === '距離 (公里)') {
-                                                    return `${context.dataset.label}: ${context.raw} 公里`;
-                                                } else {
-                                                    return `${context.dataset.label}: ${context.raw}分鐘 (${formatMinutesToHours(context.raw)})`;
-                                                }
-                                            }
-                                        }
-                                    },
-                                    legend: {
-                                        labels: {
-                                            color: '#57534e'
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    } catch (e) {
-                        console.error("Error during chart rendering:", e);
-                    }
                 });
         });
     </script>
