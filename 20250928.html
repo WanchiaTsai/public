@@ -439,14 +439,10 @@
                                 timeDiv.className = 'time';
                                 if (block.type === 'location') {
                                     timeDiv.innerHTML = `${block.time || ''} ${block.isEstimated ? '<span class="text-amber-600">(預估)</span>' : ''}`;
+                                    if(timeDiv.textContent || timeDiv.innerHTML) timeCol.appendChild(timeDiv);
                                 } else if (block.type === 'movement') {
-                                    if (block.startTime && block.arrivalTime) {
-                                        timeDiv.innerHTML = `${block.isEstimated ? '<span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-amber-600 bg-amber-200">預估</span><br>' : ''}${block.startTime}<br>↓<br>${block.arrivalTime}`;
-                                    } else {
-                                        timeDiv.textContent = block.startTime || block.duration;
-                                    }
+                                    // Time for movement is now inside the card
                                 }
-                                if(timeDiv.textContent || timeDiv.innerHTML) timeCol.appendChild(timeDiv);
 
                                 const markerCol = document.createElement('div');
                                 markerCol.className = 'marker-col';
@@ -498,30 +494,41 @@
                                                                         cardHtmlContent += `<div class="timeline-item-content">${expandableContent}</div>`;
                                                                     }
                                 } else if (block.type === 'movement') {
-                                    const travelInfo = travelModeInfo[block.travelMode];
-                                    markerCol.innerHTML = `<div class="marker-icon ${travelInfo.color}">${travelInfo.emoji}</div><div class="marker-line"></div>`;
+                                    const modeInfo = travelModeInfo[block.travelMode] || {};
+                                    markerCol.innerHTML = `<div class="marker-icon ${modeInfo.color || 'bg-stone-500'}">${modeInfo.emoji || '➡️'}</div><div class="marker-line"></div>`;
                                     cardDiv.className = 'timeline-card travel-method-card';
-                                    
-                                                                    cardHtmlContent = `
-                                                                        <h3 class="timeline-title">${travelInfo.label} - ${block.duration}
-                                                                            ${block.isRoundTrip ? `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">來回</span>` : ''}
-                                                                        </h3>
-                                                                        <p class="timeline-detail">${(block.distance || 0).toFixed(1)} km</p>
-                                                                        <div class="timeline-item-content">
-                                                                            <div class="mt-4 pt-4 border-t border-stone-200 space-y-2 timeline-detail">
-                                                                                <div class="grid grid-cols-[auto,1fr] gap-x-4">
-                                                                                    <strong class="text-stone-500">從:</strong>
-                                                                                    <span>${formatFurigana(block.from)}</span>
-                                                                                    <strong class="text-stone-500">到:</strong>
-                                                                                    <span>${formatFurigana(block.to)}</span>
-                                                                                    ${block.route ? `<strong class="text-stone-500">路徑:</strong><span>${block.route}</span>` : ''}
-                                                                                </div>
-                                                                                ${block.navigationLink ? `<a href="${block.navigationLink}" target="_blank" title="在地圖上開啟" class="inline-block mt-4 text-2xl hover:opacity-75 transition-opacity">🗺️</a>` : ''}
-                                                                            </div>
-                                                                        </div>
-                                                                    `;
+
+                                    let fromToHTML = '';
+                                    if (block.from && block.to) {
+                                        fromToHTML = `<p class="timeline-detail">從: ${formatFurigana(block.from)}</p>
+                                                      <p class="timeline-detail">到: ${formatFurigana(block.to)}</p>`;
+                                    } else if (block.to) {
+                                        fromToHTML = `<p class="timeline-detail">到: ${formatFurigana(block.to)}</p>`;
+                                    }
+
+                                    let timeHTML = '';
+                                    if (block.startTime && block.arrivalTime) {
+                                        timeHTML = `<div class="mt-3 pt-3 border-t border-stone-200 text-sm text-stone-600">
+                                                        ${block.isEstimated ? '<span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-amber-600 bg-amber-200">預估</span> ' : ''}
+                                                        <span>${block.startTime} → ${block.arrivalTime}</span>
+                                                    </div>`;
+                                    }
+
+                                    cardHtmlContent = `
+                                        <div>
+                                            <h3 class="timeline-title">${modeInfo.label || '移動'} - ${block.duration || ''}</h3>
+                                            <p class="timeline-detail text-stone-500">${(block.distance || 0).toFixed(1)} km</p>
+                                            ${timeHTML}
+                                        </div>
+                                        <div class="timeline-item-content">
+                                            <div class="mt-3 pt-3 border-t border-stone-200 space-y-1">
+                                                ${fromToHTML}
+                                                ${block.route ? `<p class="timeline-detail">路徑: ${block.route}</p>` : ''}
+                                            </div>
+                                        </div>
+                                    `;
                                 }
-                                
+
                                 cardDiv.innerHTML = cardHtmlContent;
                                 cardCol.appendChild(cardDiv);
 
