@@ -3,15 +3,9 @@
         "type": "location",
         "name": "TPE 桃園國際機場",
         "date": "9月28日",
-        "time": "06:30 AM",
         "details": "",
         "googleMapsLink": "https://maps.app.goo.gl/y6YXot6ieCCmTVHr5",
         "services": [
-            {
-                "name": "禮遇通關 (出境)",
-                "details": "航班IT256, 編號FT14004896, 票券驗證碼 9085",
-                "link": "https://68666.tw/MscA"
-            }
         ]
     },
     {
@@ -460,11 +454,6 @@
         "date": "10月6日",
         "details": "",
         "services": [
-            {
-                "name": "禮遇通關 (入境)",
-                "details": "航班IT229, 預約編號FT14004875, 票券驗證碼 1198",
-                "link": "https://68666.tw/2tyt"
-            }
         ],
         "googleMapsLink": "https://maps.app.goo.gl/y6YXot6ieCCmTVHr5"
     }
