@@ -112,30 +112,45 @@
         .timeline-item.active .timeline-item-content { max-height: 500px; opacity: 1; }
         rt { font-size: 0.7em; color: #78716c; }
 
-        /* Responsive adjustments for mobile */
+        /* More aggressive responsive adjustments for mobile */
         @media (max-width: 640px) {
+            body {
+                -webkit-text-size-adjust: 100%; /* Prevent font scaling on iOS */
+                overflow-wrap: break-word;
+            }
             .timeline-item {
-                grid-template-columns: 4.5rem 2.2rem 1fr; /* Shrink time column */
-                gap: 0 0.75rem;
+                /* Greatly reduce left whitespace */
+                grid-template-columns: 3.5rem 1.8rem 1fr;
+                gap: 0 0.5rem;
+            }
+            .time-col {
+                padding-top: 0;
             }
             .time-col .date {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
             .time-col .time {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                line-height: 1.2;
             }
-            .timeline-card {
-                padding: 1rem;
+            .marker-icon {
+                width: 1.8rem;
+                height: 1.8rem;
+                font-size: 1rem;
+            }
+            .timeline-title, .timeline-detail {
+                overflow-wrap: break-word;
+                word-break: break-all; /* More aggressive word breaking */
             }
             .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
             }
             h1.text-4xl {
-                font-size: 1.875rem; /* equivalent to text-3xl */
+                font-size: 1.875rem; /* text-3xl */
             }
             h2.text-2xl {
-                font-size: 1.25rem; /* equivalent to text-xl */
+                font-size: 1.25rem; /* text-xl */
             }
         }
     </style>
